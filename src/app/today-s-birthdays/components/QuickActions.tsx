@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React from 'react';
-import Icon from '@/components/ui/AppIcon';
+import React from "react";
+import Icon from "@/components/ui/AppIcon";
 
 interface QuickAction {
   id: number;
@@ -20,35 +20,35 @@ const QuickActions = ({ onActionClick }: QuickActionsProps) => {
   const actions: QuickAction[] = [
     {
       id: 1,
-      label: 'Send Team Alert',
-      icon: 'BellAlertIcon',
-      color: 'text-trust',
-      bgColor: 'bg-trust/10 hover:bg-trust/20',
-      action: 'send-alert',
+      label: "Send Team Alert",
+      icon: "BellAlertIcon",
+      color: "text-trust",
+      bgColor: "bg-trust/10 hover:bg-trust/20",
+      action: "send-alert",
     },
     {
       id: 2,
-      label: 'Order Cake',
-      icon: 'ShoppingCartIcon',
-      color: 'text-celebration',
-      bgColor: 'bg-celebration/10 hover:bg-celebration/20',
-      action: 'order-cake',
+      label: "Order Cake",
+      icon: "ShoppingCartIcon",
+      color: "text-celebration",
+      bgColor: "bg-celebration/10 hover:bg-celebration/20",
+      action: "order-cake",
     },
     {
       id: 3,
-      label: 'Capture Photo',
-      icon: 'CameraIcon',
-      color: 'text-premium',
-      bgColor: 'bg-premium/10 hover:bg-premium/20',
-      action: 'capture-photo',
+      label: "Capture Photo",
+      icon: "CameraIcon",
+      color: "text-premium",
+      bgColor: "bg-premium/10 hover:bg-premium/20",
+      action: "capture-photo",
     },
     {
       id: 4,
-      label: 'Voice Note',
-      icon: 'MicrophoneIcon',
-      color: 'text-success',
-      bgColor: 'bg-success/10 hover:bg-success/20',
-      action: 'voice-note',
+      label: "Voice Note",
+      icon: "MicrophoneIcon",
+      color: "text-success",
+      bgColor: "bg-success/10 hover:bg-success/20",
+      action: "voice-note",
     },
   ];
 
@@ -59,8 +59,12 @@ const QuickActions = ({ onActionClick }: QuickActionsProps) => {
           <Icon name="BoltIcon" size={20} className="text-primary" />
         </div>
         <div>
-          <h3 className="text-lg font-heading font-semibold text-foreground">Quick Actions</h3>
-          <p className="text-sm text-muted-foreground">Fast celebration management</p>
+          <h3 className="text-lg font-heading font-semibold text-foreground">
+            Quick Actions
+          </h3>
+          <p className="text-sm text-muted-foreground">
+            Fast celebration management
+          </p>
         </div>
       </div>
 
@@ -71,10 +75,14 @@ const QuickActions = ({ onActionClick }: QuickActionsProps) => {
             onClick={() => onActionClick(action.action)}
             className={`flex flex-col items-center gap-3 p-4 rounded-lg border border-border transition-all duration-300 ${action.bgColor}`}
           >
-            <div className={`w-12 h-12 rounded-full bg-background flex items-center justify-center ${action.color}`}>
+            <div
+              className={`w-12 h-12 rounded-full bg-background flex items-center justify-center ${action.color}`}
+            >
               <Icon name={action.icon as any} size={24} />
             </div>
-            <span className="text-sm font-medium text-foreground text-center">{action.label}</span>
+            <span className="text-sm font-medium text-foreground text-center">
+              {action.label}
+            </span>
           </button>
         ))}
       </div>

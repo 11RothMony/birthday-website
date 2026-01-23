@@ -1,25 +1,25 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import CalendarHeader from './CalendarHeader';
-import CalendarFilters from './CalendarFilters';
-import CalendarLegend from './CalendarLegend';
-import DayView from './DayView';
-import WeekView from './WeekView';
-import MonthView from './MonthView';
-import YearView from './YearView';
-import CelebrationModal from './CelebrationModal';
-import QuickActions from './QuickActions';
-import mockData from '@/data/staff-mock-data.json';
+import React, { useState, useEffect } from "react";
+import CalendarHeader from "./CalendarHeader";
+import CalendarFilters from "./CalendarFilters";
+import CalendarLegend from "./CalendarLegend";
+import DayView from "./DayView";
+import WeekView from "./WeekView";
+import MonthView from "./MonthView";
+import YearView from "./YearView";
+import CelebrationModal from "./CelebrationModal";
+import QuickActions from "./QuickActions";
+import mockData from "@/data/staff-mock-data.json";
 
 interface Celebration {
   id: string;
   name: string;
-  type: 'Birthday' | 'Work Anniversary' | 'Milestone';
+  type: "Birthday" | "Work Anniversary" | "Milestone";
   date: string;
   time?: string;
   department: string;
-  status: 'Planned' | 'In Progress' | 'Completed';
+  status: "Planned" | "In Progress" | "Completed";
   image: string;
   alt: string;
   notes?: string;
@@ -30,11 +30,16 @@ interface Celebration {
 const CalendarInteractive = () => {
   const [isHydrated, setIsHydrated] = useState(false);
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [viewMode, setViewMode] = useState<'day' | 'week' | 'month' | 'year'>('month');
-  const [selectedDepartment, setSelectedDepartment] = useState('All Departments');
-  const [selectedCelebrationType, setSelectedCelebrationType] = useState('All Types');
-  const [selectedStatus, setSelectedStatus] = useState('All Status');
-  const [selectedCelebration, setSelectedCelebration] = useState<Celebration | null>(null);
+  const [viewMode, setViewMode] = useState<"day" | "week" | "month" | "year">(
+    "month",
+  );
+  const [selectedDepartment, setSelectedDepartment] =
+    useState("All Departments");
+  const [selectedCelebrationType, setSelectedCelebrationType] =
+    useState("All Types");
+  const [selectedStatus, setSelectedStatus] = useState("All Status");
+  const [selectedCelebration, setSelectedCelebration] =
+    useState<Celebration | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [celebrations, setCelebrations] = useState<Celebration[]>([]);
 
@@ -42,19 +47,22 @@ const CalendarInteractive = () => {
     setIsHydrated(true);
 
     // Load celebrations from staff mock data
-    const mockCelebrations: Celebration[] = mockData.staff.map(staff => ({
+    const mockCelebrations: Celebration[] = mockData.staff.map((staff) => ({
       id: staff.id,
       name: staff.name,
-      type: 'Birthday' as const,
+      type: "Birthday" as const,
       date: staff.birthday,
-      time: '10:00', // Default time
+      time: "10:00", // Default time
       department: staff.department,
-      status: staff.cakeStatus === 'ordered' ? 'In Progress' as const : 'Planned' as const,
+      status:
+        staff.cakeStatus === "ordered"
+          ? ("In Progress" as const)
+          : ("Planned" as const),
       image: staff.image,
       alt: staff.alt,
       notes: staff.notes,
-      cakeStatus: staff.cakeStatus || 'Not Ordered',
-      giftStatus: 'Not Started',
+      cakeStatus: staff.cakeStatus || "Not Ordered",
+      giftStatus: "Not Started",
     }));
 
     setCelebrations(mockCelebrations);
@@ -74,16 +82,16 @@ const CalendarInteractive = () => {
   const handlePrevious = () => {
     const newDate = new Date(currentDate);
     switch (viewMode) {
-      case 'day':
+      case "day":
         newDate.setDate(currentDate.getDate() - 1);
         break;
-      case 'week':
+      case "week":
         newDate.setDate(currentDate.getDate() - 7);
         break;
-      case 'month':
+      case "month":
         newDate.setMonth(currentDate.getMonth() - 1);
         break;
-      case 'year':
+      case "year":
         newDate.setFullYear(currentDate.getFullYear() - 1);
         break;
     }
@@ -93,16 +101,16 @@ const CalendarInteractive = () => {
   const handleNext = () => {
     const newDate = new Date(currentDate);
     switch (viewMode) {
-      case 'day':
+      case "day":
         newDate.setDate(currentDate.getDate() + 1);
         break;
-      case 'week':
+      case "week":
         newDate.setDate(currentDate.getDate() + 7);
         break;
-      case 'month':
+      case "month":
         newDate.setMonth(currentDate.getMonth() + 1);
         break;
-      case 'year':
+      case "year":
         newDate.setFullYear(currentDate.getFullYear() + 1);
         break;
     }
@@ -113,14 +121,14 @@ const CalendarInteractive = () => {
     setCurrentDate(new Date());
   };
 
-  const handleViewModeChange = (mode: 'day' | 'week' | 'month' | 'year') => {
+  const handleViewModeChange = (mode: "day" | "week" | "month" | "year") => {
     setViewMode(mode);
   };
 
   const handleResetFilters = () => {
-    setSelectedDepartment('All Departments');
-    setSelectedCelebrationType('All Types');
-    setSelectedStatus('All Status');
+    setSelectedDepartment("All Departments");
+    setSelectedCelebrationType("All Types");
+    setSelectedStatus("All Status");
   };
 
   const handleCelebrationClick = (celebration: Celebration) => {
@@ -128,9 +136,12 @@ const CalendarInteractive = () => {
     setIsModalOpen(true);
   };
 
-  const handleStatusChange = (id: string, status: 'Planned' | 'In Progress' | 'Completed') => {
+  const handleStatusChange = (
+    id: string,
+    status: "Planned" | "In Progress" | "Completed",
+  ) => {
     setCelebrations((prev) =>
-      prev.map((cel) => (cel.id === id ? { ...cel, status } : cel))
+      prev.map((cel) => (cel.id === id ? { ...cel, status } : cel)),
     );
     if (selectedCelebration && selectedCelebration.id === id) {
       setSelectedCelebration({ ...selectedCelebration, status });
@@ -139,63 +150,94 @@ const CalendarInteractive = () => {
 
   const handleDayClick = (date: Date) => {
     setCurrentDate(date);
-    setViewMode('day');
+    setViewMode("day");
   };
 
   const handleMonthClick = (month: number) => {
     const newDate = new Date(currentDate);
     newDate.setMonth(month);
     setCurrentDate(newDate);
-    setViewMode('month');
+    setViewMode("month");
   };
 
   const handlePrint = () => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       window.print();
     }
   };
 
   const handleExport = () => {
     const dataStr = JSON.stringify(filteredCelebrations, null, 2);
-    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+    const dataBlob = new Blob([dataStr], { type: "application/json" });
     const url = URL.createObjectURL(dataBlob);
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = url;
-    link.download = `celebrations-${currentDate.toISOString().split('T')[0]}.json`;
+    link.download = `celebrations-${currentDate.toISOString().split("T")[0]}.json`;
     link.click();
     URL.revokeObjectURL(url);
   };
 
   const handleShare = () => {
-    if (typeof navigator !== 'undefined' && navigator.share) {
+    if (typeof navigator !== "undefined" && navigator.share) {
       navigator.share({
-        title: 'BirthdayDesk Calendar',
-        text: `Check out the celebrations calendar for ${currentDate.toLocaleDateString('en-US', {
-          month: 'long',
-          year: 'numeric',
-        })}`,
+        title: "BirthdayDesk Calendar",
+        text: `Check out the celebrations calendar for ${currentDate.toLocaleDateString(
+          "en-US",
+          {
+            month: "long",
+            year: "numeric",
+          },
+        )}`,
         url: window.location.href,
       });
     } else {
-      alert('Sharing is not supported on this device');
+      alert("Sharing is not supported on this device");
     }
   };
 
   const filteredCelebrations = celebrations.filter((cel) => {
     const departmentMatch =
-      selectedDepartment === 'All Departments' || cel.department === selectedDepartment;
-    const typeMatch = selectedCelebrationType === 'All Types' || cel.type === selectedCelebrationType;
-    const statusMatch = selectedStatus === 'All Status' || cel.status === selectedStatus;
+      selectedDepartment === "All Departments" ||
+      cel.department === selectedDepartment;
+    const typeMatch =
+      selectedCelebrationType === "All Types" ||
+      cel.type === selectedCelebrationType;
+    const statusMatch =
+      selectedStatus === "All Status" || cel.status === selectedStatus;
     return departmentMatch && typeMatch && statusMatch;
   });
 
   const legendItems = [
-    { color: 'bg-primary', label: 'Birthday', count: celebrations.filter((c) => c.type === 'Birthday').length },
-    { color: 'bg-secondary', label: 'Work Anniversary', count: celebrations.filter((c) => c.type === 'Work Anniversary').length },
-    { color: 'bg-accent', label: 'Milestone', count: celebrations.filter((c) => c.type === 'Milestone').length },
-    { color: 'bg-success', label: 'Completed', count: celebrations.filter((c) => c.status === 'Completed').length },
-    { color: 'bg-warning', label: 'In Progress', count: celebrations.filter((c) => c.status === 'In Progress').length },
-    { color: 'bg-muted', label: 'Planned', count: celebrations.filter((c) => c.status === 'Planned').length },
+    {
+      color: "bg-primary",
+      label: "Birthday",
+      count: celebrations.filter((c) => c.type === "Birthday").length,
+    },
+    {
+      color: "bg-secondary",
+      label: "Work Anniversary",
+      count: celebrations.filter((c) => c.type === "Work Anniversary").length,
+    },
+    {
+      color: "bg-accent",
+      label: "Milestone",
+      count: celebrations.filter((c) => c.type === "Milestone").length,
+    },
+    {
+      color: "bg-success",
+      label: "Completed",
+      count: celebrations.filter((c) => c.status === "Completed").length,
+    },
+    {
+      color: "bg-warning",
+      label: "In Progress",
+      count: celebrations.filter((c) => c.status === "In Progress").length,
+    },
+    {
+      color: "bg-muted",
+      label: "Planned",
+      count: celebrations.filter((c) => c.status === "Planned").length,
+    },
   ];
 
   return (
@@ -218,9 +260,13 @@ const CalendarInteractive = () => {
         onStatusChange={setSelectedStatus}
         onReset={handleResetFilters}
       />
-      <QuickActions onPrint={handlePrint} onExport={handleExport} onShare={handleShare} />
+      <QuickActions
+        onPrint={handlePrint}
+        onExport={handleExport}
+        onShare={handleShare}
+      />
 
-      {viewMode === 'day' && (
+      {viewMode === "day" && (
         <DayView
           celebrations={filteredCelebrations}
           currentDate={currentDate}
@@ -228,7 +274,7 @@ const CalendarInteractive = () => {
         />
       )}
 
-      {viewMode === 'week' && (
+      {viewMode === "week" && (
         <WeekView
           celebrations={filteredCelebrations}
           currentDate={currentDate}
@@ -236,7 +282,7 @@ const CalendarInteractive = () => {
         />
       )}
 
-      {viewMode === 'month' && (
+      {viewMode === "month" && (
         <MonthView
           celebrations={filteredCelebrations}
           currentDate={currentDate}
@@ -244,7 +290,7 @@ const CalendarInteractive = () => {
         />
       )}
 
-      {viewMode === 'year' && (
+      {viewMode === "year" && (
         <YearView
           celebrations={filteredCelebrations}
           currentDate={currentDate}

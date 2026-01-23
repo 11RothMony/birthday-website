@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import Icon from '@/components/ui/AppIcon';
+import React, { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import Icon from "@/components/ui/AppIcon";
 
 interface HeaderProps {
   onMenuClick?: () => void;
@@ -20,16 +20,24 @@ const Header = ({ onMenuClick }: HeaderProps) => {
   const [isMoreMenuOpen, setIsMoreMenuOpen] = useState(false);
 
   const primaryNavItems: NavItem[] = [
-    { label: 'Dashboard', href: '/dashboard-hub', icon: 'HomeIcon' },
-    { label: "This Month's HBD", href: '/today-s-birthdays', icon: 'CakeIcon' },
-    { label: 'Staff Directory', href: '/staff-directory', icon: 'UsersIcon' },
-    { label: 'Calendar View', href: '/calendar-view', icon: 'CalendarDaysIcon' },
-    { label: 'Settings', href: '/settings-panel', icon: 'Cog6ToothIcon' },
+    { label: "Dashboard", href: "/dashboard-hub", icon: "HomeIcon" },
+    { label: "This Month's HBD", href: "/today-s-birthdays", icon: "CakeIcon" },
+    { label: "Staff Directory", href: "/staff-directory", icon: "UsersIcon" },
+    {
+      label: "Calendar View",
+      href: "/calendar-view",
+      icon: "CalendarDaysIcon",
+    },
+    { label: "Settings", href: "/settings-panel", icon: "Cog6ToothIcon" },
   ];
 
   const secondaryNavItems: NavItem[] = [
-    { label: 'Calendar View', href: '/calendar-view', icon: 'CalendarDaysIcon' },
-    { label: 'Settings', href: '/settings-panel', icon: 'Cog6ToothIcon' },
+    {
+      label: "Calendar View",
+      href: "/calendar-view",
+      icon: "CalendarDaysIcon",
+    },
+    { label: "Settings", href: "/settings-panel", icon: "Cog6ToothIcon" },
   ];
 
   const isActive = (href: string) => pathname === href;
@@ -57,7 +65,13 @@ const Header = ({ onMenuClick }: HeaderProps) => {
               xmlns="http://www.w3.org/2000/svg"
               className="transition-transform duration-300 group-hover:scale-105"
             >
-              <circle cx="20" cy="20" r="18" fill="var(--color-primary)" opacity="0.2" />
+              <circle
+                cx="20"
+                cy="20"
+                r="18"
+                fill="var(--color-primary)"
+                opacity="0.2"
+              />
               <circle cx="20" cy="20" r="14" fill="var(--color-primary)" />
               <path
                 d="M20 10 L22 16 L28 16 L23 20 L25 26 L20 22 L15 26 L17 20 L12 16 L18 16 Z"
@@ -72,7 +86,9 @@ const Header = ({ onMenuClick }: HeaderProps) => {
             <h1 className="text-xl font-heading font-semibold text-foreground leading-none">
               BirthdayBHG
             </h1>
-            <p className="text-xs text-muted-foreground mt-0.5">Celebrate Every Moment</p>
+            <p className="text-xs text-muted-foreground mt-0.5">
+              Celebrate Every Moment
+            </p>
           </div>
         </Link>
 
@@ -84,8 +100,8 @@ const Header = ({ onMenuClick }: HeaderProps) => {
               href={item.href}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
                 isActive(item.href)
-                  ? 'bg-primary text-primary-foreground shadow-warm'
-                  : 'text-foreground hover:bg-muted hover:text-foreground'
+                  ? "bg-primary text-primary-foreground shadow-warm"
+                  : "text-foreground hover:bg-muted hover:text-foreground"
               }`}
             >
               <Icon name={item.icon as any} size={20} />
@@ -117,7 +133,8 @@ const Header = ({ onMenuClick }: HeaderProps) => {
                       onClick={() => setIsMoreMenuOpen(false)}
                       className={`flex items-center gap-3 px-4 py-2.5 transition-colors duration-300 ${
                         isActive(item.href)
-                          ? 'bg-primary/10 text-primary' :'text-foreground hover:bg-muted'
+                          ? "bg-primary/10 text-primary"
+                          : "text-foreground hover:bg-muted"
                       }`}
                     >
                       <Icon name={item.icon as any} size={20} />
@@ -158,11 +175,14 @@ const Header = ({ onMenuClick }: HeaderProps) => {
               href={item.href}
               className={`flex flex-col items-center gap-1 px-3 py-2 rounded-lg transition-all duration-300 ${
                 isActive(item.href)
-                  ? 'bg-primary/10 text-primary' :'text-muted-foreground hover:text-foreground'
+                  ? "bg-primary/10 text-primary"
+                  : "text-muted-foreground hover:text-foreground"
               }`}
             >
               <Icon name={item.icon as any} size={20} />
-              <span className="text-xs font-medium">{item.label.split(' ')[0]}</span>
+              <span className="text-xs font-medium">
+                {item.label.split(" ")[0]}
+              </span>
             </Link>
           ))}
         </div>

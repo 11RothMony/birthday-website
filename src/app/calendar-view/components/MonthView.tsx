@@ -1,13 +1,12 @@
-import React from 'react';
-
+import React from "react";
 
 interface Celebration {
   id: string;
   name: string;
-  type: 'Birthday' | 'Work Anniversary' | 'Milestone';
+  type: "Birthday" | "Work Anniversary" | "Milestone";
   date: string;
   department: string;
-  status: 'Planned' | 'In Progress' | 'Completed';
+  status: "Planned" | "In Progress" | "Completed";
 }
 
 interface MonthViewProps {
@@ -16,7 +15,11 @@ interface MonthViewProps {
   onDayClick: (date: Date) => void;
 }
 
-const MonthView = ({ celebrations, currentDate, onDayClick }: MonthViewProps) => {
+const MonthView = ({
+  celebrations,
+  currentDate,
+  onDayClick,
+}: MonthViewProps) => {
   const getDaysInMonth = () => {
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
@@ -36,11 +39,11 @@ const MonthView = ({ celebrations, currentDate, onDayClick }: MonthViewProps) =>
   };
 
   const days = getDaysInMonth();
-  const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   const getCelebrationsForDay = (date: Date | null) => {
     if (!date) return [];
-    const dateStr = date.toISOString().split('T')[0];
+    const dateStr = date.toISOString().split("T")[0];
     return celebrations.filter((cel) => cel.date === dateStr);
   };
 
@@ -56,12 +59,12 @@ const MonthView = ({ celebrations, currentDate, onDayClick }: MonthViewProps) =>
 
   const getStatusDot = (status: string) => {
     switch (status) {
-      case 'Completed':
-        return 'bg-success';
-      case 'In Progress':
-        return 'bg-warning';
+      case "Completed":
+        return "bg-success";
+      case "In Progress":
+        return "bg-warning";
       default:
-        return 'bg-primary';
+        return "bg-primary";
     }
   };
 
@@ -69,7 +72,10 @@ const MonthView = ({ celebrations, currentDate, onDayClick }: MonthViewProps) =>
     <div className="bg-card rounded-lg shadow-warm overflow-hidden">
       <div className="grid grid-cols-7 border-b border-border">
         {weekDays.map((day) => (
-          <div key={day} className="p-4 text-center border-r border-border last:border-r-0">
+          <div
+            key={day}
+            className="p-4 text-center border-r border-border last:border-r-0"
+          >
             <p className="text-sm font-semibold text-foreground">{day}</p>
           </div>
         ))}
@@ -86,8 +92,10 @@ const MonthView = ({ celebrations, currentDate, onDayClick }: MonthViewProps) =>
               onClick={() => day && onDayClick(day)}
               disabled={!day}
               className={`min-h-[120px] p-2 border-r border-b border-border last:border-r-0 transition-all duration-300 ${
-                day ? 'hover:bg-muted/50 cursor-pointer' : 'bg-muted/20 cursor-not-allowed'
-              } ${today ? 'bg-primary/5' : ''}`}
+                day
+                  ? "hover:bg-muted/50 cursor-pointer"
+                  : "bg-muted/20 cursor-not-allowed"
+              } ${today ? "bg-primary/5" : ""}`}
             >
               {day && (
                 <div className="h-full flex flex-col">
@@ -95,8 +103,8 @@ const MonthView = ({ celebrations, currentDate, onDayClick }: MonthViewProps) =>
                     <span
                       className={`text-sm font-semibold ${
                         today
-                          ? 'w-7 h-7 flex items-center justify-center rounded-full bg-primary text-primary-foreground'
-                          : 'text-foreground'
+                          ? "w-7 h-7 flex items-center justify-center rounded-full bg-primary text-primary-foreground"
+                          : "text-foreground"
                       }`}
                     >
                       {day.getDate()}
@@ -114,7 +122,9 @@ const MonthView = ({ celebrations, currentDate, onDayClick }: MonthViewProps) =>
                         key={celebration.id}
                         className="flex items-center gap-1 text-left"
                       >
-                        <div className={`w-2 h-2 rounded-full flex-shrink-0 ${getStatusDot(celebration.status)}`} />
+                        <div
+                          className={`w-2 h-2 rounded-full flex-shrink-0 ${getStatusDot(celebration.status)}`}
+                        />
                         <p className="text-xs text-foreground truncate flex-1">
                           {celebration.name}
                         </p>

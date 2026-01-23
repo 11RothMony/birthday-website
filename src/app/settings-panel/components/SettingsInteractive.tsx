@@ -1,19 +1,19 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import NotificationSettings from './NotificationSettings';
-import DisplaySettings from './DisplaySettings';
-import DataManagement from './DataManagement';
-import AccessibilitySettings from './AccessibilitySettings';
-import Icon from '@/components/ui/AppIcon';
+import React, { useState } from "react";
+import NotificationSettings from "./NotificationSettings";
+import DisplaySettings from "./DisplaySettings";
+import Icon from "@/components/ui/AppIcon";
 
 const SettingsInteractive = () => {
-  const [activeTab, setActiveTab] = useState<'notifications' | 'display' | 'data' | 'accessibility'>('notifications');
+  const [activeTab, setActiveTab] = useState<
+    "notifications" | "display" | "data" | "accessibility"
+  >("notifications");
   const [showSaveSuccess, setShowSaveSuccess] = useState(false);
 
   const tabs = [
-    { id: 'notifications' as const, label: 'Notifications', icon: 'BellIcon' },
-    { id: 'display' as const, label: 'Display', icon: 'PaintBrushIcon' },
+    { id: "notifications" as const, label: "Notifications", icon: "BellIcon" },
+    { id: "display" as const, label: "Display", icon: "PaintBrushIcon" },
   ];
 
   const handleSave = () => {
@@ -31,8 +31,12 @@ const SettingsInteractive = () => {
               <Icon name="Cog6ToothIcon" size={28} className="text-primary" />
             </div>
             <div>
-              <h1 className="text-3xl font-heading font-semibold text-foreground">Settings</h1>
-              <p className="text-sm text-muted-foreground">Customize your BirthdayDesk experience</p>
+              <h1 className="text-3xl font-heading font-semibold text-foreground">
+                Settings
+              </h1>
+              <p className="text-sm text-muted-foreground">
+                Customize your BirthdayDesk experience
+              </p>
             </div>
           </div>
         </div>
@@ -46,7 +50,8 @@ const SettingsInteractive = () => {
                 onClick={() => setActiveTab(tab.id)}
                 className={`flex items-center gap-2 px-6 py-3 font-medium transition-all duration-300 border-b-2 ${
                   activeTab === tab.id
-                    ? 'border-primary text-primary' :'border-transparent text-muted-foreground hover:text-foreground hover:border-border'
+                    ? "border-primary text-primary"
+                    : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
                 }`}
               >
                 <Icon name={tab.icon as any} size={20} />
@@ -58,8 +63,10 @@ const SettingsInteractive = () => {
 
         {/* Content */}
         <div className="space-y-6">
-          {activeTab === 'notifications' && <NotificationSettings onSave={handleSave} />}
-          {activeTab === 'display' && <DisplaySettings onSave={handleSave} />}
+          {activeTab === "notifications" && (
+            <NotificationSettings onSave={handleSave} />
+          )}
+          {activeTab === "display" && <DisplaySettings onSave={handleSave} />}
         </div>
 
         {/* Success Toast */}
@@ -69,7 +76,9 @@ const SettingsInteractive = () => {
               <Icon name="CheckCircleIcon" size={24} />
               <div>
                 <p className="font-semibold text-sm">Settings Saved</p>
-                <p className="text-xs opacity-90">Your preferences have been updated</p>
+                <p className="text-xs opacity-90">
+                  Your preferences have been updated
+                </p>
               </div>
             </div>
           </div>
@@ -79,12 +88,19 @@ const SettingsInteractive = () => {
         <div className="mt-8 bg-card rounded-lg p-6 shadow-warm">
           <div className="flex items-start gap-4">
             <div className="w-12 h-12 bg-trust/10 rounded-lg flex items-center justify-center flex-shrink-0">
-              <Icon name="QuestionMarkCircleIcon" size={28} className="text-trust" />
+              <Icon
+                name="QuestionMarkCircleIcon"
+                size={28}
+                className="text-trust"
+              />
             </div>
             <div className="flex-1">
-              <h2 className="text-lg font-heading font-semibold text-foreground mb-2">Need Help?</h2>
+              <h2 className="text-lg font-heading font-semibold text-foreground mb-2">
+                Need Help?
+              </h2>
               <p className="text-sm text-muted-foreground mb-4">
-                If you have questions about any settings or need assistance, check out our help resources or contact support.
+                If you have questions about any settings or need assistance,
+                check out our help resources or contact support.
               </p>
               <div className="flex flex-wrap gap-3">
                 <button className="px-4 py-2 bg-trust text-trust-foreground rounded-lg text-sm font-medium hover:shadow-warm transition-all duration-300">
@@ -111,8 +127,14 @@ const SettingsInteractive = () => {
           </div>
           <div className="p-4 bg-celebration/5 rounded-lg">
             <div className="flex items-center gap-2 mb-2">
-              <Icon name="ShieldCheckIcon" size={20} className="text-celebration" />
-              <h3 className="text-sm font-semibold text-foreground">Data Safety</h3>
+              <Icon
+                name="ShieldCheckIcon"
+                size={20}
+                className="text-celebration"
+              />
+              <h3 className="text-sm font-semibold text-foreground">
+                Data Safety
+              </h3>
             </div>
             <p className="text-xs text-muted-foreground">
               Regular backups ensure your celebration data is always safe
@@ -121,7 +143,9 @@ const SettingsInteractive = () => {
           <div className="p-4 bg-secondary/5 rounded-lg">
             <div className="flex items-center gap-2 mb-2">
               <Icon name="SparklesIcon" size={20} className="text-secondary" />
-              <h3 className="text-sm font-semibold text-foreground">Customization</h3>
+              <h3 className="text-sm font-semibold text-foreground">
+                Customization
+              </h3>
             </div>
             <p className="text-xs text-muted-foreground">
               Adjust display settings to match your workflow preferences

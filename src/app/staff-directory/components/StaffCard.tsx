@@ -1,6 +1,6 @@
-import React from 'react';
-import AppImage from '@/components/ui/AppImage';
-import Icon from '@/components/ui/AppIcon';
+import React from "react";
+import AppImage from "@/components/ui/AppImage";
+import Icon from "@/components/ui/AppIcon";
 
 interface StaffMember {
   id: string;
@@ -31,12 +31,26 @@ const StaffCard = ({ staff, onEdit, onView }: StaffCardProps) => {
   const getBirthdayStatus = (birthday: string) => {
     const today = new Date();
     const birthDate = new Date(birthday);
-    const daysUntil = Math.ceil((birthDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
-    
-    if (daysUntil === 0) return { text: 'Today!', color: 'bg-celebration text-celebration-foreground' };
-    if (daysUntil > 0 && daysUntil <= 7) return { text: `${daysUntil} days`, color: 'bg-warning text-warning-foreground' };
-    if (daysUntil > 7 && daysUntil <= 30) return { text: `${daysUntil} days`, color: 'bg-trust text-trust-foreground' };
-    return { text: 'Upcoming', color: 'bg-muted text-muted-foreground' };
+    const daysUntil = Math.ceil(
+      (birthDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24),
+    );
+
+    if (daysUntil === 0)
+      return {
+        text: "Today!",
+        color: "bg-celebration text-celebration-foreground",
+      };
+    if (daysUntil > 0 && daysUntil <= 7)
+      return {
+        text: `${daysUntil} days`,
+        color: "bg-warning text-warning-foreground",
+      };
+    if (daysUntil > 7 && daysUntil <= 30)
+      return {
+        text: `${daysUntil} days`,
+        color: "bg-trust text-trust-foreground",
+      };
+    return { text: "Upcoming", color: "bg-muted text-muted-foreground" };
   };
 
   const status = getBirthdayStatus(staff.birthday);
@@ -53,34 +67,59 @@ const StaffCard = ({ staff, onEdit, onView }: StaffCardProps) => {
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className={`absolute -bottom-1 -right-1 w-6 h-6 rounded-full ${status.color} flex items-center justify-center`}>
+            <div
+              className={`absolute -bottom-1 -right-1 w-6 h-6 rounded-full ${status.color} flex items-center justify-center`}
+            >
               <Icon name="CakeIcon" size={14} variant="solid" />
             </div>
           </div>
 
           <div className="flex-1 min-w-0">
             <div className="flex items-start justify-between gap-2 mb-1">
-              <h3 className="text-base font-semibold text-foreground truncate">{staff.name}</h3>
-              <span className={`px-2 py-1 rounded-full text-xs font-medium ${status.color} whitespace-nowrap`}>
+              <h3 className="text-base font-semibold text-foreground truncate">
+                {staff.name}
+              </h3>
+              <span
+                className={`px-2 py-1 rounded-full text-xs font-medium ${status.color} whitespace-nowrap`}
+              >
                 {status.text}
               </span>
             </div>
-            <p className="text-sm text-muted-foreground mb-1">{staff.position}</p>
+            <p className="text-sm text-muted-foreground mb-1">
+              {staff.position}
+            </p>
             <p className="text-xs text-muted-foreground">{staff.department}</p>
           </div>
         </div>
 
         <div className="mt-4 pt-4 border-t border-border space-y-2">
           <div className="flex items-center gap-2 text-sm">
-            <Icon name="CalendarIcon" size={16} className="text-muted-foreground" />
-            <span className="text-foreground">{new Date(staff.birthday).toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}</span>
+            <Icon
+              name="CalendarIcon"
+              size={16}
+              className="text-muted-foreground"
+            />
+            <span className="text-foreground">
+              {new Date(staff.birthday).toLocaleDateString("en-US", {
+                month: "long",
+                day: "numeric",
+              })}
+            </span>
           </div>
           <div className="flex items-center gap-2 text-sm">
-            <Icon name="EnvelopeIcon" size={16} className="text-muted-foreground" />
+            <Icon
+              name="EnvelopeIcon"
+              size={16}
+              className="text-muted-foreground"
+            />
             <span className="text-foreground truncate">{staff.email}</span>
           </div>
           <div className="flex items-center gap-2 text-sm">
-            <Icon name="PhoneIcon" size={16} className="text-muted-foreground" />
+            <Icon
+              name="PhoneIcon"
+              size={16}
+              className="text-muted-foreground"
+            />
             <span className="text-foreground">{staff.phone}</span>
           </div>
         </div>

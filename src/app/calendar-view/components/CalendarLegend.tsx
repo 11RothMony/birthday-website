@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface LegendItem {
   color: string;
@@ -19,8 +19,12 @@ const CalendarLegend = ({ items }: CalendarLegendProps) => {
           <div key={index} className="flex items-center gap-2">
             <div className={`w-4 h-4 rounded ${item.color}`} />
             <div className="flex-1 min-w-0">
-              <p className="text-xs font-medium text-foreground truncate">{item.label}</p>
-              <p className="text-xs text-muted-foreground">{item.count} events</p>
+              <p className="text-xs font-medium text-foreground truncate">
+                {item.label}
+              </p>
+              <p className="text-xs text-muted-foreground">
+                {item.count} events
+              </p>
             </div>
           </div>
         ))}

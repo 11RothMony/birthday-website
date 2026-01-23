@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React from 'react';
-import Icon from '@/components/ui/AppIcon';
+import React from "react";
+import Icon from "@/components/ui/AppIcon";
 
 interface FilterPanelProps {
   selectedDepartment: string;
@@ -16,33 +16,33 @@ const FilterPanel = ({
   selectedMonth,
   onDepartmentChange,
   onMonthChange,
-  onReset
+  onReset,
 }: FilterPanelProps) => {
   const departments = [
-    'All Departments',
-    'Engineering',
-    'Marketing',
-    'Sales',
-    'Human Resources',
-    'Finance',
-    'Operations',
-    'Customer Support'
+    "All Departments",
+    "Engineering",
+    "Marketing",
+    "Sales",
+    "Human Resources",
+    "Finance",
+    "Operations",
+    "Customer Support",
   ];
 
   const months = [
-    'All Months',
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
+    "All Months",
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
   ];
 
   return (
@@ -62,27 +62,35 @@ const FilterPanel = ({
 
       <div className="space-y-4">
         <div>
-          <label className="block text-xs font-medium text-muted-foreground mb-2">Department</label>
+          <label className="block text-xs font-medium text-muted-foreground mb-2">
+            Department
+          </label>
           <select
             value={selectedDepartment}
             onChange={(e) => onDepartmentChange(e.target.value)}
             className="w-full px-3 py-2 bg-background border border-input rounded-lg text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
           >
             {departments.map((dept) => (
-              <option key={dept} value={dept}>{dept}</option>
+              <option key={dept} value={dept}>
+                {dept}
+              </option>
             ))}
           </select>
         </div>
 
         <div>
-          <label className="block text-xs font-medium text-muted-foreground mb-2">Birthday Month</label>
+          <label className="block text-xs font-medium text-muted-foreground mb-2">
+            Birthday Month
+          </label>
           <select
             value={selectedMonth}
             onChange={(e) => onMonthChange(e.target.value)}
             className="w-full px-3 py-2 bg-background border border-input rounded-lg text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
           >
             {months.map((month) => (
-              <option key={month} value={month}>{month}</option>
+              <option key={month} value={month}>
+                {month}
+              </option>
             ))}
           </select>
         </div>

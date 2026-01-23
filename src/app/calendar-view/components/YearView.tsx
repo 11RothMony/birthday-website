@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
 interface Celebration {
   id: string;
   date: string;
-  status: 'Planned' | 'In Progress' | 'Completed';
+  status: "Planned" | "In Progress" | "Completed";
 }
 
 interface YearViewProps {
@@ -12,20 +12,24 @@ interface YearViewProps {
   onMonthClick: (month: number) => void;
 }
 
-const YearView = ({ celebrations, currentDate, onMonthClick }: YearViewProps) => {
+const YearView = ({
+  celebrations,
+  currentDate,
+  onMonthClick,
+}: YearViewProps) => {
   const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
   ];
 
   const getCelebrationsForMonth = (monthIndex: number) => {
@@ -42,15 +46,19 @@ const YearView = ({ celebrations, currentDate, onMonthClick }: YearViewProps) =>
     const monthCelebrations = getCelebrationsForMonth(monthIndex);
     return {
       total: monthCelebrations.length,
-      completed: monthCelebrations.filter((c) => c.status === 'Completed').length,
-      inProgress: monthCelebrations.filter((c) => c.status === 'In Progress').length,
-      planned: monthCelebrations.filter((c) => c.status === 'Planned').length,
+      completed: monthCelebrations.filter((c) => c.status === "Completed")
+        .length,
+      inProgress: monthCelebrations.filter((c) => c.status === "In Progress")
+        .length,
+      planned: monthCelebrations.filter((c) => c.status === "Planned").length,
     };
   };
 
   const getCurrentMonth = () => {
     const today = new Date();
-    return today.getFullYear() === currentDate.getFullYear() ? today.getMonth() : -1;
+    return today.getFullYear() === currentDate.getFullYear()
+      ? today.getMonth()
+      : -1;
   };
 
   const currentMonth = getCurrentMonth();
@@ -66,11 +74,13 @@ const YearView = ({ celebrations, currentDate, onMonthClick }: YearViewProps) =>
             key={month}
             onClick={() => onMonthClick(index)}
             className={`bg-card rounded-lg shadow-warm p-6 transition-all duration-300 hover:shadow-warm-lg hover:scale-105 text-left ${
-              isCurrentMonth ? 'ring-2 ring-primary' : ''
+              isCurrentMonth ? "ring-2 ring-primary" : ""
             }`}
           >
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-heading font-semibold text-foreground">{month}</h3>
+              <h3 className="text-lg font-heading font-semibold text-foreground">
+                {month}
+              </h3>
               {isCurrentMonth && (
                 <span className="px-2 py-1 bg-primary text-primary-foreground text-xs font-semibold rounded-full">
                   Current
@@ -80,8 +90,12 @@ const YearView = ({ celebrations, currentDate, onMonthClick }: YearViewProps) =>
 
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-sm text-muted-foreground">Total Events</span>
-                <span className="text-2xl font-semibold text-foreground">{stats.total}</span>
+                <span className="text-sm text-muted-foreground">
+                  Total Events
+                </span>
+                <span className="text-2xl font-semibold text-foreground">
+                  {stats.total}
+                </span>
               </div>
 
               {stats.total > 0 && (
@@ -91,19 +105,25 @@ const YearView = ({ celebrations, currentDate, onMonthClick }: YearViewProps) =>
                       {stats.completed > 0 && (
                         <div
                           className="bg-success"
-                          style={{ width: `${(stats.completed / stats.total) * 100}%` }}
+                          style={{
+                            width: `${(stats.completed / stats.total) * 100}%`,
+                          }}
                         />
                       )}
                       {stats.inProgress > 0 && (
                         <div
                           className="bg-warning"
-                          style={{ width: `${(stats.inProgress / stats.total) * 100}%` }}
+                          style={{
+                            width: `${(stats.inProgress / stats.total) * 100}%`,
+                          }}
                         />
                       )}
                       {stats.planned > 0 && (
                         <div
                           className="bg-primary"
-                          style={{ width: `${(stats.planned / stats.total) * 100}%` }}
+                          style={{
+                            width: `${(stats.planned / stats.total) * 100}%`,
+                          }}
                         />
                       )}
                     </div>
@@ -112,15 +132,21 @@ const YearView = ({ celebrations, currentDate, onMonthClick }: YearViewProps) =>
                   <div className="grid grid-cols-3 gap-2 text-xs">
                     <div className="flex items-center gap-1">
                       <div className="w-2 h-2 rounded-full bg-success" />
-                      <span className="text-muted-foreground">{stats.completed}</span>
+                      <span className="text-muted-foreground">
+                        {stats.completed}
+                      </span>
                     </div>
                     <div className="flex items-center gap-1">
                       <div className="w-2 h-2 rounded-full bg-warning" />
-                      <span className="text-muted-foreground">{stats.inProgress}</span>
+                      <span className="text-muted-foreground">
+                        {stats.inProgress}
+                      </span>
                     </div>
                     <div className="flex items-center gap-1">
                       <div className="w-2 h-2 rounded-full bg-primary" />
-                      <span className="text-muted-foreground">{stats.planned}</span>
+                      <span className="text-muted-foreground">
+                        {stats.planned}
+                      </span>
                     </div>
                   </div>
                 </>

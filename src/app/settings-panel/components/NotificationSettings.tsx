@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import Icon from '@/components/ui/AppIcon';
+import React, { useState, useEffect } from "react";
+import Icon from "@/components/ui/AppIcon";
 
 interface NotificationPreference {
   id: string;
@@ -19,43 +19,46 @@ const NotificationSettings = ({ onSave }: NotificationSettingsProps) => {
   const [isHydrated, setIsHydrated] = useState(false);
   const [preferences, setPreferences] = useState<NotificationPreference[]>([
     {
-      id: 'birthday-today',
-      label: 'Today\'s Birthdays',
-      description: 'Get notified when you open the dashboard about today\'s celebrations',
+      id: "birthday-today",
+      label: "Today's Birthdays",
+      description:
+        "Get notified when you open the dashboard about today's celebrations",
       enabled: true,
-      icon: 'CakeIcon'
+      icon: "CakeIcon",
     },
     {
-      id: 'birthday-upcoming',
-      label: 'Upcoming Birthdays',
-      description: 'Receive reminders 3 days before upcoming birthdays',
+      id: "birthday-upcoming",
+      label: "Upcoming Birthdays",
+      description: "Receive reminders 3 days before upcoming birthdays",
       enabled: true,
-      icon: 'CalendarIcon'
+      icon: "CalendarIcon",
     },
     {
-      id: 'cake-reminder',
-      label: 'Cake Preparation',
-      description: 'Reminders to order or prepare birthday cakes',
+      id: "cake-reminder",
+      label: "Cake Preparation",
+      description: "Reminders to order or prepare birthday cakes",
       enabled: true,
-      icon: 'BellAlertIcon'
+      icon: "BellAlertIcon",
     },
     {
-      id: 'celebration-complete',
-      label: 'Celebration Completion',
-      description: 'Prompt to mark celebrations as complete',
+      id: "celebration-complete",
+      label: "Celebration Completion",
+      description: "Prompt to mark celebrations as complete",
       enabled: false,
-      icon: 'CheckCircleIcon'
+      icon: "CheckCircleIcon",
     },
     {
-      id: 'weekly-summary',
-      label: 'Weekly Summary',
-      description: 'Get a summary of upcoming celebrations every Monday',
+      id: "weekly-summary",
+      label: "Weekly Summary",
+      description: "Get a summary of upcoming celebrations every Monday",
       enabled: true,
-      icon: 'DocumentTextIcon'
-    }
+      icon: "DocumentTextIcon",
+    },
   ]);
 
-  const [browserNotifications, setBrowserNotifications] = useState<'granted' | 'denied' | 'default'>('default');
+  const [browserNotifications, setBrowserNotifications] = useState<
+    "granted" | "denied" | "default"
+  >("default");
 
   useEffect(() => {
     setIsHydrated(true);
@@ -64,12 +67,12 @@ const NotificationSettings = ({ onSave }: NotificationSettingsProps) => {
   useEffect(() => {
     if (!isHydrated) return;
 
-    const saved = localStorage.getItem('notification-preferences');
+    const saved = localStorage.getItem("notification-preferences");
     if (saved) {
       setPreferences(JSON.parse(saved));
     }
 
-    if ('Notification' in window) {
+    if ("Notification" in window) {
       setBrowserNotifications(Notification.permission);
     }
   }, [isHydrated]);
@@ -77,29 +80,29 @@ const NotificationSettings = ({ onSave }: NotificationSettingsProps) => {
   const handleToggle = (id: string) => {
     if (!isHydrated) return;
 
-    const updated = preferences.map(pref =>
-      pref.id === id ? { ...pref, enabled: !pref.enabled } : pref
+    const updated = preferences.map((pref) =>
+      pref.id === id ? { ...pref, enabled: !pref.enabled } : pref,
     );
     setPreferences(updated);
-    localStorage.setItem('notification-preferences', JSON.stringify(updated));
+    localStorage.setItem("notification-preferences", JSON.stringify(updated));
     onSave?.(updated);
   };
 
   const requestBrowserPermission = async () => {
-    if (!isHydrated || !('Notification' in window)) return;
+    if (!isHydrated || !("Notification" in window)) return;
 
     try {
       const permission = await Notification.requestPermission();
       setBrowserNotifications(permission);
-      
-      if (permission === 'granted') {
-        new Notification('BirthdayDesk Notifications Enabled', {
-          body: 'You will now receive birthday celebration reminders',
-          icon: '/favicon.ico'
+
+      if (permission === "granted") {
+        new Notification("BirthdayDesk Notifications Enabled", {
+          body: "You will now receive birthday celebration reminders",
+          icon: "/favicon.ico",
         });
       }
     } catch (error) {
-      console.error('Error requesting notification permission:', error);
+      console.error("Error requesting notification permission:", error);
     }
   };
 
@@ -116,7 +119,7 @@ const NotificationSettings = ({ onSave }: NotificationSettingsProps) => {
           </div>
         </div>
         <div className="space-y-4">
-          {[1, 2, 3].map(i => (
+          {[1, 2, 3].map((i) => (
             <div key={i} className="h-16 bg-muted rounded-lg animate-pulse" />
           ))}
         </div>
@@ -131,19 +134,30 @@ const NotificationSettings = ({ onSave }: NotificationSettingsProps) => {
           <Icon name="BellIcon" size={24} className="text-primary" />
         </div>
         <div>
-          <h2 className="text-xl font-heading font-semibold text-foreground">Notification Preferences</h2>
-          <p className="text-sm text-muted-foreground">Manage how you receive celebration reminders</p>
+          <h2 className="text-xl font-heading font-semibold text-foreground">
+            Notification Preferences
+          </h2>
+          <p className="text-sm text-muted-foreground">
+            Manage how you receive celebration reminders
+          </p>
         </div>
       </div>
 
-      {browserNotifications !== 'granted' && (
+      {browserNotifications !== "granted" && (
         <div className="mb-6 p-4 bg-warning/10 border border-warning/20 rounded-lg">
           <div className="flex items-start gap-3">
-            <Icon name="ExclamationTriangleIcon" size={20} className="text-warning flex-shrink-0 mt-0.5" />
+            <Icon
+              name="ExclamationTriangleIcon"
+              size={20}
+              className="text-warning flex-shrink-0 mt-0.5"
+            />
             <div className="flex-1">
-              <h3 className="text-sm font-semibold text-foreground mb-1">Browser Notifications Disabled</h3>
+              <h3 className="text-sm font-semibold text-foreground mb-1">
+                Browser Notifications Disabled
+              </h3>
               <p className="text-xs text-muted-foreground mb-3">
-                Enable browser notifications to receive real-time birthday reminders
+                Enable browser notifications to receive real-time birthday
+                reminders
               </p>
               <button
                 onClick={requestBrowserPermission}
@@ -164,23 +178,31 @@ const NotificationSettings = ({ onSave }: NotificationSettingsProps) => {
           >
             <div className="flex items-start gap-3 flex-1">
               <div className="w-8 h-8 bg-background rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
-                <Icon name={pref.icon as any} size={18} className="text-foreground" />
+                <Icon
+                  name={pref.icon as any}
+                  size={18}
+                  className="text-foreground"
+                />
               </div>
               <div className="flex-1">
-                <h3 className="text-sm font-semibold text-foreground mb-1">{pref.label}</h3>
-                <p className="text-xs text-muted-foreground">{pref.description}</p>
+                <h3 className="text-sm font-semibold text-foreground mb-1">
+                  {pref.label}
+                </h3>
+                <p className="text-xs text-muted-foreground">
+                  {pref.description}
+                </p>
               </div>
             </div>
             <button
               onClick={() => handleToggle(pref.id)}
               className={`relative w-12 h-6 rounded-full transition-colors duration-300 flex-shrink-0 ${
-                pref.enabled ? 'bg-success' : 'bg-border'
+                pref.enabled ? "bg-success" : "bg-border"
               }`}
               aria-label={`Toggle ${pref.label}`}
             >
               <span
                 className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform duration-300 ${
-                  pref.enabled ? 'translate-x-6' : 'translate-x-0'
+                  pref.enabled ? "translate-x-6" : "translate-x-0"
                 }`}
               />
             </button>
@@ -190,13 +212,21 @@ const NotificationSettings = ({ onSave }: NotificationSettingsProps) => {
 
       <div className="mt-6 p-4 bg-primary/5 rounded-lg">
         <div className="flex items-start gap-3">
-          <Icon name="InformationCircleIcon" size={20} className="text-primary flex-shrink-0 mt-0.5" />
+          <Icon
+            name="InformationCircleIcon"
+            size={20}
+            className="text-primary flex-shrink-0 mt-0.5"
+          />
           <div>
-            <h3 className="text-sm font-semibold text-foreground mb-1">Notification Tips</h3>
+            <h3 className="text-sm font-semibold text-foreground mb-1">
+              Notification Tips
+            </h3>
             <ul className="text-xs text-muted-foreground space-y-1">
               <li>• Notifications appear when you open the dashboard</li>
               <li>• Browser notifications work even when the app is closed</li>
-              <li>• You can customize notification timing in advanced settings</li>
+              <li>
+                • You can customize notification timing in advanced settings
+              </li>
             </ul>
           </div>
         </div>

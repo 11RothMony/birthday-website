@@ -1,5 +1,5 @@
-import React from 'react';
-import Icon from '@/components/ui/AppIcon';
+import React from "react";
+import Icon from "@/components/ui/AppIcon";
 
 interface CalendarFiltersProps {
   selectedDepartment: string;
@@ -20,14 +20,26 @@ const CalendarFilters = ({
   onStatusChange,
   onReset,
 }: CalendarFiltersProps) => {
-  const departments = ['All Departments', 'Engineering', 'Marketing', 'Sales', 'HR', 'Operations'];
-  const celebrationTypes = ['All Types', 'Birthday', 'Work Anniversary', 'Milestone'];
-  const statuses = ['All Status', 'Planned', 'In Progress', 'Completed'];
+  const departments = [
+    "All Departments",
+    "Engineering",
+    "Marketing",
+    "Sales",
+    "HR",
+    "Operations",
+  ];
+  const celebrationTypes = [
+    "All Types",
+    "Birthday",
+    "Work Anniversary",
+    "Milestone",
+  ];
+  const statuses = ["All Status", "Planned", "In Progress", "Completed"];
 
-  const hasActiveFilters = 
-    selectedDepartment !== 'All Departments' ||
-    selectedCelebrationType !== 'All Types' ||
-    selectedStatus !== 'All Status';
+  const hasActiveFilters =
+    selectedDepartment !== "All Departments" ||
+    selectedCelebrationType !== "All Types" ||
+    selectedStatus !== "All Status";
 
   return (
     <div className="bg-card rounded-lg shadow-warm p-4 mb-6">
