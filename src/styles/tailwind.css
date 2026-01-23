@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Primary Colors - Celebration Energy */
+    --color-primary: #E8B4F0; /* purple-300 */
+    --color-primary-foreground: #2D3748; /* gray-800 */
+    
+    /* Secondary Colors - Calm Reliability */
+    --color-secondary: #A8D8EA; /* blue-300 */
+    --color-secondary-foreground: #2D3748; /* gray-800 */
+    
+    /* Accent Colors - Joyful Highlights */
+    --color-accent: #FFD93D; /* yellow-400 */
+    --color-accent-foreground: #2D3748; /* gray-800 */
+    
+    /* Background & Surface */
+    --color-background: #FEFEFE; /* white */
+    --color-foreground: #2D3748; /* gray-800 */
+    --color-card: #F8F9FA; /* gray-50 */
+    --color-card-foreground: #2D3748; /* gray-800 */
+    --color-popover: #FFFFFF; /* white */
+    --color-popover-foreground: #2D3748; /* gray-800 */
+    
+    /* Muted Elements */
+    --color-muted: #F8F9FA; /* gray-50 */
+    --color-muted-foreground: #718096; /* gray-500 */
+    
+    /* Border & Input */
+    --color-border: #E2E8F0; /* gray-200 */
+    --color-input: #E2E8F0; /* gray-200 */
+    --color-ring: #E8B4F0; /* purple-300 */
+    
+    /* Status Colors */
+    --color-success: #48BB78; /* green-500 */
+    --color-success-foreground: #FFFFFF; /* white */
+    --color-warning: #ED8936; /* orange-500 */
+    --color-warning-foreground: #FFFFFF; /* white */
+    --color-error: #E53E3E; /* red-500 */
+    --color-error-foreground: #FFFFFF; /* white */
+    --color-destructive: #E53E3E; /* red-500 */
+    --color-destructive-foreground: #FFFFFF; /* white */
+    
+    /* Brand Specific Colors */
+    --color-celebration: #f59e0b; /* amber-500 */
+    --color-celebration-foreground: #FFFFFF; /* white */
+    --color-trust: #3b82f6; /* blue-500 */
+    --color-trust-foreground: #FFFFFF; /* white */
+    --color-premium: #6366f1; /* indigo-500 */
+    --color-premium-foreground: #FFFFFF; /* white */
+    
+    /* Spacing & Layout */
+    --radius: 0.5rem;
+    --header-height: 4rem;
+    --sidebar-width: 16rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  
+  .font-accent {
+    font-family: 'Dancing Script', cursive;
+  }
+}
+
+@layer utilities {
+  .celebration-gradient {
+    background: linear-gradient(135deg, #f8fafc 0%, #fef3e2 100%);
+  }
+  
+  .active-celebration-gradient {
+    background: linear-gradient(135deg, #fef3e2 0%, #fde68a 100%);
+  }
+  
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .shadow-warm {
+    box-shadow: 0 2px 8px rgba(251, 146, 60, 0.08);
+  }
+  
+  .shadow-warm-lg {
+    box-shadow: 0 4px 16px rgba(251, 146, 60, 0.12);
+  }
+  
+  .shadow-celebration {
+    box-shadow: 0 8px 25px rgba(245, 158, 11, 0.1);
+  }
+
+  .animate-pulse-gentle {
+    animation: pulse-gentle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse-gentle {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
+
+  .animate-slide-in {
+    animation: slide-in 0.3s ease-out;
+  }
+
+  @keyframes slide-in {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+}
