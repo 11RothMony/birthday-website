@@ -1,7 +1,7 @@
 {
-    "theme_color": "#8936FF",
-    "background_color": "#2EC6FE",
-    
+  "theme_color": "#8936FF",
+  "background_color": "#2EC6FE",
+
   "icons": [
     {
       "src": "windows11/SmallTile.scale-100.png",
@@ -453,10 +453,10 @@
     }
   ],
 
-    "orientation": "any",
-    "display": "standalone",
-    "dir": "auto",
-    "lang": "en-US",
-    "name": "BHG HBD",
-    "short_name": "BHG HBD"
+  "orientation": "any",
+  "display": "standalone",
+  "dir": "auto",
+  "lang": "en-US",
+  "name": "BHG HBD",
+  "short_name": "BHG HBD"
 }
