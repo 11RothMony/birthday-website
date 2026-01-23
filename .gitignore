@@ -35,3 +35,10 @@ jest-test-results.json
 
 # Optional: if using TurboRepo or monorepo
 turbo/
+
+node_modules
+.next
+dist
+build
+.env
+.DS_Store
