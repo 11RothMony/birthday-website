@@ -1,12 +1,12 @@
-import type { Metadata } from "next";
-import Header from "@/components/common/Header";
-import Sidebar from "@/components/common/Sidebar";
-import CalendarInteractive from "./components/CalendarInteractive";
+import type { Metadata } from 'next';
+import Header from '@/components/common/Header';
+import Sidebar from '@/components/common/Sidebar';
+import CalendarInteractive from './components/CalendarInteractive';
 
 export const metadata: Metadata = {
-  title: "Calendar View - BirthdayDesk",
+  title: 'Calendar View - BirthdayDesk',
   description:
-    "Visual monthly, weekly, daily, and yearly calendar views with celebration planning tools, drag-and-drop features, and comprehensive birthday timeline management for workplace celebrations.",
+    'Visual monthly, weekly, daily, and yearly calendar views with celebration planning tools, drag-and-drop features, and comprehensive birthday timeline management for workplace celebrations.',
 };
 
 export default function CalendarViewPage() {

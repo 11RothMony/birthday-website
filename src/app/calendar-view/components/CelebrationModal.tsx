@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import React from "react";
-import Icon from "@/components/ui/AppIcon";
-import AppImage from "@/components/ui/AppImage";
+import React from 'react';
+import Icon from '@/components/ui/AppIcon';
+import AppImage from '@/components/ui/AppImage';
 
 interface Celebration {
   id: string;
   name: string;
-  type: "Birthday" | "Work Anniversary" | "Milestone";
+  type: 'Birthday' | 'Work Anniversary' | 'Milestone';
   date: string;
   time?: string;
   department: string;
-  status: "Planned" | "In Progress" | "Completed";
+  status: 'Planned' | 'In Progress' | 'Completed';
   image: string;
   alt: string;
   notes?: string;
@@ -23,10 +23,7 @@ interface CelebrationModalProps {
   celebration: Celebration | null;
   isOpen: boolean;
   onClose: () => void;
-  onStatusChange: (
-    id: string,
-    status: "Planned" | "In Progress" | "Completed",
-  ) => void;
+  onStatusChange: (id: string, status: 'Planned' | 'In Progress' | 'Completed') => void;
 }
 
 const CelebrationModal = ({
@@ -39,31 +36,28 @@ const CelebrationModal = ({
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "Completed":
-        return "bg-success text-success-foreground";
-      case "In Progress":
-        return "bg-warning text-warning-foreground";
+      case 'Completed':
+        return 'bg-success text-success-foreground';
+      case 'In Progress':
+        return 'bg-warning text-warning-foreground';
       default:
-        return "bg-primary text-primary-foreground";
+        return 'bg-primary text-primary-foreground';
     }
   };
 
   const formatDate = (dateStr: string) => {
     const date = new Date(dateStr);
-    return date.toLocaleDateString("en-US", {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
+    return date.toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
     });
   };
 
   return (
     <>
-      <div
-        className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50"
-        onClick={onClose}
-      />
+      <div className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50" onClick={onClose} />
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
         <div className="bg-card rounded-lg shadow-warm-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
           <div className="sticky top-0 bg-card border-b border-border p-6 flex items-center justify-between">
@@ -89,9 +83,7 @@ const CelebrationModal = ({
                 />
               </div>
               <div className="flex-1">
-                <h3 className="text-xl font-semibold text-foreground mb-2">
-                  {celebration.name}
-                </h3>
+                <h3 className="text-xl font-semibold text-foreground mb-2">{celebration.name}</h3>
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="px-3 py-1 bg-primary/10 text-primary text-sm font-medium rounded-full">
                     {celebration.type}
@@ -101,7 +93,7 @@ const CelebrationModal = ({
                   </span>
                   <span
                     className={`px-3 py-1 text-sm font-medium rounded-full ${getStatusColor(
-                      celebration.status,
+                      celebration.status
                     )}`}
                   >
                     {celebration.status}
@@ -126,9 +118,7 @@ const CelebrationModal = ({
                   <Icon name="ClockIcon" size={24} className="text-primary" />
                   <div>
                     <p className="text-xs text-muted-foreground">Time</p>
-                    <p className="text-sm font-medium text-foreground">
-                      {celebration.time}
-                    </p>
+                    <p className="text-sm font-medium text-foreground">{celebration.time}</p>
                   </div>
                 </div>
               )}
@@ -136,17 +126,11 @@ const CelebrationModal = ({
 
             {(celebration.cakeStatus || celebration.giftStatus) && (
               <div className="space-y-3">
-                <h4 className="text-sm font-semibold text-foreground">
-                  Preparation Status
-                </h4>
+                <h4 className="text-sm font-semibold text-foreground">Preparation Status</h4>
                 {celebration.cakeStatus && (
                   <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
                     <div className="flex items-center gap-2">
-                      <Icon
-                        name="CakeIcon"
-                        size={20}
-                        className="text-celebration"
-                      />
+                      <Icon name="CakeIcon" size={20} className="text-celebration" />
                       <span className="text-sm text-foreground">Cake</span>
                     </div>
                     <span className="text-sm font-medium text-foreground">
@@ -157,11 +141,7 @@ const CelebrationModal = ({
                 {celebration.giftStatus && (
                   <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
                     <div className="flex items-center gap-2">
-                      <Icon
-                        name="GiftIcon"
-                        size={20}
-                        className="text-celebration"
-                      />
+                      <Icon name="GiftIcon" size={20} className="text-celebration" />
                       <span className="text-sm text-foreground">Gift</span>
                     </div>
                     <span className="text-sm font-medium text-foreground">
@@ -174,9 +154,7 @@ const CelebrationModal = ({
 
             {celebration.notes && (
               <div>
-                <h4 className="text-sm font-semibold text-foreground mb-2">
-                  Notes
-                </h4>
+                <h4 className="text-sm font-semibold text-foreground mb-2">Notes</h4>
                 <p className="text-sm text-muted-foreground p-4 bg-muted/50 rounded-lg">
                   {celebration.notes}
                 </p>
@@ -184,25 +162,21 @@ const CelebrationModal = ({
             )}
 
             <div>
-              <h4 className="text-sm font-semibold text-foreground mb-3">
-                Update Status
-              </h4>
+              <h4 className="text-sm font-semibold text-foreground mb-3">Update Status</h4>
               <div className="flex flex-wrap gap-2">
-                {(["Planned", "In Progress", "Completed"] as const).map(
-                  (status) => (
-                    <button
-                      key={status}
-                      onClick={() => onStatusChange(celebration.id, status)}
-                      className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${
-                        celebration.status === status
-                          ? getStatusColor(status)
-                          : "bg-muted text-foreground hover:bg-muted/80"
-                      }`}
-                    >
-                      {status}
-                    </button>
-                  ),
-                )}
+                {(['Planned', 'In Progress', 'Completed'] as const).map((status) => (
+                  <button
+                    key={status}
+                    onClick={() => onStatusChange(celebration.id, status)}
+                    className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${
+                      celebration.status === status
+                        ? getStatusColor(status)
+                        : 'bg-muted text-foreground hover:bg-muted/80'
+                    }`}
+                  >
+                    {status}
+                  </button>
+                ))}
               </div>
             </div>
           </div>

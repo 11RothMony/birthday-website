@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import AppImage from "@/components/ui/AppImage";
-import Icon from "@/components/ui/AppIcon";
+import React, { useState } from 'react';
+import AppImage from '@/components/ui/AppImage';
+import Icon from '@/components/ui/AppIcon';
 
 interface BirthdayPerson {
   id: number;
@@ -25,13 +25,9 @@ interface BirthdayCardProps {
   onAddNote: (id: number, note: string) => void;
 }
 
-const BirthdayCard = ({
-  person,
-  onUpdateStatus,
-  onAddNote,
-}: BirthdayCardProps) => {
+const BirthdayCard = ({ person, onUpdateStatus, onAddNote }: BirthdayCardProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [noteText, setNoteText] = useState("");
+  const [noteText, setNoteText] = useState('');
   const [showNoteInput, setShowNoteInput] = useState(false);
 
   // Calculate age from year of birth
@@ -45,7 +41,7 @@ const BirthdayCard = ({
   const handleAddNote = () => {
     if (noteText.trim()) {
       onAddNote(person.id, noteText);
-      setNoteText("");
+      setNoteText('');
       setShowNoteInput(false);
     }
   };
@@ -63,11 +59,7 @@ const BirthdayCard = ({
               />
             </div>
             <div className="absolute -top-2 -right-2 w-8 h-8 bg-celebration rounded-full flex items-center justify-center shadow-warm">
-              <Icon
-                name="CakeIcon"
-                size={16}
-                className="text-celebration-foreground"
-              />
+              <Icon name="CakeIcon" size={16} className="text-celebration-foreground" />
             </div>
           </div>
 
@@ -77,35 +69,21 @@ const BirthdayCard = ({
                 <h3 className="text-lg font-heading font-semibold text-foreground mb-1">
                   {person.name}
                 </h3>
-                <p className="text-sm text-muted-foreground">
-                  {person.department}
-                </p>
+                <p className="text-sm text-muted-foreground">{person.department}</p>
               </div>
               <div className="flex items-center gap-2 px-3 py-1.5 bg-primary/10 rounded-full">
                 <Icon name="SparklesIcon" size={16} className="text-primary" />
-                <span className="text-sm font-semibold text-primary">
-                  {age} years
-                </span>
+                <span className="text-sm font-semibold text-primary">{age} years</span>
               </div>
             </div>
 
             <div className="flex flex-wrap gap-2 mb-4">
               <div className="flex items-center gap-1.5 px-3 py-1.5 bg-muted rounded-lg">
-                <Icon
-                  name="CakeIcon"
-                  size={14}
-                  className="text-muted-foreground"
-                />
-                <span className="text-xs text-foreground">
-                  {person.preferences.cakeType}
-                </span>
+                <Icon name="CakeIcon" size={14} className="text-muted-foreground" />
+                <span className="text-xs text-foreground">{person.preferences.cakeType}</span>
               </div>
               <div className="flex items-center gap-1.5 px-3 py-1.5 bg-secondary/10 rounded-lg">
-                <Icon
-                  name="UserGroupIcon"
-                  size={14}
-                  className="text-secondary"
-                />
+                <Icon name="UserGroupIcon" size={14} className="text-secondary" />
                 <span className="text-xs text-secondary">
                   {person.preferences.celebrationStyle}
                 </span>
@@ -114,7 +92,7 @@ const BirthdayCard = ({
 
             <div className="flex flex-wrap gap-2">
               <button
-                onClick={() => onUpdateStatus(person.id, "cake-ordered")}
+                onClick={() => onUpdateStatus(person.id, 'cake-ordered')}
                 className="flex items-center gap-2 px-4 py-2 bg-trust text-trust-foreground rounded-lg text-sm font-medium hover:shadow-warm transition-all duration-300"
               >
                 <Icon name="CheckCircleIcon" size={16} />
@@ -124,10 +102,7 @@ const BirthdayCard = ({
                 onClick={() => setIsExpanded(!isExpanded)}
                 className="flex items-center gap-2 px-4 py-2 bg-muted text-foreground rounded-lg text-sm font-medium hover:bg-muted/80 transition-all duration-300"
               >
-                <Icon
-                  name={isExpanded ? "ChevronUpIcon" : "ChevronDownIcon"}
-                  size={16}
-                />
+                <Icon name={isExpanded ? 'ChevronUpIcon' : 'ChevronDownIcon'} size={16} />
                 <span>Details</span>
               </button>
             </div>
@@ -138,11 +113,7 @@ const BirthdayCard = ({
           <div className="mt-6 pt-6 border-t border-border space-y-4">
             <div>
               <h4 className="text-sm font-semibold text-foreground mb-2 flex items-center gap-2">
-                <Icon
-                  name="DocumentTextIcon"
-                  size={16}
-                  className="text-muted-foreground"
-                />
+                <Icon name="DocumentTextIcon" size={16} className="text-muted-foreground" />
                 Celebration Notes
               </h4>
               {person.notes ? (
@@ -150,9 +121,7 @@ const BirthdayCard = ({
                   {person.notes}
                 </p>
               ) : (
-                <p className="text-sm text-muted-foreground italic">
-                  No notes added yet
-                </p>
+                <p className="text-sm text-muted-foreground italic">No notes added yet</p>
               )}
             </div>
 
@@ -183,7 +152,7 @@ const BirthdayCard = ({
                   <button
                     onClick={() => {
                       setShowNoteInput(false);
-                      setNoteText("");
+                      setNoteText('');
                     }}
                     className="px-4 py-2 bg-muted text-foreground rounded-lg text-sm font-medium hover:bg-muted/80 transition-all duration-300"
                   >

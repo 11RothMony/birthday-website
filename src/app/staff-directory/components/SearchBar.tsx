@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import React from "react";
-import Icon from "@/components/ui/AppIcon";
+import React from 'react';
+import Icon from '@/components/ui/AppIcon';
 
 interface SearchBarProps {
   searchTerm: string;

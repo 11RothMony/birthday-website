@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react";
 import CalendarHeader from "./CalendarHeader";
 import CalendarFilters from "./CalendarFilters";
-import CalendarLegend from "./CalendarLegend";
 import DayView from "./DayView";
 import WeekView from "./WeekView";
 import MonthView from "./MonthView";
@@ -22,9 +21,9 @@ interface Celebration {
   status: "Planned" | "In Progress" | "Completed";
   image: string;
   alt: string;
-  notes?: string;
-  cakeStatus?: string;
-  giftStatus?: string;
+  // notes?: string;
+  // cakeStatus?: string;
+  // giftStatus?: string;
 }
 
 const CalendarInteractive = () => {
@@ -45,8 +44,6 @@ const CalendarInteractive = () => {
 
   useEffect(() => {
     setIsHydrated(true);
-
-    // Load celebrations from staff mock data
     const mockCelebrations: Celebration[] = mockData.staff.map((staff) => ({
       id: staff.id,
       name: staff.name,
@@ -54,15 +51,9 @@ const CalendarInteractive = () => {
       date: staff.birthday,
       time: "10:00", // Default time
       department: staff.department,
-      status:
-        staff.cakeStatus === "ordered"
-          ? ("In Progress" as const)
-          : ("Planned" as const),
+      status: "Planned" as const,
       image: staff.image,
       alt: staff.alt,
-      notes: staff.notes,
-      cakeStatus: staff.cakeStatus || "Not Ordered",
-      giftStatus: "Not Started",
     }));
 
     setCelebrations(mockCelebrations);
@@ -266,13 +257,13 @@ const CalendarInteractive = () => {
         onShare={handleShare}
       />
 
-      {viewMode === "day" && (
+      {/* {viewMode === 'day' && (
         <DayView
           celebrations={filteredCelebrations}
           currentDate={currentDate}
           onCelebrationClick={handleCelebrationClick}
         />
-      )}
+      )} */}
 
       {viewMode === "week" && (
         <WeekView

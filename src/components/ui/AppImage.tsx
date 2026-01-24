@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import Image from "next/image";
+import React, { useState } from 'react';
+import Image from 'next/image';
 
 interface AppImageProps {
   src: string;
@@ -11,7 +11,7 @@ interface AppImageProps {
   className?: string;
   priority?: boolean;
   quality?: number;
-  placeholder?: "blur" | "empty";
+  placeholder?: 'blur' | 'empty';
   blurDataURL?: string;
   fill?: boolean;
   sizes?: string;
@@ -25,15 +25,15 @@ function AppImage({
   alt,
   width,
   height,
-  className = "",
+  className = '',
   priority = false,
   quality = 75,
-  placeholder = "empty",
+  placeholder = 'empty',
   blurDataURL,
   fill = false,
   sizes,
   onClick,
-  fallbackSrc = "/assets/images/no_image.png",
+  fallbackSrc = '/assets/images/no_image.png',
   ...props
 }: AppImageProps) {
   const [imageSrc, setImageSrc] = useState(src);
@@ -41,12 +41,9 @@ function AppImage({
   const [hasError, setHasError] = useState(false);
 
   // More reliable external URL detection
-  const isExternal =
-    imageSrc.startsWith("http://") || imageSrc.startsWith("https://");
+  const isExternal = imageSrc.startsWith('http://') || imageSrc.startsWith('https://');
   const isLocal =
-    imageSrc.startsWith("/") ||
-    imageSrc.startsWith("./") ||
-    imageSrc.startsWith("data:");
+    imageSrc.startsWith('/') || imageSrc.startsWith('./') || imageSrc.startsWith('data:');
 
   const handleError = () => {
     if (!hasError && imageSrc !== fallbackSrc) {
@@ -61,7 +58,7 @@ function AppImage({
     setHasError(false);
   };
 
-  const commonClassName = `${className} ${isLoading ? "bg-gray-200" : ""} ${onClick ? "cursor-pointer hover:opacity-90 transition-opacity" : ""}`;
+  const commonClassName = `${className} ${isLoading ? 'bg-gray-200' : ''} ${onClick ? 'cursor-pointer hover:opacity-90 transition-opacity' : ''}`;
 
   // For external URLs or when in doubt, use regular img tag
   if (isExternal && !isLocal) {
@@ -74,7 +71,7 @@ function AppImage({
       return (
         <div
           className={`relative ${className}`}
-          style={{ width: width || "100%", height: height || "100%" }}
+          style={{ width: width || '100%', height: height || '100%' }}
         >
           <img
             src={imageSrc}
@@ -123,12 +120,7 @@ function AppImage({
   if (fill) {
     return (
       <div className={`relative ${className}`}>
-        <Image
-          {...imageProps}
-          fill
-          sizes={sizes || "100vw"}
-          style={{ objectFit: "cover" }}
-        />
+        <Image {...imageProps} fill sizes={sizes || '100vw'} style={{ objectFit: 'cover' }} />
       </div>
     );
   }

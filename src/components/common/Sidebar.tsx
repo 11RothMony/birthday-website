@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import Icon from "@/components/ui/AppIcon";
-import mockData from "@/data/staff-mock-data.json";
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import Icon from '@/components/ui/AppIcon';
+import mockData from '@/data/staff-mock-data.json';
 
 interface SidebarProps {
   isOpen?: boolean;
@@ -45,11 +45,7 @@ const Sidebar = ({ isOpen = false, onClose }: SidebarProps) => {
     const today = new Date();
     const celebratedCount = thisMonthBirthdays.filter((staff) => {
       const birthday = new Date(staff.birthday);
-      const thisYearBirthday = new Date(
-        currentYear,
-        birthday.getMonth(),
-        birthday.getDate(),
-      );
+      const thisYearBirthday = new Date(currentYear, birthday.getMonth(), birthday.getDate());
       return thisYearBirthday <= today;
     }).length;
 
@@ -63,39 +59,39 @@ const Sidebar = ({ isOpen = false, onClose }: SidebarProps) => {
 
   const navSections: NavSection[] = [
     {
-      title: "Main",
+      title: 'Main',
       items: [
-        { label: "Dashboard", href: "/dashboard-hub", icon: "HomeIcon" },
+        { label: 'Dashboard', href: '/dashboard-hub', icon: 'HomeIcon' },
         {
           label: "This Month's HBD",
-          href: "/today-s-birthdays",
-          icon: "CakeIcon",
+          href: '/today-s-birthdays',
+          icon: 'CakeIcon',
           badge: thisMonthCount.toString(),
         },
       ],
     },
     {
-      title: "Management",
+      title: 'Management',
       items: [
         {
-          label: "Staff Directory",
-          href: "/staff-directory",
-          icon: "UsersIcon",
+          label: 'Staff Directory',
+          href: '/staff-directory',
+          icon: 'UsersIcon',
         },
         {
-          label: "Calendar View",
-          href: "/calendar-view",
-          icon: "CalendarDaysIcon",
+          label: 'Calendar View',
+          href: '/calendar-view',
+          icon: 'CalendarDaysIcon',
         },
       ],
     },
     {
-      title: "Settings",
+      title: 'Settings',
       items: [
         {
-          label: "Settings Panel",
-          href: "/settings-panel",
-          icon: "Cog6ToothIcon",
+          label: 'Settings Panel',
+          href: '/settings-panel',
+          icon: 'Cog6ToothIcon',
         },
       ],
     },
@@ -103,24 +99,19 @@ const Sidebar = ({ isOpen = false, onClose }: SidebarProps) => {
 
   const isActive = (href: string) => pathname === href;
 
-  const currentMonthName = new Date().toLocaleDateString("en-US", {
-    month: "long",
+  const currentMonthName = new Date().toLocaleDateString('en-US', {
+    month: 'long',
   });
 
   return (
     <>
       {/* Mobile Overlay */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 bg-background z-40 lg:hidden"
-          onClick={onClose}
-        />
-      )}
+      {isOpen && <div className="fixed inset-0 bg-background z-40 lg:hidden" onClick={onClose} />}
 
       {/* Sidebar */}
       <aside
         className={`fixed left-0 top-16 bottom-0 w-64 bg-card border-r border-border z-50 transition-transform duration-300 lg:fixed ${
-          isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+          isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         }`}
       >
         <div className="flex flex-col h-full">
@@ -134,21 +125,15 @@ const Sidebar = ({ isOpen = false, onClose }: SidebarProps) => {
 
             <div className="relative z-10">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-medium text-foreground">
-                  {currentMonthName}
-                </span>
-                <Icon
-                  name="SparklesIcon"
-                  size={20}
-                  className="text-celebration animate-pulse"
-                />
+                <span className="text-sm font-medium text-foreground">{currentMonthName}</span>
+                <Icon name="SparklesIcon" size={20} className="text-celebration animate-pulse" />
               </div>
               <div className="flex items-baseline gap-2">
                 <span className="text-3xl font-heading font-semibold text-foreground">
                   {thisMonthCount}
                 </span>
                 <span className="text-sm text-muted-foreground">
-                  celebration{thisMonthCount !== 1 ? "s" : ""}
+                  celebration{thisMonthCount !== 1 ? 's' : ''}
                 </span>
               </div>
             </div>
@@ -169,22 +154,20 @@ const Sidebar = ({ isOpen = false, onClose }: SidebarProps) => {
                       onClick={onClose}
                       className={`flex items-center justify-between gap-3 px-3 py-2.5 rounded-lg transition-all duration-300 ${
                         isActive(item.href)
-                          ? "bg-primary text-primary-foreground shadow-warm"
-                          : "text-foreground hover:bg-muted"
+                          ? 'bg-primary text-primary-foreground shadow-warm'
+                          : 'text-foreground hover:bg-muted'
                       }`}
                     >
                       <div className="flex items-center gap-3">
                         <Icon name={item.icon as any} size={20} />
-                        <span className="text-sm font-medium">
-                          {item.label}
-                        </span>
+                        <span className="text-sm font-medium">{item.label}</span>
                       </div>
                       {item.badge && (
                         <span
                           className={`flex items-center justify-center min-w-[20px] h-5 px-1.5 text-xs font-semibold rounded-full ${
                             parseInt(item.badge) > 0
-                              ? "bg-celebration text-white animate-pulse"
-                              : "bg-muted text-muted-foreground"
+                              ? 'bg-celebration text-white animate-pulse'
+                              : 'bg-muted text-muted-foreground'
                           }`}
                         >
                           {item.badge}
@@ -209,19 +192,11 @@ const Sidebar = ({ isOpen = false, onClose }: SidebarProps) => {
           <div className="p-4 bg-muted/50 m-4 rounded-lg">
             <div className="flex items-start gap-3">
               <div className="flex-shrink-0 w-8 h-8 bg-premium/10 rounded-lg flex items-center justify-center">
-                <Icon
-                  name="QuestionMarkCircleIcon"
-                  size={20}
-                  className="text-premium"
-                />
+                <Icon name="QuestionMarkCircleIcon" size={20} className="text-premium" />
               </div>
               <div>
-                <h4 className="text-sm font-semibold text-foreground mb-1">
-                  Need Help?
-                </h4>
-                <p className="text-xs text-muted-foreground mb-2">
-                  Check our celebration guide
-                </p>
+                <h4 className="text-sm font-semibold text-foreground mb-1">Need Help?</h4>
+                <p className="text-xs text-muted-foreground mb-2">Check our celebration guide</p>
                 <button className="text-xs font-medium text-premium hover:underline">
                   View Guide →
                 </button>

@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect, useRef } from "react";
-import BirthdayCard from "./BirthdayCard";
-import NotificationPanel from "./NotificationPanel";
-import QuickActions from "./QuickActions";
-import Icon from "@/components/ui/AppIcon";
-import mockData from "@/data/staff-mock-data.json";
+import React, { useState, useEffect, useRef } from 'react';
+import BirthdayCard from './BirthdayCard';
+import NotificationPanel from './NotificationPanel';
+import QuickActions from './QuickActions';
+import Icon from '@/components/ui/AppIcon';
+import mockData from '@/data/staff-mock-data.json';
 interface BirthdayPerson {
   id: number;
   name: string;
@@ -28,7 +28,7 @@ interface TimelineEvent {
   time: string;
   title: string;
   description: string;
-  status: "completed" | "current" | "upcoming";
+  status: 'completed' | 'current' | 'upcoming';
   icon: string;
 }
 
@@ -47,14 +47,14 @@ const ThisMonthBirthdaysInteractive = () => {
   // Birthday songs playlist
   const birthdaySongs = [
     {
-      title: "Happy Birthday Classic",
-      url: "/audio/happy-birthday-155461.mp3",
+      title: 'Happy Birthday Classic',
+      url: '/audio/happy-birthday-155461.mp3',
     },
-    { title: "Birthday Celebration", url: "/audio/happy-birthday-155461.mp3" }, // Add more songs if you have them
+    { title: 'Birthday Celebration', url: '/audio/happy-birthday-155461.mp3' }, // Add more songs if you have them
   ];
 
   // Birthday video background
-  const birthdayVideo = "/videos/happy-birthday-155461.mp3";
+  const birthdayVideo = '/videos/happy-birthday-155461.mp3';
 
   // Get current month's birthdays
   const getCurrentMonthBirthdays = (): BirthdayPerson[] => {
@@ -71,14 +71,9 @@ const ThisMonthBirthdaysInteractive = () => {
         const birthday = new Date(staff.birthday);
         const today = new Date();
 
-        const thisYearBirthday = new Date(
-          currentYear,
-          birthday.getMonth(),
-          birthday.getDate(),
-        );
+        const thisYearBirthday = new Date(currentYear, birthday.getMonth(), birthday.getDate());
         const daysUntil = Math.ceil(
-          (thisYearBirthday.getTime() - today.getTime()) /
-            (1000 * 60 * 60 * 24),
+          (thisYearBirthday.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)
         );
 
         return {
@@ -145,9 +140,7 @@ const ThisMonthBirthdaysInteractive = () => {
   };
 
   const prevSong = () => {
-    setCurrentSongIndex(
-      (prev) => (prev - 1 + birthdaySongs.length) % birthdaySongs.length,
-    );
+    setCurrentSongIndex((prev) => (prev - 1 + birthdaySongs.length) % birthdaySongs.length);
   };
 
   const startSlideshow = () => {
@@ -176,9 +169,7 @@ const ThisMonthBirthdaysInteractive = () => {
   };
 
   const prevSlide = () => {
-    setCurrentSlideIndex(
-      (prev) => (prev - 1 + mockBirthdays.length) % mockBirthdays.length,
-    );
+    setCurrentSlideIndex((prev) => (prev - 1 + mockBirthdays.length) % mockBirthdays.length);
   };
 
   const toggleAutoPlay = () => {
@@ -198,7 +189,7 @@ const ThisMonthBirthdaysInteractive = () => {
   };
 
   const handleChecklistComplete = () => {
-    console.log("Celebration checklist completed");
+    console.log('Celebration checklist completed');
     setShowSuccessMessage(true);
     setTimeout(() => setShowSuccessMessage(false), 3000);
   };
@@ -210,14 +201,14 @@ const ThisMonthBirthdaysInteractive = () => {
   };
 
   const selectedPersonData = mockBirthdays.find((p) => p.id === selectedPerson);
-  const currentMonthName = new Date().toLocaleDateString("en-US", {
-    month: "long",
-    year: "numeric",
+  const currentMonthName = new Date().toLocaleDateString('en-US', {
+    month: 'long',
+    year: 'numeric',
   });
 
   const getDaysUntilText = (days: number) => {
-    if (days === 0) return "Today! 🎉";
-    if (days === 1) return "Tomorrow";
+    if (days === 0) return 'Today! 🎉';
+    if (days === 1) return 'Tomorrow';
     if (days < 0) return `${Math.abs(days)} days ago`;
     return `In ${days} days`;
   };
@@ -303,9 +294,7 @@ const ThisMonthBirthdaysInteractive = () => {
                     {currentSlidePerson.name}
                   </h2>
 
-                  <p className="text-xl text-white/90 mb-2">
-                    {currentSlidePerson.department}
-                  </p>
+                  <p className="text-xl text-white/90 mb-2">{currentSlidePerson.department}</p>
                 </div>
 
                 <div className="mt-4 text-white/70">
@@ -338,7 +327,7 @@ const ThisMonthBirthdaysInteractive = () => {
                 </h1>
                 <p className="text-muted-foreground">
                   {mockBirthdays.length} celebration
-                  {mockBirthdays.length !== 1 ? "s" : ""} this month
+                  {mockBirthdays.length !== 1 ? 's' : ''} this month
                 </p>
               </div>
             </div>
@@ -358,14 +347,8 @@ const ThisMonthBirthdaysInteractive = () => {
               {/* Music Player */}
               <div className="bg-gradient-to-r from-celebration/20 to-primary/20 rounded-xl p-4 border border-celebration/30 min-w-[280px]">
                 <div className="flex items-center gap-3 mb-2">
-                  <Icon
-                    name="MusicalNoteIcon"
-                    size={20}
-                    className="text-celebration"
-                  />
-                  <span className="text-sm font-semibold text-foreground">
-                    Birthday Music
-                  </span>
+                  <Icon name="MusicalNoteIcon" size={20} className="text-celebration" />
+                  <span className="text-sm font-semibold text-foreground">Birthday Music</span>
                 </div>
                 <p className="text-xs text-muted-foreground mb-3">
                   {birthdaySongs[currentSongIndex].title}
@@ -382,11 +365,8 @@ const ThisMonthBirthdaysInteractive = () => {
                     onClick={toggleMusic}
                     className="flex-1 py-2 px-4 rounded-lg bg-celebration text-white hover:bg-celebration/90 transition-all duration-300 font-medium flex items-center justify-center gap-2"
                   >
-                    <Icon
-                      name={isPlaying ? "PauseIcon" : "PlayIcon"}
-                      size={20}
-                    />
-                    {isPlaying ? "Pause" : "Play Music"}
+                    <Icon name={isPlaying ? 'PauseIcon' : 'PlayIcon'} size={20} />
+                    {isPlaying ? 'Pause' : 'Play Music'}
                   </button>
                   <button
                     onClick={nextSong}
@@ -409,8 +389,8 @@ const ThisMonthBirthdaysInteractive = () => {
               onClick={() => setSelectedPerson(person.id)}
               className={`cursor-pointer bg-card rounded-xl p-4 border-2 transition-all duration-300 hover:shadow-warm-lg ${
                 selectedPerson === person.id
-                  ? "border-celebration shadow-warm-lg scale-105"
-                  : "border-border hover:border-primary/50"
+                  ? 'border-celebration shadow-warm-lg scale-105'
+                  : 'border-border hover:border-primary/50'
               }`}
             >
               <div className="flex items-center gap-3 mb-3">
@@ -420,20 +400,12 @@ const ThisMonthBirthdaysInteractive = () => {
                   className="w-16 h-16 rounded-full object-cover border-2 border-celebration"
                 />
                 <div className="flex-1">
-                  <h3 className="font-heading font-semibold text-foreground">
-                    {person.name}
-                  </h3>
-                  <p className="text-sm text-muted-foreground">
-                    {person.department}
-                  </p>
+                  <h3 className="font-heading font-semibold text-foreground">{person.name}</h3>
+                  <p className="text-sm text-muted-foreground">{person.department}</p>
                 </div>
 
                 <div className="animate-bounce">
-                  <Icon
-                    name="CakeIcon"
-                    size={24}
-                    className="text-celebration"
-                  />
+                  <Icon name="CakeIcon" size={24} className="text-celebration" />
                 </div>
               </div>
 
@@ -441,18 +413,18 @@ const ThisMonthBirthdaysInteractive = () => {
                 <span
                   className={`text-xs font-medium px-3 py-1 rounded-full ${
                     person.daysUntil === 0
-                      ? "bg-celebration text-white"
+                      ? 'bg-celebration text-white'
                       : person.daysUntil < 7
-                        ? "bg-warning/20 text-warning"
-                        : "bg-primary/10 text-primary"
+                        ? 'bg-warning/20 text-warning'
+                        : 'bg-primary/10 text-primary'
                   }`}
                 >
                   {getDaysUntilText(person.daysUntil)}
                 </span>
                 <span className="text-xs text-muted-foreground">
-                  {new Date(person.birthday).toLocaleDateString("en-US", {
-                    month: "short",
-                    day: "numeric",
+                  {new Date(person.birthday).toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric',
                   })}
                 </span>
               </div>
@@ -488,33 +460,21 @@ const ThisMonthBirthdaysInteractive = () => {
               <div className="bg-card rounded-xl shadow-warm p-6 border border-border">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
-                    <Icon
-                      name="ChartBarIcon"
-                      size={20}
-                      className="text-primary"
-                    />
+                    <Icon name="ChartBarIcon" size={20} className="text-primary" />
                   </div>
                   <div>
                     <h3 className="text-lg font-heading font-semibold text-foreground">
                       Monthly Stats
                     </h3>
-                    <p className="text-sm text-muted-foreground">
-                      {currentMonthName}
-                    </p>
+                    <p className="text-sm text-muted-foreground">{currentMonthName}</p>
                   </div>
                 </div>
 
                 <div className="space-y-4">
                   <div className="flex items-center justify-between p-4 bg-celebration/10 rounded-lg border border-celebration/20">
                     <div className="flex items-center gap-3">
-                      <Icon
-                        name="CakeIcon"
-                        size={24}
-                        className="text-celebration"
-                      />
-                      <span className="text-sm font-medium text-foreground">
-                        Total Birthdays
-                      </span>
+                      <Icon name="CakeIcon" size={24} className="text-celebration" />
+                      <span className="text-sm font-medium text-foreground">Total Birthdays</span>
                     </div>
                     <span className="text-2xl font-heading font-bold text-celebration">
                       {mockBirthdays.length}
@@ -522,14 +482,8 @@ const ThisMonthBirthdaysInteractive = () => {
                   </div>
                   <div className="flex items-center justify-between p-4 bg-primary/10 rounded-lg border border-primary/20">
                     <div className="flex items-center gap-3">
-                      <Icon
-                        name="UserGroupIcon"
-                        size={24}
-                        className="text-primary"
-                      />
-                      <span className="text-sm font-medium text-foreground">
-                        Departments
-                      </span>
+                      <Icon name="UserGroupIcon" size={24} className="text-primary" />
+                      <span className="text-sm font-medium text-foreground">Departments</span>
                     </div>
                     <span className="text-2xl font-heading font-bold text-primary">
                       {new Set(mockBirthdays.map((b) => b.department)).size}
@@ -547,9 +501,7 @@ const ThisMonthBirthdaysInteractive = () => {
         )}
 
         {/* Stats and Timeline */}
-        {selectedPersonData && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6"></div>
-        )}
+        {selectedPersonData && <div className="grid grid-cols-1 lg:grid-cols-2 gap-6"></div>}
       </div>
 
       <style jsx>{`

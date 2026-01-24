@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import React from "react";
-import Icon from "@/components/ui/AppIcon";
+import React from 'react';
+import Icon from '@/components/ui/AppIcon';
 
 interface FilterPanelProps {
   selectedDepartment: string;
@@ -19,30 +19,30 @@ const FilterPanel = ({
   onReset,
 }: FilterPanelProps) => {
   const departments = [
-    "All Departments",
-    "Engineering",
-    "Marketing",
-    "Sales",
-    "Human Resources",
-    "Finance",
-    "Operations",
-    "Customer Support",
+    'All Departments',
+    'Engineering',
+    'Marketing',
+    'Sales',
+    'Human Resources',
+    'Finance',
+    'Operations',
+    'Customer Support',
   ];
 
   const months = [
-    "All Months",
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    'All Months',
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
   ];
 
   return (
@@ -52,19 +52,14 @@ const FilterPanel = ({
           <Icon name="FunnelIcon" size={18} className="text-primary" />
           Filters
         </h3>
-        <button
-          onClick={onReset}
-          className="text-xs text-trust hover:underline font-medium"
-        >
+        <button onClick={onReset} className="text-xs text-trust hover:underline font-medium">
           Reset All
         </button>
       </div>
 
       <div className="space-y-4">
         <div>
-          <label className="block text-xs font-medium text-muted-foreground mb-2">
-            Department
-          </label>
+          <label className="block text-xs font-medium text-muted-foreground mb-2">Department</label>
           <select
             value={selectedDepartment}
             onChange={(e) => onDepartmentChange(e.target.value)}

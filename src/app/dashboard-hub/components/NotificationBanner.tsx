@@ -1,19 +1,15 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect } from "react";
-import Icon from "@/components/ui/AppIcon";
+import React, { useState, useEffect } from 'react';
+import Icon from '@/components/ui/AppIcon';
 
 interface NotificationBannerProps {
-  type: "info" | "success" | "warning" | "error";
+  type: 'info' | 'success' | 'warning' | 'error';
   message: string;
   onDismiss: () => void;
 }
 
-const NotificationBanner = ({
-  type,
-  message,
-  onDismiss,
-}: NotificationBannerProps) => {
+const NotificationBanner = ({ type, message, onDismiss }: NotificationBannerProps) => {
   const [isHydrated, setIsHydrated] = React.useState(false);
 
   React.useEffect(() => {
@@ -22,28 +18,28 @@ const NotificationBanner = ({
 
   const typeConfig = {
     info: {
-      bg: "bg-trust/10",
-      border: "border-trust/20",
-      text: "text-trust",
-      icon: "InformationCircleIcon",
+      bg: 'bg-trust/10',
+      border: 'border-trust/20',
+      text: 'text-trust',
+      icon: 'InformationCircleIcon',
     },
     success: {
-      bg: "bg-success/10",
-      border: "border-success/20",
-      text: "text-success",
-      icon: "CheckCircleIcon",
+      bg: 'bg-success/10',
+      border: 'border-success/20',
+      text: 'text-success',
+      icon: 'CheckCircleIcon',
     },
     warning: {
-      bg: "bg-warning/10",
-      border: "border-warning/20",
-      text: "text-warning",
-      icon: "ExclamationTriangleIcon",
+      bg: 'bg-warning/10',
+      border: 'border-warning/20',
+      text: 'text-warning',
+      icon: 'ExclamationTriangleIcon',
     },
     error: {
-      bg: "bg-error/10",
-      border: "border-error/20",
-      text: "text-error",
-      icon: "XCircleIcon",
+      bg: 'bg-error/10',
+      border: 'border-error/20',
+      text: 'text-error',
+      icon: 'XCircleIcon',
     },
   };
 
@@ -54,9 +50,7 @@ const NotificationBanner = ({
   }
 
   return (
-    <div
-      className={`${config.bg} ${config.border} border rounded-lg p-4 flex items-start gap-3`}
-    >
+    <div className={`${config.bg} ${config.border} border rounded-lg p-4 flex items-start gap-3`}>
       <Icon name={config.icon as any} size={20} className={config.text} />
       <p className={`flex-1 text-sm ${config.text} font-medium`}>{message}</p>
       <button

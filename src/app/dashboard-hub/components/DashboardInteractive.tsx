@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect } from "react";
-import Link from "next/link";
-import TodaysBirthdayCard from "./TodaysBirthdayCard";
-import StatCard from "./StatCard";
-import NotificationBanner from "./NotificationBanner";
-import Icon from "@/components/ui/AppIcon";
-import mockData from "@/data/staff-mock-data.json";
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import TodaysBirthdayCard from './TodaysBirthdayCard';
+import StatCard from './StatCard';
+import NotificationBanner from './NotificationBanner';
+import Icon from '@/components/ui/AppIcon';
+import mockData from '@/data/staff-mock-data.json';
 
 interface Birthday {
   id: number;
@@ -15,7 +15,7 @@ interface Birthday {
   image: string;
   alt: string;
   age: number;
-  cakeStatus: "ordered" | "ready" | "delivered" | "not-ordered";
+  cakeStatus: 'ordered' | 'ready' | 'delivered' | 'not-ordered';
   preferences: string;
 }
 
@@ -35,16 +35,14 @@ interface TimelineEvent {
   action: string;
   time: string;
   icon: string;
-  color: "primary" | "trust" | "celebration" | "success";
+  color: 'primary' | 'trust' | 'celebration' | 'success';
 }
 
 const DashboardInteractive = () => {
   const [isHydrated, setIsHydrated] = useState(false);
   const [showNotification, setShowNotification] = useState(true);
   const [todaysBirthdays, setTodaysBirthdays] = useState<Birthday[]>([]);
-  const [upcomingCelebrations, setUpcomingCelebrations] = useState<
-    UpcomingCelebration[]
-  >([]);
+  const [upcomingCelebrations, setUpcomingCelebrations] = useState<UpcomingCelebration[]>([]);
   const [timelineEvents, setTimelineEvents] = useState<TimelineEvent[]>([]);
 
   // Helper function to check if birthday is this month
@@ -77,7 +75,7 @@ const DashboardInteractive = () => {
   // Format date for display
   const formatDate = (birthdayString: string): string => {
     const date = new Date(birthdayString);
-    return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
   };
 
   useEffect(() => {
@@ -94,18 +92,14 @@ const DashboardInteractive = () => {
         alt: staff.alt,
         age: staff.age,
         cakeStatus:
-          (staff.cakeStatus as
-            | "ordered"
-            | "ready"
-            | "delivered"
-            | "not-ordered") || "not-ordered",
+          (staff.cakeStatus as 'ordered' | 'ready' | 'delivered' | 'not-ordered') || 'not-ordered',
       }))
       .sort((a, b) => {
         const dateA = new Date(
-          mockData.staff.find((s) => parseInt(s.id) === a.id)!.birthday,
+          mockData.staff.find((s) => parseInt(s.id) === a.id)!.birthday
         ).getDate();
         const dateB = new Date(
-          mockData.staff.find((s) => parseInt(s.id) === b.id)!.birthday,
+          mockData.staff.find((s) => parseInt(s.id) === b.id)!.birthday
         ).getDate();
         return dateA - dateB;
       });
@@ -134,29 +128,29 @@ const DashboardInteractive = () => {
         string,
         {
           icon: string;
-          color: "primary" | "trust" | "celebration" | "success";
+          color: 'primary' | 'trust' | 'celebration' | 'success';
           action: string;
         }
       > = {
         delivered: {
-          icon: "CheckCircleIcon",
-          color: "success",
-          action: "cake delivered successfully",
+          icon: 'CheckCircleIcon',
+          color: 'success',
+          action: 'cake delivered successfully',
         },
         ready: {
-          icon: "ClockIcon",
-          color: "trust",
-          action: "cake is ready for pickup",
+          icon: 'ClockIcon',
+          color: 'trust',
+          action: 'cake is ready for pickup',
         },
         ordered: {
-          icon: "SparklesIcon",
-          color: "celebration",
-          action: "cake order confirmed",
+          icon: 'SparklesIcon',
+          color: 'celebration',
+          action: 'cake order confirmed',
         },
-        "not-ordered": {
-          icon: "BellIcon",
-          color: "primary",
-          action: "birthday reminder sent",
+        'not-ordered': {
+          icon: 'BellIcon',
+          color: 'primary',
+          action: 'birthday reminder sent',
         },
       };
 
@@ -180,12 +174,10 @@ const DashboardInteractive = () => {
 
   const handleUpdateStatus = (
     id: number,
-    status: "ordered" | "ready" | "delivered" | "not-ordered",
+    status: 'ordered' | 'ready' | 'delivered' | 'not-ordered'
   ) => {
     setTodaysBirthdays((prev) =>
-      prev.map((birthday) =>
-        birthday.id === id ? { ...birthday, cakeStatus: status } : birthday,
-      ),
+      prev.map((birthday) => (birthday.id === id ? { ...birthday, cakeStatus: status } : birthday))
     );
   };
 
@@ -214,9 +206,7 @@ const DashboardInteractive = () => {
     return daysUntil >= 0 && daysUntil <= 7;
   }).length;
 
-  const completedCelebrations = todaysBirthdays.filter(
-    (b) => b.cakeStatus === "delivered",
-  ).length;
+  const completedCelebrations = todaysBirthdays.filter((b) => b.cakeStatus === 'delivered').length;
 
   return (
     <div className="min-h-screen bg-background pt-16 lg:pl-64">
@@ -228,16 +218,16 @@ const DashboardInteractive = () => {
               Dashboard Hub
             </h1>
             <p className="text-sm text-muted-foreground">
-              Welcome back! Here's what's happening today
+              Welcome back! Here is what is happening today
             </p>
           </div>
           <div className="flex items-center gap-2">
             <span className="text-sm text-muted-foreground">
-              {new Date().toLocaleDateString("en-US", {
-                weekday: "long",
-                year: "numeric",
-                month: "long",
-                day: "numeric",
+              {new Date().toLocaleDateString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
               })}
             </span>
           </div>
@@ -247,7 +237,7 @@ const DashboardInteractive = () => {
         {showNotification && todaysBirthdays.length > 0 && (
           <NotificationBanner
             type="info"
-            message={`${todaysBirthdays.length} birthday${todaysBirthdays.length > 1 ? "s" : ""} this month! Don't forget to check cake delivery status.`}
+            message={`${todaysBirthdays.length} birthday${todaysBirthdays.length > 1 ? 's' : ''} this month! Don't forget to check cake delivery status.`}
             onDismiss={() => setShowNotification(false)}
           />
         )}
@@ -281,13 +271,9 @@ const DashboardInteractive = () => {
             <div className="bg-card rounded-lg border border-border p-4 lg:p-6 shadow-warm">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
-                  <Icon
-                    name="CakeIcon"
-                    size={24}
-                    className="text-celebration"
-                  />
+                  <Icon name="CakeIcon" size={24} className="text-celebration" />
                   <h2 className="text-lg font-heading font-semibold text-foreground">
-                    This Month's Birthdays
+                    This Month HBD
                   </h2>
                 </div>
                 <Link
@@ -299,17 +285,9 @@ const DashboardInteractive = () => {
               </div>
               {todaysBirthdays.length === 0 ? (
                 <div className="text-center py-8">
-                  <Icon
-                    name="CakeIcon"
-                    size={48}
-                    className="text-muted-foreground mx-auto mb-3"
-                  />
-                  <p className="text-foreground font-medium mb-1">
-                    No birthdays this month
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    Check upcoming celebrations
-                  </p>
+                  <Icon name="CakeIcon" size={48} className="text-muted-foreground mx-auto mb-3" />
+                  <p className="text-foreground font-medium mb-1">No birthdays this month</p>
+                  <p className="text-sm text-muted-foreground">Check upcoming celebrations</p>
                 </div>
               ) : (
                 <div className="space-y-3">
