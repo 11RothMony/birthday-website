@@ -4,6 +4,18 @@ import React, { useState, useEffect } from "react";
 import AppImage from "@/components/ui/AppImage";
 import Icon from "@/components/ui/AppIcon";
 
+// interface Birthday {
+//   id: number;
+//   name: string;
+//   department: string;
+//   image: string;
+//   alt: string;
+//   age: number;
+
+//   cakeStatus: "ordered" | "ready" | "delivered";
+//   preferences: string;
+// }
+// In TodaysBirthdayCard.tsx
 interface Birthday {
   id: number;
   name: string;
@@ -11,17 +23,27 @@ interface Birthday {
   image: string;
   alt: string;
   age: number;
-
-  cakeStatus: "ordered" | "ready" | "delivered";
+  cakeStatus: "ordered" | "ready" | "delivered" | "not-ordered"; // Add "not-ordered"
   preferences: string;
 }
 
 interface TodaysBirthdayCardProps {
   birthday: Birthday;
-  onUpdateStatus: (id: number, status: "ordered" | "ready" | "delivered") => void;
+  onUpdateStatus: (
+    id: number,
+    status: "ordered" | "ready" | "delivered" | "not-ordered",
+  ) => void; // Add "not-ordered"
 }
 
-const TodaysBirthdayCard = ({ birthday, onUpdateStatus }: TodaysBirthdayCardProps) => {
+// interface TodaysBirthdayCardProps {
+//   birthday: Birthday;
+//   onUpdateStatus: (id: number, status: "ordered" | "ready" | "delivered") => void;
+// }
+
+const TodaysBirthdayCard = ({
+  birthday,
+  onUpdateStatus,
+}: TodaysBirthdayCardProps) => {
   const [isHydrated, setIsHydrated] = React.useState(false);
 
   React.useEffect(() => {
@@ -88,15 +110,23 @@ const TodaysBirthdayCard = ({ birthday, onUpdateStatus }: TodaysBirthdayCardProp
             />
           </div>
           <div className="absolute -top-1 -right-1 w-6 h-6 bg-celebration rounded-full flex items-center justify-center">
-            <Icon name="CakeIcon" size={14} className="text-celebration-foreground" />
+            <Icon
+              name="CakeIcon"
+              size={14}
+              className="text-celebration-foreground"
+            />
           </div>
         </div>
 
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-2 mb-2">
             <div>
-              <h3 className="text-base font-semibold text-foreground truncate">{birthday.name}</h3>
-              <p className="text-sm text-muted-foreground">{birthday.department}</p>
+              <h3 className="text-base font-semibold text-foreground truncate">
+                {birthday.name}
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                {birthday.department}
+              </p>
             </div>
             <span className="flex-shrink-0 px-2 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full">
               {age} years
@@ -104,28 +134,38 @@ const TodaysBirthdayCard = ({ birthday, onUpdateStatus }: TodaysBirthdayCardProp
           </div>
 
           <div className="flex items-center gap-2 mb-3">
-            <Icon name="InformationCircleIcon" size={16} className="text-muted-foreground" />
-            <p className="text-xs text-muted-foreground">{birthday.preferences}</p>
+            <Icon
+              name="InformationCircleIcon"
+              size={16}
+              className="text-muted-foreground"
+            />
+            <p className="text-xs text-muted-foreground">
+              {birthday.preferences}
+            </p>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="text-xs font-medium text-foreground">Cake Status:</span>
+            <span className="text-xs font-medium text-foreground">
+              Cake Status:
+            </span>
             <button
               onClick={() => {
-                const statuses: Array<"ordered" | "ready" | "delivered"> = [
-                  "ordered",
-                  "ready",
-                  "delivered",
-                ];
+                const statuses: Array<
+                  "ordered" | "ready" | "delivered" | "not-ordered"
+                > = ["not-ordered", "ordered", "ready", "delivered"];
                 const currentIndex = statuses.indexOf(birthday.cakeStatus);
-                const nextStatus = statuses[(currentIndex + 1) % statuses.length];
+                const nextStatus =
+                  statuses[(currentIndex + 1) % statuses.length];
                 onUpdateStatus(birthday.id, nextStatus);
               }}
               className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border transition-all duration-300 hover:scale-105 ${getStatusColor(
-                birthday.cakeStatus
+                birthday.cakeStatus,
               )}`}
             >
-              <Icon name={getStatusIcon(birthday.cakeStatus) as any} size={14} />
+              <Icon
+                name={getStatusIcon(birthday.cakeStatus) as any}
+                size={14}
+              />
               <span className="capitalize">{birthday.cakeStatus}</span>
             </button>
           </div>

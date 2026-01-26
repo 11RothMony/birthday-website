@@ -12,13 +12,6 @@ interface StaffMember {
   birthday: string;
   image: string;
   alt: string;
-  dietaryRestrictions: string[];
-  celebrationPreferences: {
-    cakePreference: string;
-    giftPreference: string;
-    partyPreference: string;
-  };
-  notes: string;
 }
 
 interface StaffCardProps {

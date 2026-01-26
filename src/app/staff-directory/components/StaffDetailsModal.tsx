@@ -14,13 +14,6 @@ interface StaffMember {
   birthday: string;
   image: string;
   alt: string;
-  dietaryRestrictions: string[];
-  celebrationPreferences: {
-    cakePreference: string;
-    giftPreference: string;
-    partyPreference: string;
-  };
-  notes: string;
 }
 
 interface StaffDetailsModalProps {
@@ -103,54 +96,23 @@ const StaffDetailsModal = ({ staff, isOpen, onClose }: StaffDetailsModalProps) =
                   <div>
                     <p className="text-xs text-muted-foreground mb-1">Cake Preference</p>
                     <p className="text-sm text-foreground">
-                      {staff.celebrationPreferences.cakePreference}
+                     
                     </p>
                   </div>
                   <div>
                     <p className="text-xs text-muted-foreground mb-1">Gift Preference</p>
                     <p className="text-sm text-foreground">
-                      {staff.celebrationPreferences.giftPreference}
+                      
                     </p>
                   </div>
                   <div>
                     <p className="text-xs text-muted-foreground mb-1">Party Preference</p>
                     <p className="text-sm text-foreground">
-                      {staff.celebrationPreferences.partyPreference}
+                      
                     </p>
                   </div>
                 </div>
               </div>
-
-              {staff.dietaryRestrictions.length > 0 && (
-                <div>
-                  <h4 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
-                    <Icon name="ExclamationTriangleIcon" size={20} className="text-warning" />
-                    Dietary Restrictions
-                  </h4>
-                  <div className="flex flex-wrap gap-2 pl-7">
-                    {staff.dietaryRestrictions.map((restriction, index) => (
-                      <span
-                        key={index}
-                        className="px-3 py-1 bg-warning/10 text-warning text-sm rounded-full"
-                      >
-                        {restriction}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {staff.notes && (
-                <div>
-                  <h4 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
-                    <Icon name="DocumentTextIcon" size={20} className="text-trust" />
-                    Notes
-                  </h4>
-                  <p className="text-sm text-foreground pl-7 bg-muted p-3 rounded-lg">
-                    {staff.notes}
-                  </p>
-                </div>
-              )}
             </div>
           </div>
         </div>

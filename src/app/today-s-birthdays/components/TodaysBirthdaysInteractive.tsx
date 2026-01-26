@@ -76,20 +76,23 @@ const ThisMonthBirthdaysInteractive = () => {
           (thisYearBirthday.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)
         );
 
-        return {
-          id: parseInt(staff.id),
-          name: staff.name,
-          department: staff.department,
-          age: staff.age,
-          image: staff.image,
-          alt: staff.alt,
-          birthday: staff.birthday,
-          daysUntil: daysUntil,
-          preferences: {
-            dietaryRestrictions: staff.dietaryRestrictions,
-          },
-          notes: staff.notes,
-        };
+       return {
+  id: parseInt(staff.id),
+  name: staff.name,
+  department: staff.department,
+  age: staff.age,
+  image: staff.image,
+  alt: staff.alt,
+  birthday: staff.birthday,
+  daysUntil: daysUntil,
+  preferences: {
+    cakeType:  'Chocolate',
+    dietaryRestrictions: [],
+    celebrationStyle: 'Office Party',
+  },
+  notes:  '',
+}
+
       })
       .sort((a, b) => a.daysUntil - b.daysUntil);
   };

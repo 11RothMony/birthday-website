@@ -16,6 +16,7 @@ interface Birthday {
   alt: string;
   age: number;
   cakeStatus: "ordered" | "ready" | "delivered" | "not-ordered";
+  preferences: string;
 }
 
 interface UpcomingCelebration {
@@ -95,96 +96,97 @@ const DashboardInteractive = () => {
       return;
     }
 
-    // Filter staff with birthdays this month
-    const birthdaysData: Birthday[] = mockData.staff
-      .filter((staff) => staff?.birthday && isBirthdayThisMonth(staff.birthday))
-      .map((staff) => ({
-        id: parseInt(staff.id),
-        name: staff.name || "Unknown",
-        department: staff.department || "Unknown",
-        image: staff.image || "",
-        alt: staff.alt || staff.name || "Staff photo",
-        age: staff.age || 0,
-       cakeStatus: (staff as any)?.cakeStatus || "not-ordered"
-      }))
-      .sort((a, b) => {
-        const staffA = mockData.staff.find((s) => parseInt(s.id) === a.id);
-        const staffB = mockData.staff.find((s) => parseInt(s.id) === b.id);
-        
-        if (!staffA?.birthday || !staffB?.birthday) return 0;
-        
-        const dateA = new Date(staffA.birthday).getDate();
-        const dateB = new Date(staffB.birthday).getDate();
-        return dateA - dateB;
+    const processData = () => {
+      // Filter staff with birthdays this month
+      const birthdaysData: Birthday[] = mockData.staff
+        .filter((staff) => staff?.birthday && isBirthdayThisMonth(staff.birthday))
+        .sort((a, b) => {
+          if (!a?.birthday || !b?.birthday) return 0;
+          const dateA = new Date(a.birthday).getDate();
+          const dateB = new Date(b.birthday).getDate();
+          return dateA - dateB;
+        })
+        .map((staff) => ({
+          id: parseInt(staff.id),
+          name: staff.name || "Unknown",
+          department: staff.department || "Unknown",
+          image: staff.image || "",
+          alt: staff.alt || staff.name || "Staff photo",
+          age: staff.age || 0,
+          cakeStatus: ((staff as any)?.cakeStatus as "ordered" | "ready" | "delivered" | "not-ordered") || "not-ordered",
+          preferences: (staff as any)?.preferences || "No preferences specified",
+        }));
+
+      // Filter upcoming birthdays (next 30 days, excluding today)
+      const upcomingData: UpcomingCelebration[] = mockData.staff
+        .filter((staff) => {
+          if (!staff?.birthday) return false;
+          const daysUntil = getDaysUntilBirthday(staff.birthday);
+          return daysUntil > 0 && daysUntil <= 30;
+        })
+        .map((staff) => ({
+          id: parseInt(staff.id),
+          name: staff.name || "Unknown",
+          department: staff.department || "Unknown",
+          image: staff.image || "",
+          alt: staff.alt || staff.name || "Staff photo",
+          date: formatDate(staff.birthday),
+          daysUntil: getDaysUntilBirthday(staff.birthday),
+        }))
+        .sort((a, b) => a.daysUntil - b.daysUntil)
+        .slice(0, 4); // Show only first 4 upcoming
+
+      // Generate timeline events based on today's birthdays
+      const eventsData: TimelineEvent[] = birthdaysData.map((birthday, index) => {
+        const statusMap: Record<
+          string,
+          {
+            icon: string;
+            color: "primary" | "trust" | "celebration" | "success";
+            action: string;
+          }
+        > = {
+          delivered: {
+            icon: "CheckCircleIcon",
+            color: "success",
+            action: "cake delivered successfully",
+          },
+          ready: {
+            icon: "ClockIcon",
+            color: "trust",
+            action: "cake is ready for pickup",
+          },
+          ordered: {
+            icon: "SparklesIcon",
+            color: "celebration",
+            action: "cake order confirmed",
+          },
+          "not-ordered": {
+            icon: "BellIcon",
+            color: "primary",
+            action: "birthday reminder sent",
+          },
+        };
+
+        const status = statusMap[birthday.cakeStatus];
+        const time = `${10 - index}:${30 - index * 15} AM`;
+
+        return {
+          id: birthday.id,
+          name: birthday.name,
+          action: status.action,
+          time: time,
+          icon: status.icon,
+          color: status.color,
+        };
       });
 
-    // Filter upcoming birthdays (next 30 days, excluding today)
-    const upcomingData: UpcomingCelebration[] = mockData.staff
-      .filter((staff) => {
-        if (!staff?.birthday) return false;
-        const daysUntil = getDaysUntilBirthday(staff.birthday);
-        return daysUntil > 0 && daysUntil <= 30;
-      })
-      .map((staff) => ({
-        id: parseInt(staff.id),
-        name: staff.name || "Unknown",
-        department: staff.department || "Unknown",
-        image: staff.image || "",
-        alt: staff.alt || staff.name || "Staff photo",
-        date: formatDate(staff.birthday),
-        daysUntil: getDaysUntilBirthday(staff.birthday),
-      }))
-      .sort((a, b) => a.daysUntil - b.daysUntil)
-      .slice(0, 4); // Show only first 4 upcoming
+      setTodaysBirthdays(birthdaysData);
+      setUpcomingCelebrations(upcomingData);
+      setTimelineEvents(eventsData);
+    };
 
-    // Generate timeline events based on today's birthdays
-    const eventsData: TimelineEvent[] = birthdaysData.map((birthday, index) => {
-      const statusMap: Record<
-        string,
-        {
-          icon: string;
-          color: "primary" | "trust" | "celebration" | "success";
-          action: string;
-        }
-      > = {
-        delivered: {
-          icon: "CheckCircleIcon",
-          color: "success",
-          action: "cake delivered successfully",
-        },
-        ready: {
-          icon: "ClockIcon",
-          color: "trust",
-          action: "cake is ready for pickup",
-        },
-        ordered: {
-          icon: "SparklesIcon",
-          color: "celebration",
-          action: "cake order confirmed",
-        },
-        "not-ordered": {
-          icon: "BellIcon",
-          color: "primary",
-          action: "birthday reminder sent",
-        },
-      };
-
-      const status = statusMap[birthday.cakeStatus];
-      const time = `${10 - index}:${30 - index * 15} AM`;
-
-      return {
-        id: birthday.id,
-        name: birthday.name,
-        action: status.action,
-        time: time,
-        icon: status.icon,
-        color: status.color,
-      };
-    });
-
-    setTodaysBirthdays(birthdaysData);
-    setUpcomingCelebrations(upcomingData);
-    setTimelineEvents(eventsData);
+    processData();
   }, []);
 
   const handleUpdateStatus = (

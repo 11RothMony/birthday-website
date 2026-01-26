@@ -13,13 +13,6 @@ interface StaffMember {
   birthday: string;
   image: string;
   alt: string;
-  dietaryRestrictions: string[];
-  celebrationPreferences: {
-    cakePreference: string;
-    giftPreference: string;
-    partyPreference: string;
-  };
-  notes: string;
 }
 
 interface EditStaffModalProps {
@@ -56,7 +49,6 @@ const EditStaffModal = ({ staff, isOpen, onClose, onSave }: EditStaffModalProps)
         ? {
             ...prev,
             celebrationPreferences: {
-              ...prev.celebrationPreferences,
               [field]: value,
             },
           }
@@ -149,53 +141,6 @@ const EditStaffModal = ({ staff, isOpen, onClose, onSave }: EditStaffModalProps)
                 />
               </div>
             </div>
-
-            <div>
-              <label className="block text-sm font-medium text-foreground mb-2">
-                Cake Preference
-              </label>
-              <input
-                type="text"
-                value={formData.celebrationPreferences.cakePreference}
-                onChange={(e) => handlePreferenceChange("cakePreference", e.target.value)}
-                className="w-full px-3 py-2 bg-background border border-input rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-foreground mb-2">
-                Gift Preference
-              </label>
-              <input
-                type="text"
-                value={formData.celebrationPreferences.giftPreference}
-                onChange={(e) => handlePreferenceChange("giftPreference", e.target.value)}
-                className="w-full px-3 py-2 bg-background border border-input rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-foreground mb-2">
-                Party Preference
-              </label>
-              <input
-                type="text"
-                value={formData.celebrationPreferences.partyPreference}
-                onChange={(e) => handlePreferenceChange("partyPreference", e.target.value)}
-                className="w-full px-3 py-2 bg-background border border-input rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-foreground mb-2">Notes</label>
-              <textarea
-                value={formData.notes}
-                onChange={(e) => handleChange("notes", e.target.value)}
-                rows={4}
-                className="w-full px-3 py-2 bg-background border border-input rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none"
-              />
-            </div>
-
             <div className="flex gap-3 pt-4">
               <button
                 type="button"

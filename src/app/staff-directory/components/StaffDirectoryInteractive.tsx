@@ -20,13 +20,7 @@ interface StaffMember {
   birthday: string;
   image: string;
   alt: string;
-  dietaryRestrictions: string[];
-  celebrationPreferences: {
-    cakePreference: string;
-    giftPreference: string;
-    partyPreference: string;
-  };
-  notes: string;
+
 }
 
 const StaffDirectoryInteractive = () => {
@@ -55,8 +49,6 @@ const StaffDirectoryInteractive = () => {
       birthday: staff.birthday,
       image: staff.image,
       alt: staff.alt,
-      dietaryRestrictions: staff.dietaryRestrictions,
-      notes: staff.notes,
     }));
 
     setStaffMembers(mockStaff);
