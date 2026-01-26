@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React from 'react';
-import Icon from '@/components/ui/AppIcon';
+import React from "react";
+import Icon from "@/components/ui/AppIcon";
 
 interface FilterPanelProps {
   selectedDepartment: string;
@@ -19,30 +19,30 @@ const FilterPanel = ({
   onReset,
 }: FilterPanelProps) => {
   const departments = [
-    'All Departments',
-    'Engineering',
-    'Marketing',
-    'Sales',
-    'Human Resources',
-    'Finance',
-    'Operations',
-    'Customer Support',
+    "All Departments",
+    "Engineering",
+    "Marketing",
+    "Sales",
+    "Human Resources",
+    "Finance",
+    "Operations",
+    "Customer Support",
   ];
 
   const months = [
-    'All Months',
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
+    "All Months",
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
   ];
 
   return (

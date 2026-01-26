@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import Icon from '@/components/ui/AppIcon';
+import React, { useState, useEffect } from "react";
+import Icon from "@/components/ui/AppIcon";
 
 interface NotificationBannerProps {
-  type: 'info' | 'success' | 'warning' | 'error';
+  type: "info" | "success" | "warning" | "error";
   message: string;
   onDismiss: () => void;
 }
@@ -18,28 +18,28 @@ const NotificationBanner = ({ type, message, onDismiss }: NotificationBannerProp
 
   const typeConfig = {
     info: {
-      bg: 'bg-trust/10',
-      border: 'border-trust/20',
-      text: 'text-trust',
-      icon: 'InformationCircleIcon',
+      bg: "bg-trust/10",
+      border: "border-trust/20",
+      text: "text-trust",
+      icon: "InformationCircleIcon",
     },
     success: {
-      bg: 'bg-success/10',
-      border: 'border-success/20',
-      text: 'text-success',
-      icon: 'CheckCircleIcon',
+      bg: "bg-success/10",
+      border: "border-success/20",
+      text: "text-success",
+      icon: "CheckCircleIcon",
     },
     warning: {
-      bg: 'bg-warning/10',
-      border: 'border-warning/20',
-      text: 'text-warning',
-      icon: 'ExclamationTriangleIcon',
+      bg: "bg-warning/10",
+      border: "border-warning/20",
+      text: "text-warning",
+      icon: "ExclamationTriangleIcon",
     },
     error: {
-      bg: 'bg-error/10',
-      border: 'border-error/20',
-      text: 'text-error',
-      icon: 'XCircleIcon',
+      bg: "bg-error/10",
+      border: "border-error/20",
+      text: "text-error",
+      icon: "XCircleIcon",
     },
   };
 

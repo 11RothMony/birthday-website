@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect, useRef } from 'react';
-import BirthdayCard from './BirthdayCard';
-import NotificationPanel from './NotificationPanel';
-import QuickActions from './QuickActions';
-import Icon from '@/components/ui/AppIcon';
-import mockData from '@/data/staff-mock-data.json';
+import React, { useState, useEffect, useRef } from "react";
+import BirthdayCard from "./BirthdayCard";
+import NotificationPanel from "./NotificationPanel";
+import QuickActions from "./QuickActions";
+import Icon from "@/components/ui/AppIcon";
+import mockData from "@/data/staff-mock-data.json";
 interface BirthdayPerson {
   id: number;
   name: string;
@@ -28,7 +28,7 @@ interface TimelineEvent {
   time: string;
   title: string;
   description: string;
-  status: 'completed' | 'current' | 'upcoming';
+  status: "completed" | "current" | "upcoming";
   icon: string;
 }
 
@@ -47,14 +47,14 @@ const ThisMonthBirthdaysInteractive = () => {
   // Birthday songs playlist
   const birthdaySongs = [
     {
-      title: 'Happy Birthday Classic',
-      url: '/audio/happy-birthday-155461.mp3',
+      title: "Happy Birthday Classic",
+      url: "/audio/happy-birthday-155461.mp3",
     },
-    { title: 'Birthday Celebration', url: '/audio/happy-birthday-155461.mp3' }, // Add more songs if you have them
+    { title: "Birthday Celebration", url: "/audio/happy-birthday-155461.mp3" }, // Add more songs if you have them
   ];
 
   // Birthday video background
-  const birthdayVideo = '/videos/happy-birthday-155461.mp3';
+  const birthdayVideo = "/videos/happy-birthday-155461.mp3";
 
   // Get current month's birthdays
   const getCurrentMonthBirthdays = (): BirthdayPerson[] => {
@@ -189,7 +189,7 @@ const ThisMonthBirthdaysInteractive = () => {
   };
 
   const handleChecklistComplete = () => {
-    console.log('Celebration checklist completed');
+    console.log("Celebration checklist completed");
     setShowSuccessMessage(true);
     setTimeout(() => setShowSuccessMessage(false), 3000);
   };
@@ -201,14 +201,14 @@ const ThisMonthBirthdaysInteractive = () => {
   };
 
   const selectedPersonData = mockBirthdays.find((p) => p.id === selectedPerson);
-  const currentMonthName = new Date().toLocaleDateString('en-US', {
-    month: 'long',
-    year: 'numeric',
+  const currentMonthName = new Date().toLocaleDateString("en-US", {
+    month: "long",
+    year: "numeric",
   });
 
   const getDaysUntilText = (days: number) => {
-    if (days === 0) return 'Today! 🎉';
-    if (days === 1) return 'Tomorrow';
+    if (days === 0) return "Today! 🎉";
+    if (days === 1) return "Tomorrow";
     if (days < 0) return `${Math.abs(days)} days ago`;
     return `In ${days} days`;
   };
@@ -327,7 +327,7 @@ const ThisMonthBirthdaysInteractive = () => {
                 </h1>
                 <p className="text-muted-foreground">
                   {mockBirthdays.length} celebration
-                  {mockBirthdays.length !== 1 ? 's' : ''} this month
+                  {mockBirthdays.length !== 1 ? "s" : ""} this month
                 </p>
               </div>
             </div>
@@ -365,8 +365,8 @@ const ThisMonthBirthdaysInteractive = () => {
                     onClick={toggleMusic}
                     className="flex-1 py-2 px-4 rounded-lg bg-celebration text-white hover:bg-celebration/90 transition-all duration-300 font-medium flex items-center justify-center gap-2"
                   >
-                    <Icon name={isPlaying ? 'PauseIcon' : 'PlayIcon'} size={20} />
-                    {isPlaying ? 'Pause' : 'Play Music'}
+                    <Icon name={isPlaying ? "PauseIcon" : "PlayIcon"} size={20} />
+                    {isPlaying ? "Pause" : "Play Music"}
                   </button>
                   <button
                     onClick={nextSong}
@@ -389,8 +389,8 @@ const ThisMonthBirthdaysInteractive = () => {
               onClick={() => setSelectedPerson(person.id)}
               className={`cursor-pointer bg-card rounded-xl p-4 border-2 transition-all duration-300 hover:shadow-warm-lg ${
                 selectedPerson === person.id
-                  ? 'border-celebration shadow-warm-lg scale-105'
-                  : 'border-border hover:border-primary/50'
+                  ? "border-celebration shadow-warm-lg scale-105"
+                  : "border-border hover:border-primary/50"
               }`}
             >
               <div className="flex items-center gap-3 mb-3">
@@ -413,18 +413,18 @@ const ThisMonthBirthdaysInteractive = () => {
                 <span
                   className={`text-xs font-medium px-3 py-1 rounded-full ${
                     person.daysUntil === 0
-                      ? 'bg-celebration text-white'
+                      ? "bg-celebration text-white"
                       : person.daysUntil < 7
-                        ? 'bg-warning/20 text-warning'
-                        : 'bg-primary/10 text-primary'
+                        ? "bg-warning/20 text-warning"
+                        : "bg-primary/10 text-primary"
                   }`}
                 >
                   {getDaysUntilText(person.daysUntil)}
                 </span>
                 <span className="text-xs text-muted-foreground">
-                  {new Date(person.birthday).toLocaleDateString('en-US', {
-                    month: 'short',
-                    day: 'numeric',
+                  {new Date(person.birthday).toLocaleDateString("en-US", {
+                    month: "short",
+                    day: "numeric",
                   })}
                 </span>
               </div>

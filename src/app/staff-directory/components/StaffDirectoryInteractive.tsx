@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import Icon from '@/components/ui/AppIcon';
-import mockData from '@/data/staff-mock-data.json';
-import StaffCard from './StaffCard';
-import StaffDetailsModal from './StaffDetailsModal';
-import EditStaffModal from './EditStaffModal';
-import SearchBar from './SearchBar';
-import FilterPanel from './FilterPanel';
-import StatsCard from './StatsCard';
+import React, { useState, useEffect } from "react";
+import Icon from "@/components/ui/AppIcon";
+import mockData from "@/data/staff-mock-data.json";
+import StaffCard from "./StaffCard";
+import StaffDetailsModal from "./StaffDetailsModal";
+import EditStaffModal from "./EditStaffModal";
+import SearchBar from "./SearchBar";
+import FilterPanel from "./FilterPanel";
+import StatsCard from "./StatsCard";
 
 interface StaffMember {
   id: string;
@@ -33,14 +33,14 @@ const StaffDirectoryInteractive = () => {
   const [isHydrated, setIsHydrated] = useState(false);
   const [staffMembers, setStaffMembers] = useState<StaffMember[]>([]);
   const [filteredStaff, setFilteredStaff] = useState<StaffMember[]>([]);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedDepartment, setSelectedDepartment] = useState('All Departments');
-  const [selectedMonth, setSelectedMonth] = useState('All Months');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedDepartment, setSelectedDepartment] = useState("All Departments");
+  const [selectedMonth, setSelectedMonth] = useState("All Months");
   const [selectedStaff, setSelectedStaff] = useState<StaffMember | null>(null);
   const [editingStaff, setEditingStaff] = useState<StaffMember | null>(null);
   const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [sortBy, setSortBy] = useState('name');
+  const [sortBy, setSortBy] = useState("name");
 
   useEffect(() => {
     setIsHydrated(true);
@@ -77,24 +77,24 @@ const StaffDirectoryInteractive = () => {
       );
     }
 
-    if (selectedDepartment !== 'All Departments') {
+    if (selectedDepartment !== "All Departments") {
       filtered = filtered.filter((staff) => staff.department === selectedDepartment);
     }
 
-    if (selectedMonth !== 'All Months') {
+    if (selectedMonth !== "All Months") {
       const monthIndex = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December',
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
       ].indexOf(selectedMonth);
 
       filtered = filtered.filter((staff) => {
@@ -104,11 +104,11 @@ const StaffDirectoryInteractive = () => {
     }
 
     filtered.sort((a, b) => {
-      if (sortBy === 'name') {
+      if (sortBy === "name") {
         return a.name.localeCompare(b.name);
-      } else if (sortBy === 'birthday') {
+      } else if (sortBy === "birthday") {
         return new Date(a.birthday).getTime() - new Date(b.birthday).getTime();
-      } else if (sortBy === 'department') {
+      } else if (sortBy === "department") {
         return a.department.localeCompare(b.department);
       }
       return 0;
@@ -134,18 +134,18 @@ const StaffDirectoryInteractive = () => {
   };
 
   const handleResetFilters = () => {
-    setSelectedDepartment('All Departments');
-    setSelectedMonth('All Months');
-    setSearchTerm('');
+    setSelectedDepartment("All Departments");
+    setSelectedMonth("All Months");
+    setSearchTerm("");
   };
 
   const handleExportData = () => {
     const dataStr = JSON.stringify(staffMembers, null, 2);
-    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+    const dataBlob = new Blob([dataStr], { type: "application/json" });
     const url = URL.createObjectURL(dataBlob);
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = url;
-    link.download = 'staff-directory-export.json';
+    link.download = "staff-directory-export.json";
     link.click();
     URL.revokeObjectURL(url);
   };

@@ -1,5 +1,5 @@
-import React from 'react';
-import Icon from '@/components/ui/AppIcon';
+import React from "react";
+import Icon from "@/components/ui/AppIcon";
 
 interface StatsCardProps {
   title: string;

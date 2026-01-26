@@ -1,6 +1,6 @@
-import React from 'react';
-import AppImage from '@/components/ui/AppImage';
-import Icon from '@/components/ui/AppIcon';
+import React from "react";
+import AppImage from "@/components/ui/AppImage";
+import Icon from "@/components/ui/AppIcon";
 
 interface StaffMember {
   id: string;
@@ -35,20 +35,20 @@ const StaffCard = ({ staff, onEdit, onView }: StaffCardProps) => {
 
     if (daysUntil === 0)
       return {
-        text: 'Today!',
-        color: 'bg-celebration text-celebration-foreground',
+        text: "Today!",
+        color: "bg-celebration text-celebration-foreground",
       };
     if (daysUntil > 0 && daysUntil <= 7)
       return {
         text: `${daysUntil} days`,
-        color: 'bg-warning text-warning-foreground',
+        color: "bg-warning text-warning-foreground",
       };
     if (daysUntil > 7 && daysUntil <= 30)
       return {
         text: `${daysUntil} days`,
-        color: 'bg-trust text-trust-foreground',
+        color: "bg-trust text-trust-foreground",
       };
-    return { text: 'Upcoming', color: 'bg-muted text-muted-foreground' };
+    return { text: "Upcoming", color: "bg-muted text-muted-foreground" };
   };
 
   const status = getBirthdayStatus(staff.birthday);
@@ -86,9 +86,9 @@ const StaffCard = ({ staff, onEdit, onView }: StaffCardProps) => {
           <div className="flex items-center gap-2 text-sm">
             <Icon name="CalendarIcon" size={16} className="text-muted-foreground" />
             <span className="text-foreground">
-              {new Date(staff.birthday).toLocaleDateString('en-US', {
-                month: 'long',
-                day: 'numeric',
+              {new Date(staff.birthday).toLocaleDateString("en-US", {
+                month: "long",
+                day: "numeric",
               })}
             </span>
           </div>

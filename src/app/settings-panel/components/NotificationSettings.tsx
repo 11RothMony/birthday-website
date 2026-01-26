@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import Icon from '@/components/ui/AppIcon';
+import React, { useState, useEffect } from "react";
+import Icon from "@/components/ui/AppIcon";
 
 interface NotificationPreference {
   id: string;
@@ -19,45 +19,45 @@ const NotificationSettings = ({ onSave }: NotificationSettingsProps) => {
   const [isHydrated, setIsHydrated] = useState(false);
   const [preferences, setPreferences] = useState<NotificationPreference[]>([
     {
-      id: 'birthday-today',
+      id: "birthday-today",
       label: "Today's Birthdays",
       description: "Get notified when you open the dashboard about today's celebrations",
       enabled: true,
-      icon: 'CakeIcon',
+      icon: "CakeIcon",
     },
     {
-      id: 'birthday-upcoming',
-      label: 'Upcoming Birthdays',
-      description: 'Receive reminders 3 days before upcoming birthdays',
+      id: "birthday-upcoming",
+      label: "Upcoming Birthdays",
+      description: "Receive reminders 3 days before upcoming birthdays",
       enabled: true,
-      icon: 'CalendarIcon',
+      icon: "CalendarIcon",
     },
     {
-      id: 'cake-reminder',
-      label: 'Cake Preparation',
-      description: 'Reminders to order or prepare birthday cakes',
+      id: "cake-reminder",
+      label: "Cake Preparation",
+      description: "Reminders to order or prepare birthday cakes",
       enabled: true,
-      icon: 'BellAlertIcon',
+      icon: "BellAlertIcon",
     },
     {
-      id: 'celebration-complete',
-      label: 'Celebration Completion',
-      description: 'Prompt to mark celebrations as complete',
+      id: "celebration-complete",
+      label: "Celebration Completion",
+      description: "Prompt to mark celebrations as complete",
       enabled: false,
-      icon: 'CheckCircleIcon',
+      icon: "CheckCircleIcon",
     },
     {
-      id: 'weekly-summary',
-      label: 'Weekly Summary',
-      description: 'Get a summary of upcoming celebrations every Monday',
+      id: "weekly-summary",
+      label: "Weekly Summary",
+      description: "Get a summary of upcoming celebrations every Monday",
       enabled: true,
-      icon: 'DocumentTextIcon',
+      icon: "DocumentTextIcon",
     },
   ]);
 
   const [browserNotifications, setBrowserNotifications] = useState<
-    'granted' | 'denied' | 'default'
-  >('default');
+    "granted" | "denied" | "default"
+  >("default");
 
   useEffect(() => {
     setIsHydrated(true);
@@ -66,12 +66,12 @@ const NotificationSettings = ({ onSave }: NotificationSettingsProps) => {
   useEffect(() => {
     if (!isHydrated) return;
 
-    const saved = localStorage.getItem('notification-preferences');
+    const saved = localStorage.getItem("notification-preferences");
     if (saved) {
       setPreferences(JSON.parse(saved));
     }
 
-    if ('Notification' in window) {
+    if ("Notification" in window) {
       setBrowserNotifications(Notification.permission);
     }
   }, [isHydrated]);
@@ -83,25 +83,25 @@ const NotificationSettings = ({ onSave }: NotificationSettingsProps) => {
       pref.id === id ? { ...pref, enabled: !pref.enabled } : pref
     );
     setPreferences(updated);
-    localStorage.setItem('notification-preferences', JSON.stringify(updated));
+    localStorage.setItem("notification-preferences", JSON.stringify(updated));
     onSave?.(updated);
   };
 
   const requestBrowserPermission = async () => {
-    if (!isHydrated || !('Notification' in window)) return;
+    if (!isHydrated || !("Notification" in window)) return;
 
     try {
       const permission = await Notification.requestPermission();
       setBrowserNotifications(permission);
 
-      if (permission === 'granted') {
-        new Notification('BirthdayDesk Notifications Enabled', {
-          body: 'You will now receive birthday celebration reminders',
-          icon: '/favicon.ico',
+      if (permission === "granted") {
+        new Notification("BirthdayDesk Notifications Enabled", {
+          body: "You will now receive birthday celebration reminders",
+          icon: "/favicon.ico",
         });
       }
     } catch (error) {
-      console.error('Error requesting notification permission:', error);
+      console.error("Error requesting notification permission:", error);
     }
   };
 
@@ -142,7 +142,7 @@ const NotificationSettings = ({ onSave }: NotificationSettingsProps) => {
         </div>
       </div>
 
-      {browserNotifications !== 'granted' && (
+      {browserNotifications !== "granted" && (
         <div className="mb-6 p-4 bg-warning/10 border border-warning/20 rounded-lg">
           <div className="flex items-start gap-3">
             <Icon
@@ -186,13 +186,13 @@ const NotificationSettings = ({ onSave }: NotificationSettingsProps) => {
             <button
               onClick={() => handleToggle(pref.id)}
               className={`relative w-12 h-6 rounded-full transition-colors duration-300 flex-shrink-0 ${
-                pref.enabled ? 'bg-success' : 'bg-border'
+                pref.enabled ? "bg-success" : "bg-border"
               }`}
               aria-label={`Toggle ${pref.label}`}
             >
               <span
                 className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform duration-300 ${
-                  pref.enabled ? 'translate-x-6' : 'translate-x-0'
+                  pref.enabled ? "translate-x-6" : "translate-x-0"
                 }`}
               />
             </button>

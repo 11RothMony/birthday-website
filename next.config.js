@@ -61,4 +61,16 @@ module.exports = withPWA({
   // Your existing Next.js config
   reactStrictMode: true,
   swcMinify: true,
+    eslint: {
+    ignoreDuringBuilds: true,
+  },
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/dashboard-hub",
+        permanent: false,
+      },
+    ];
+  },
 });

@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import AppImage from '@/components/ui/AppImage';
-import Icon from '@/components/ui/AppIcon';
+import React, { useState, useEffect } from "react";
+import AppImage from "@/components/ui/AppImage";
+import Icon from "@/components/ui/AppIcon";
 
 interface Birthday {
   id: number;
@@ -12,13 +12,13 @@ interface Birthday {
   alt: string;
   age: number;
 
-  cakeStatus: 'ordered' | 'ready' | 'delivered';
+  cakeStatus: "ordered" | "ready" | "delivered";
   preferences: string;
 }
 
 interface TodaysBirthdayCardProps {
   birthday: Birthday;
-  onUpdateStatus: (id: number, status: 'ordered' | 'ready' | 'delivered') => void;
+  onUpdateStatus: (id: number, status: "ordered" | "ready" | "delivered") => void;
 }
 
 const TodaysBirthdayCard = ({ birthday, onUpdateStatus }: TodaysBirthdayCardProps) => {
@@ -38,27 +38,27 @@ const TodaysBirthdayCard = ({ birthday, onUpdateStatus }: TodaysBirthdayCardProp
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'ordered':
-        return 'bg-warning/10 text-warning border-warning/20';
-      case 'ready':
-        return 'bg-trust/10 text-trust border-trust/20';
-      case 'delivered':
-        return 'bg-success/10 text-success border-success/20';
+      case "ordered":
+        return "bg-warning/10 text-warning border-warning/20";
+      case "ready":
+        return "bg-trust/10 text-trust border-trust/20";
+      case "delivered":
+        return "bg-success/10 text-success border-success/20";
       default:
-        return 'bg-muted text-muted-foreground border-border';
+        return "bg-muted text-muted-foreground border-border";
     }
   };
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'ordered':
-        return 'ClockIcon';
-      case 'ready':
-        return 'CheckCircleIcon';
-      case 'delivered':
-        return 'SparklesIcon';
+      case "ordered":
+        return "ClockIcon";
+      case "ready":
+        return "CheckCircleIcon";
+      case "delivered":
+        return "SparklesIcon";
       default:
-        return 'QuestionMarkCircleIcon';
+        return "QuestionMarkCircleIcon";
     }
   };
 
@@ -112,10 +112,10 @@ const TodaysBirthdayCard = ({ birthday, onUpdateStatus }: TodaysBirthdayCardProp
             <span className="text-xs font-medium text-foreground">Cake Status:</span>
             <button
               onClick={() => {
-                const statuses: Array<'ordered' | 'ready' | 'delivered'> = [
-                  'ordered',
-                  'ready',
-                  'delivered',
+                const statuses: Array<"ordered" | "ready" | "delivered"> = [
+                  "ordered",
+                  "ready",
+                  "delivered",
                 ];
                 const currentIndex = statuses.indexOf(birthday.cakeStatus);
                 const nextStatus = statuses[(currentIndex + 1) % statuses.length];

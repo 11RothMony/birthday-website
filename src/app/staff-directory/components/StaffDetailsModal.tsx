@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React from 'react';
-import AppImage from '@/components/ui/AppImage';
-import Icon from '@/components/ui/AppIcon';
+import React from "react";
+import AppImage from "@/components/ui/AppImage";
+import Icon from "@/components/ui/AppIcon";
 
 interface StaffMember {
   id: string;
@@ -83,11 +83,11 @@ const StaffDetailsModal = ({ staff, isOpen, onClose }: StaffDetailsModalProps) =
                   <div className="flex items-center gap-2">
                     <Icon name="CalendarIcon" size={16} className="text-muted-foreground" />
                     <span className="text-sm text-foreground">
-                      Birthday:{' '}
-                      {new Date(staff.birthday).toLocaleDateString('en-US', {
-                        month: 'long',
-                        day: 'numeric',
-                        year: 'numeric',
+                      Birthday:{" "}
+                      {new Date(staff.birthday).toLocaleDateString("en-US", {
+                        month: "long",
+                        day: "numeric",
+                        year: "numeric",
                       })}
                     </span>
                   </div>

@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react";
 import CalendarHeader from "./CalendarHeader";
 import CalendarFilters from "./CalendarFilters";
-import DayView from "./DayView";
 import WeekView from "./WeekView";
 import MonthView from "./MonthView";
 import YearView from "./YearView";
@@ -29,16 +28,11 @@ interface Celebration {
 const CalendarInteractive = () => {
   const [isHydrated, setIsHydrated] = useState(false);
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [viewMode, setViewMode] = useState<"day" | "week" | "month" | "year">(
-    "month",
-  );
-  const [selectedDepartment, setSelectedDepartment] =
-    useState("All Departments");
-  const [selectedCelebrationType, setSelectedCelebrationType] =
-    useState("All Types");
+  const [viewMode, setViewMode] = useState<"day" | "week" | "month" | "year">("month");
+  const [selectedDepartment, setSelectedDepartment] = useState("All Departments");
+  const [selectedCelebrationType, setSelectedCelebrationType] = useState("All Types");
   const [selectedStatus, setSelectedStatus] = useState("All Status");
-  const [selectedCelebration, setSelectedCelebration] =
-    useState<Celebration | null>(null);
+  const [selectedCelebration, setSelectedCelebration] = useState<Celebration | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [celebrations, setCelebrations] = useState<Celebration[]>([]);
 
@@ -127,13 +121,8 @@ const CalendarInteractive = () => {
     setIsModalOpen(true);
   };
 
-  const handleStatusChange = (
-    id: string,
-    status: "Planned" | "In Progress" | "Completed",
-  ) => {
-    setCelebrations((prev) =>
-      prev.map((cel) => (cel.id === id ? { ...cel, status } : cel)),
-    );
+  const handleStatusChange = (id: string, status: "Planned" | "In Progress" | "Completed") => {
+    setCelebrations((prev) => prev.map((cel) => (cel.id === id ? { ...cel, status } : cel)));
     if (selectedCelebration && selectedCelebration.id === id) {
       setSelectedCelebration({ ...selectedCelebration, status });
     }
@@ -172,13 +161,10 @@ const CalendarInteractive = () => {
     if (typeof navigator !== "undefined" && navigator.share) {
       navigator.share({
         title: "BirthdayDesk Calendar",
-        text: `Check out the celebrations calendar for ${currentDate.toLocaleDateString(
-          "en-US",
-          {
-            month: "long",
-            year: "numeric",
-          },
-        )}`,
+        text: `Check out the celebrations calendar for ${currentDate.toLocaleDateString("en-US", {
+          month: "long",
+          year: "numeric",
+        })}`,
         url: window.location.href,
       });
     } else {
@@ -188,13 +174,10 @@ const CalendarInteractive = () => {
 
   const filteredCelebrations = celebrations.filter((cel) => {
     const departmentMatch =
-      selectedDepartment === "All Departments" ||
-      cel.department === selectedDepartment;
+      selectedDepartment === "All Departments" || cel.department === selectedDepartment;
     const typeMatch =
-      selectedCelebrationType === "All Types" ||
-      cel.type === selectedCelebrationType;
-    const statusMatch =
-      selectedStatus === "All Status" || cel.status === selectedStatus;
+      selectedCelebrationType === "All Types" || cel.type === selectedCelebrationType;
+    const statusMatch = selectedStatus === "All Status" || cel.status === selectedStatus;
     return departmentMatch && typeMatch && statusMatch;
   });
 
@@ -251,11 +234,7 @@ const CalendarInteractive = () => {
         onStatusChange={setSelectedStatus}
         onReset={handleResetFilters}
       />
-      <QuickActions
-        onPrint={handlePrint}
-        onExport={handleExport}
-        onShare={handleShare}
-      />
+      <QuickActions onPrint={handlePrint} onExport={handleExport} onShare={handleShare} />
 
       {/* {viewMode === 'day' && (
         <DayView

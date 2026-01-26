@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
 interface Celebration {
   id: string;
   date: string;
-  status: 'Planned' | 'In Progress' | 'Completed';
+  status: "Planned" | "In Progress" | "Completed";
 }
 
 interface YearViewProps {
@@ -14,18 +14,18 @@ interface YearViewProps {
 
 const YearView = ({ celebrations, currentDate, onMonthClick }: YearViewProps) => {
   const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
   ];
 
   const getCelebrationsForMonth = (monthIndex: number) => {
@@ -41,9 +41,9 @@ const YearView = ({ celebrations, currentDate, onMonthClick }: YearViewProps) =>
     const monthCelebrations = getCelebrationsForMonth(monthIndex);
     return {
       total: monthCelebrations.length,
-      completed: monthCelebrations.filter((c) => c.status === 'Completed').length,
-      inProgress: monthCelebrations.filter((c) => c.status === 'In Progress').length,
-      planned: monthCelebrations.filter((c) => c.status === 'Planned').length,
+      completed: monthCelebrations.filter((c) => c.status === "Completed").length,
+      inProgress: monthCelebrations.filter((c) => c.status === "In Progress").length,
+      planned: monthCelebrations.filter((c) => c.status === "Planned").length,
     };
   };
 
@@ -65,7 +65,7 @@ const YearView = ({ celebrations, currentDate, onMonthClick }: YearViewProps) =>
             key={month}
             onClick={() => onMonthClick(index)}
             className={`bg-card rounded-lg shadow-warm p-6 transition-all duration-300 hover:shadow-warm-lg hover:scale-105 text-left ${
-              isCurrentMonth ? 'ring-2 ring-primary' : ''
+              isCurrentMonth ? "ring-2 ring-primary" : ""
             }`}
           >
             <div className="flex items-center justify-between mb-4">

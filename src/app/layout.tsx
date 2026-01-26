@@ -1,9 +1,9 @@
-import React from 'react';
-import type { Metadata, Viewport } from 'next';
-import '../styles/index.css';
+import React from "react";
+import type { Metadata, Viewport } from "next";
+import "../styles/index.css";
 
 export const viewport: Viewport = {
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
 };
 
@@ -17,21 +17,21 @@ export const viewport: Viewport = {
 //   },
 // };
 export const metadata: Metadata = {
-  title: 'Your App Name',
-  description: 'Your app description',
-  manifest: '/manifest.json',
-  themeColor: '#000000',
+  title: "Your App Name",
+  description: "Your app description",
+  manifest: "/manifest.json",
+  themeColor: "#000000",
   appleWebApp: {
     capable: true,
-    statusBarStyle: 'default',
-    title: 'Your App Name',
+    statusBarStyle: "default",
+    title: "Your App Name",
   },
   formatDetection: {
     telephone: false,
   },
   icons: {
-    icon: '/icons/icon-192x192.png',
-    apple: '/icons/icon-192x192.png',
+    icon: "/icons/icon-192x192.png",
+    apple: "/icons/icon-192x192.png",
   },
 };
 

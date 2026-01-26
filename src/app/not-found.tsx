@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { useRouter } from 'next/navigation';
-import Icon from '@/components/ui/AppIcon';
+import React from "react";
+import { useRouter } from "next/navigation";
+import Icon from "@/components/ui/AppIcon";
 
 export default function NotFound() {
   const router = useRouter();
 
   const handleGoHome = () => {
-    router?.push('/');
+    router?.push("/");
   };
 
   const handleGoBack = () => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       window.history?.back();
     }
   };

@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import Icon from '@/components/ui/AppIcon';
+import React, { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import Icon from "@/components/ui/AppIcon";
 
 interface HeaderProps {
   onMenuClick?: () => void;
@@ -20,24 +20,24 @@ const Header = ({ onMenuClick }: HeaderProps) => {
   const [isMoreMenuOpen, setIsMoreMenuOpen] = useState(false);
 
   const primaryNavItems: NavItem[] = [
-    { label: 'Dashboard', href: '/dashboard-hub', icon: 'HomeIcon' },
-    { label: "This Month's HBD", href: '/today-s-birthdays', icon: 'CakeIcon' },
-    { label: 'Staff Directory', href: '/staff-directory', icon: 'UsersIcon' },
+    { label: "Dashboard", href: "/dashboard-hub", icon: "HomeIcon" },
+    { label: "This Month's HBD", href: "/today-s-birthdays", icon: "CakeIcon" },
+    { label: "Staff Directory", href: "/staff-directory", icon: "UsersIcon" },
     {
-      label: 'Calendar View',
-      href: '/calendar-view',
-      icon: 'CalendarDaysIcon',
+      label: "Calendar View",
+      href: "/calendar-view",
+      icon: "CalendarDaysIcon",
     },
-    { label: 'Settings', href: '/settings-panel', icon: 'Cog6ToothIcon' },
+    { label: "Settings", href: "/settings-panel", icon: "Cog6ToothIcon" },
   ];
 
   const secondaryNavItems: NavItem[] = [
     {
-      label: 'Calendar View',
-      href: '/calendar-view',
-      icon: 'CalendarDaysIcon',
+      label: "Calendar View",
+      href: "/calendar-view",
+      icon: "CalendarDaysIcon",
     },
-    { label: 'Settings', href: '/settings-panel', icon: 'Cog6ToothIcon' },
+    { label: "Settings", href: "/settings-panel", icon: "Cog6ToothIcon" },
   ];
 
   const isActive = (href: string) => pathname === href;
@@ -92,8 +92,8 @@ const Header = ({ onMenuClick }: HeaderProps) => {
               href={item.href}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
                 isActive(item.href)
-                  ? 'bg-primary text-primary-foreground shadow-warm'
-                  : 'text-foreground hover:bg-muted hover:text-foreground'
+                  ? "bg-primary text-primary-foreground shadow-warm"
+                  : "text-foreground hover:bg-muted hover:text-foreground"
               }`}
             >
               <Icon name={item.icon as any} size={20} />
@@ -122,8 +122,8 @@ const Header = ({ onMenuClick }: HeaderProps) => {
                       onClick={() => setIsMoreMenuOpen(false)}
                       className={`flex items-center gap-3 px-4 py-2.5 transition-colors duration-300 ${
                         isActive(item.href)
-                          ? 'bg-primary/10 text-primary'
-                          : 'text-foreground hover:bg-muted'
+                          ? "bg-primary/10 text-primary"
+                          : "text-foreground hover:bg-muted"
                       }`}
                     >
                       <Icon name={item.icon as any} size={20} />
@@ -164,12 +164,12 @@ const Header = ({ onMenuClick }: HeaderProps) => {
               href={item.href}
               className={`flex flex-col items-center gap-1 px-3 py-2 rounded-lg transition-all duration-300 ${
                 isActive(item.href)
-                  ? 'bg-primary/10 text-primary'
-                  : 'text-muted-foreground hover:text-foreground'
+                  ? "bg-primary/10 text-primary"
+                  : "text-muted-foreground hover:text-foreground"
               }`}
             >
               <Icon name={item.icon as any} size={20} />
-              <span className="text-xs font-medium">{item.label.split(' ')[0]}</span>
+              <span className="text-xs font-medium">{item.label.split(" ")[0]}</span>
             </Link>
           ))}
         </div>

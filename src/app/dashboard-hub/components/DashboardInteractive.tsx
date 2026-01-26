@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import TodaysBirthdayCard from './TodaysBirthdayCard';
-import StatCard from './StatCard';
-import NotificationBanner from './NotificationBanner';
-import Icon from '@/components/ui/AppIcon';
-import mockData from '@/data/staff-mock-data.json';
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import TodaysBirthdayCard from "./TodaysBirthdayCard";
+import StatCard from "./StatCard";
+import NotificationBanner from "./NotificationBanner";
+import Icon from "@/components/ui/AppIcon";
+import mockData from "@/data/staff-mock-data.json";
 
 interface Birthday {
   id: number;
@@ -15,8 +15,7 @@ interface Birthday {
   image: string;
   alt: string;
   age: number;
-  cakeStatus: 'ordered' | 'ready' | 'delivered' | 'not-ordered';
-  preferences: string;
+  cakeStatus: "ordered" | "ready" | "delivered" | "not-ordered";
 }
 
 interface UpcomingCelebration {
@@ -35,7 +34,7 @@ interface TimelineEvent {
   action: string;
   time: string;
   icon: string;
-  color: 'primary' | 'trust' | 'celebration' | 'success';
+  color: "primary" | "trust" | "celebration" | "success";
 }
 
 const DashboardInteractive = () => {
@@ -47,6 +46,8 @@ const DashboardInteractive = () => {
 
   // Helper function to check if birthday is this month
   const isBirthdayThisMonth = (birthdayString: string): boolean => {
+    if (!birthdayString) return false;
+    
     const today = new Date();
     const birthday = new Date(birthdayString);
 
@@ -55,11 +56,16 @@ const DashboardInteractive = () => {
 
   // Helper function to calculate days until birthday
   const getDaysUntilBirthday = (birthdayString: string): number => {
+    if (!birthdayString) return Infinity;
+    
     const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
     const birthday = new Date(birthdayString);
-
+    
     // Set birthday to current year
     birthday.setFullYear(today.getFullYear());
+    birthday.setHours(0, 0, 0, 0);
 
     // If birthday already passed this year, set to next year
     if (birthday < today) {
@@ -74,48 +80,57 @@ const DashboardInteractive = () => {
 
   // Format date for display
   const formatDate = (birthdayString: string): string => {
+    if (!birthdayString) return "";
+    
     const date = new Date(birthdayString);
-    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
   };
 
   useEffect(() => {
     setIsHydrated(true);
 
+    // Validate mock data
+    if (!mockData?.staff || !Array.isArray(mockData.staff)) {
+      console.error("Invalid mock data structure");
+      return;
+    }
+
     // Filter staff with birthdays this month
     const birthdaysData: Birthday[] = mockData.staff
-      .filter((staff) => isBirthdayThisMonth(staff.birthday))
+      .filter((staff) => staff?.birthday && isBirthdayThisMonth(staff.birthday))
       .map((staff) => ({
         id: parseInt(staff.id),
-        name: staff.name,
-        department: staff.department,
-        image: staff.image,
-        alt: staff.alt,
-        age: staff.age,
-        cakeStatus:
-          (staff.cakeStatus as 'ordered' | 'ready' | 'delivered' | 'not-ordered') || 'not-ordered',
+        name: staff.name || "Unknown",
+        department: staff.department || "Unknown",
+        image: staff.image || "",
+        alt: staff.alt || staff.name || "Staff photo",
+        age: staff.age || 0,
+       cakeStatus: (staff as any)?.cakeStatus || "not-ordered"
       }))
       .sort((a, b) => {
-        const dateA = new Date(
-          mockData.staff.find((s) => parseInt(s.id) === a.id)!.birthday
-        ).getDate();
-        const dateB = new Date(
-          mockData.staff.find((s) => parseInt(s.id) === b.id)!.birthday
-        ).getDate();
+        const staffA = mockData.staff.find((s) => parseInt(s.id) === a.id);
+        const staffB = mockData.staff.find((s) => parseInt(s.id) === b.id);
+        
+        if (!staffA?.birthday || !staffB?.birthday) return 0;
+        
+        const dateA = new Date(staffA.birthday).getDate();
+        const dateB = new Date(staffB.birthday).getDate();
         return dateA - dateB;
       });
 
     // Filter upcoming birthdays (next 30 days, excluding today)
     const upcomingData: UpcomingCelebration[] = mockData.staff
       .filter((staff) => {
+        if (!staff?.birthday) return false;
         const daysUntil = getDaysUntilBirthday(staff.birthday);
         return daysUntil > 0 && daysUntil <= 30;
       })
       .map((staff) => ({
         id: parseInt(staff.id),
-        name: staff.name,
-        department: staff.department,
-        image: staff.image,
-        alt: staff.alt,
+        name: staff.name || "Unknown",
+        department: staff.department || "Unknown",
+        image: staff.image || "",
+        alt: staff.alt || staff.name || "Staff photo",
         date: formatDate(staff.birthday),
         daysUntil: getDaysUntilBirthday(staff.birthday),
       }))
@@ -128,29 +143,29 @@ const DashboardInteractive = () => {
         string,
         {
           icon: string;
-          color: 'primary' | 'trust' | 'celebration' | 'success';
+          color: "primary" | "trust" | "celebration" | "success";
           action: string;
         }
       > = {
         delivered: {
-          icon: 'CheckCircleIcon',
-          color: 'success',
-          action: 'cake delivered successfully',
+          icon: "CheckCircleIcon",
+          color: "success",
+          action: "cake delivered successfully",
         },
         ready: {
-          icon: 'ClockIcon',
-          color: 'trust',
-          action: 'cake is ready for pickup',
+          icon: "ClockIcon",
+          color: "trust",
+          action: "cake is ready for pickup",
         },
         ordered: {
-          icon: 'SparklesIcon',
-          color: 'celebration',
-          action: 'cake order confirmed',
+          icon: "SparklesIcon",
+          color: "celebration",
+          action: "cake order confirmed",
         },
-        'not-ordered': {
-          icon: 'BellIcon',
-          color: 'primary',
-          action: 'birthday reminder sent',
+        "not-ordered": {
+          icon: "BellIcon",
+          color: "primary",
+          action: "birthday reminder sent",
         },
       };
 
@@ -174,15 +189,11 @@ const DashboardInteractive = () => {
 
   const handleUpdateStatus = (
     id: number,
-    status: 'ordered' | 'ready' | 'delivered' | 'not-ordered'
+    status: "ordered" | "ready" | "delivered" | "not-ordered"
   ) => {
     setTodaysBirthdays((prev) =>
       prev.map((birthday) => (birthday.id === id ? { ...birthday, cakeStatus: status } : birthday))
     );
-  };
-
-  const handleQuickAction = (action: string) => {
-    console.log(`Quick action: ${action}`);
   };
 
   if (!isHydrated) {
@@ -200,13 +211,27 @@ const DashboardInteractive = () => {
     );
   }
 
-  // Calculate stats
-  const thisWeekBirthdays = mockData.staff.filter((staff) => {
-    const daysUntil = getDaysUntilBirthday(staff.birthday);
-    return daysUntil >= 0 && daysUntil <= 7;
-  }).length;
+  // Calculate stats with validation
+  const thisWeekBirthdays = mockData?.staff
+    ? mockData.staff.filter((staff) => {
+        if (!staff?.birthday) return false;
+        const daysUntil = getDaysUntilBirthday(staff.birthday);
+        return daysUntil >= 0 && daysUntil <= 7;
+      }).length
+    : 0;
 
-  const completedCelebrations = todaysBirthdays.filter((b) => b.cakeStatus === 'delivered').length;
+  const completedCelebrations = todaysBirthdays.filter((b) => b.cakeStatus === "delivered").length;
+
+  const totalStaff = mockData?.staff?.length || 0;
+  
+  const thisMonthCount = mockData?.staff
+    ? mockData.staff.filter((s) => {
+        if (!s?.birthday) return false;
+        const month = new Date(s.birthday).getMonth();
+        const currentMonth = new Date().getMonth();
+        return month === currentMonth;
+      }).length
+    : 0;
 
   return (
     <div className="min-h-screen bg-background pt-16 lg:pl-64">
@@ -223,11 +248,11 @@ const DashboardInteractive = () => {
           </div>
           <div className="flex items-center gap-2">
             <span className="text-sm text-muted-foreground">
-              {new Date().toLocaleDateString('en-US', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
+              {new Date().toLocaleDateString("en-US", {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric",
               })}
             </span>
           </div>
@@ -237,7 +262,7 @@ const DashboardInteractive = () => {
         {showNotification && todaysBirthdays.length > 0 && (
           <NotificationBanner
             type="info"
-            message={`${todaysBirthdays.length} birthday${todaysBirthdays.length > 1 ? 's' : ''} this month! Don't forget to check cake delivery status.`}
+            message={`${todaysBirthdays.length} birthday${todaysBirthdays.length > 1 ? "s" : ""} this month! Don't forget to check cake delivery status.`}
             onDismiss={() => setShowNotification(false)}
           />
         )}
@@ -247,19 +272,13 @@ const DashboardInteractive = () => {
           <StatCard
             icon="CakeIcon"
             label="This Month"
-            value={
-              mockData.staff.filter((s) => {
-                const month = new Date(s.birthday).getMonth();
-                const currentMonth = new Date().getMonth();
-                return month === currentMonth;
-              }).length
-            }
+            value={thisMonthCount}
             color="celebration"
           />
           <StatCard
             icon="UsersIcon"
             label="Total Staff"
-            value={mockData.staff.length}
+            value={totalStaff}
             color="trust"
           />
         </div>

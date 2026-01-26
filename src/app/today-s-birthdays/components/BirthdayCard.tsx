@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import AppImage from '@/components/ui/AppImage';
-import Icon from '@/components/ui/AppIcon';
+import React, { useState } from "react";
+import AppImage from "@/components/ui/AppImage";
+import Icon from "@/components/ui/AppIcon";
 
 interface BirthdayPerson {
   id: number;
@@ -27,7 +27,7 @@ interface BirthdayCardProps {
 
 const BirthdayCard = ({ person, onUpdateStatus, onAddNote }: BirthdayCardProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [noteText, setNoteText] = useState('');
+  const [noteText, setNoteText] = useState("");
   const [showNoteInput, setShowNoteInput] = useState(false);
 
   // Calculate age from year of birth
@@ -41,7 +41,7 @@ const BirthdayCard = ({ person, onUpdateStatus, onAddNote }: BirthdayCardProps) 
   const handleAddNote = () => {
     if (noteText.trim()) {
       onAddNote(person.id, noteText);
-      setNoteText('');
+      setNoteText("");
       setShowNoteInput(false);
     }
   };
@@ -92,7 +92,7 @@ const BirthdayCard = ({ person, onUpdateStatus, onAddNote }: BirthdayCardProps) 
 
             <div className="flex flex-wrap gap-2">
               <button
-                onClick={() => onUpdateStatus(person.id, 'cake-ordered')}
+                onClick={() => onUpdateStatus(person.id, "cake-ordered")}
                 className="flex items-center gap-2 px-4 py-2 bg-trust text-trust-foreground rounded-lg text-sm font-medium hover:shadow-warm transition-all duration-300"
               >
                 <Icon name="CheckCircleIcon" size={16} />
@@ -102,7 +102,7 @@ const BirthdayCard = ({ person, onUpdateStatus, onAddNote }: BirthdayCardProps) 
                 onClick={() => setIsExpanded(!isExpanded)}
                 className="flex items-center gap-2 px-4 py-2 bg-muted text-foreground rounded-lg text-sm font-medium hover:bg-muted/80 transition-all duration-300"
               >
-                <Icon name={isExpanded ? 'ChevronUpIcon' : 'ChevronDownIcon'} size={16} />
+                <Icon name={isExpanded ? "ChevronUpIcon" : "ChevronDownIcon"} size={16} />
                 <span>Details</span>
               </button>
             </div>
@@ -152,7 +152,7 @@ const BirthdayCard = ({ person, onUpdateStatus, onAddNote }: BirthdayCardProps) 
                   <button
                     onClick={() => {
                       setShowNoteInput(false);
-                      setNoteText('');
+                      setNoteText("");
                     }}
                     className="px-4 py-2 bg-muted text-foreground rounded-lg text-sm font-medium hover:bg-muted/80 transition-all duration-300"
                   >

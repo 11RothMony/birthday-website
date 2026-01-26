@@ -1,5 +1,5 @@
-import React from 'react';
-import Icon from '@/components/ui/AppIcon';
+import React from "react";
+import Icon from "@/components/ui/AppIcon";
 
 interface StatCardProps {
   icon: string;
@@ -9,15 +9,15 @@ interface StatCardProps {
     value: string;
     isPositive: boolean;
   };
-  color: 'primary' | 'trust' | 'celebration' | 'success';
+  color: "primary" | "trust" | "celebration" | "success";
 }
 
 const StatCard = ({ icon, label, value, trend, color }: StatCardProps) => {
   const colorClasses = {
-    primary: 'bg-primary/10 text-primary',
-    trust: 'bg-trust/10 text-trust',
-    celebration: 'bg-celebration/10 text-celebration',
-    success: 'bg-success/10 text-success',
+    primary: "bg-primary/10 text-primary",
+    trust: "bg-trust/10 text-trust",
+    celebration: "bg-celebration/10 text-celebration",
+    success: "bg-success/10 text-success",
   };
 
   return (
@@ -31,10 +31,10 @@ const StatCard = ({ icon, label, value, trend, color }: StatCardProps) => {
         {trend && (
           <div
             className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${
-              trend.isPositive ? 'bg-success/10 text-success' : 'bg-error/10 text-error'
+              trend.isPositive ? "bg-success/10 text-success" : "bg-error/10 text-error"
             }`}
           >
-            <Icon name={trend.isPositive ? 'ArrowUpIcon' : 'ArrowDownIcon'} size={12} />
+            <Icon name={trend.isPositive ? "ArrowUpIcon" : "ArrowDownIcon"} size={12} />
             <span>{trend.value}</span>
           </div>
         )}

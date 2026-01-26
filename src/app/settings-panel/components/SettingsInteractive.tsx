@@ -1,19 +1,19 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import NotificationSettings from './NotificationSettings';
-import DisplaySettings from './DisplaySettings';
-import Icon from '@/components/ui/AppIcon';
+import React, { useState } from "react";
+import NotificationSettings from "./NotificationSettings";
+import DisplaySettings from "./DisplaySettings";
+import Icon from "@/components/ui/AppIcon";
 
 const SettingsInteractive = () => {
   const [activeTab, setActiveTab] = useState<
-    'notifications' | 'display' | 'data' | 'accessibility'
-  >('notifications');
+    "notifications" | "display" | "data" | "accessibility"
+  >("notifications");
   const [showSaveSuccess, setShowSaveSuccess] = useState(false);
 
   const tabs = [
-    { id: 'notifications' as const, label: 'Notifications', icon: 'BellIcon' },
-    { id: 'display' as const, label: 'Display', icon: 'PaintBrushIcon' },
+    { id: "notifications" as const, label: "Notifications", icon: "BellIcon" },
+    { id: "display" as const, label: "Display", icon: "PaintBrushIcon" },
   ];
 
   const handleSave = () => {
@@ -48,8 +48,8 @@ const SettingsInteractive = () => {
                 onClick={() => setActiveTab(tab.id)}
                 className={`flex items-center gap-2 px-6 py-3 font-medium transition-all duration-300 border-b-2 ${
                   activeTab === tab.id
-                    ? 'border-primary text-primary'
-                    : 'border-transparent text-muted-foreground hover:text-foreground hover:border-border'
+                    ? "border-primary text-primary"
+                    : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
                 }`}
               >
                 <Icon name={tab.icon as any} size={20} />
@@ -61,8 +61,8 @@ const SettingsInteractive = () => {
 
         {/* Content */}
         <div className="space-y-6">
-          {activeTab === 'notifications' && <NotificationSettings onSave={handleSave} />}
-          {activeTab === 'display' && <DisplaySettings onSave={handleSave} />}
+          {activeTab === "notifications" && <NotificationSettings onSave={handleSave} />}
+          {activeTab === "display" && <DisplaySettings onSave={handleSave} />}
         </div>
 
         {/* Success Toast */}

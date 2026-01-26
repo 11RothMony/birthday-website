@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import React from 'react';
-import Icon from '@/components/ui/AppIcon';
-import AppImage from '@/components/ui/AppImage';
+import React from "react";
+import Icon from "@/components/ui/AppIcon";
+import AppImage from "@/components/ui/AppImage";
 
 interface Celebration {
   id: string;
   name: string;
-  type: 'Birthday' | 'Work Anniversary' | 'Milestone';
+  type: "Birthday" | "Work Anniversary" | "Milestone";
   date: string;
   time?: string;
   department: string;
-  status: 'Planned' | 'In Progress' | 'Completed';
+  status: "Planned" | "In Progress" | "Completed";
   image: string;
   alt: string;
   notes?: string;
@@ -23,7 +23,7 @@ interface CelebrationModalProps {
   celebration: Celebration | null;
   isOpen: boolean;
   onClose: () => void;
-  onStatusChange: (id: string, status: 'Planned' | 'In Progress' | 'Completed') => void;
+  onStatusChange: (id: string, status: "Planned" | "In Progress" | "Completed") => void;
 }
 
 const CelebrationModal = ({
@@ -36,22 +36,22 @@ const CelebrationModal = ({
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'Completed':
-        return 'bg-success text-success-foreground';
-      case 'In Progress':
-        return 'bg-warning text-warning-foreground';
+      case "Completed":
+        return "bg-success text-success-foreground";
+      case "In Progress":
+        return "bg-warning text-warning-foreground";
       default:
-        return 'bg-primary text-primary-foreground';
+        return "bg-primary text-primary-foreground";
     }
   };
 
   const formatDate = (dateStr: string) => {
     const date = new Date(dateStr);
-    return date.toLocaleDateString('en-US', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
+    return date.toLocaleDateString("en-US", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     });
   };
 
@@ -164,14 +164,14 @@ const CelebrationModal = ({
             <div>
               <h4 className="text-sm font-semibold text-foreground mb-3">Update Status</h4>
               <div className="flex flex-wrap gap-2">
-                {(['Planned', 'In Progress', 'Completed'] as const).map((status) => (
+                {(["Planned", "In Progress", "Completed"] as const).map((status) => (
                   <button
                     key={status}
                     onClick={() => onStatusChange(celebration.id, status)}
                     className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${
                       celebration.status === status
                         ? getStatusColor(status)
-                        : 'bg-muted text-foreground hover:bg-muted/80'
+                        : "bg-muted text-foreground hover:bg-muted/80"
                     }`}
                   >
                     {status}

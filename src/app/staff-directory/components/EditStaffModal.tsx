@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import Icon from '@/components/ui/AppIcon';
+import React, { useState, useEffect } from "react";
+import Icon from "@/components/ui/AppIcon";
 
 interface StaffMember {
   id: string;
@@ -88,7 +88,7 @@ const EditStaffModal = ({ staff, isOpen, onClose, onSave }: EditStaffModalProps)
                 <input
                   type="text"
                   value={formData.name}
-                  onChange={(e) => handleChange('name', e.target.value)}
+                  onChange={(e) => handleChange("name", e.target.value)}
                   className="w-full px-3 py-2 bg-background border border-input rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                   required
                 />
@@ -99,7 +99,7 @@ const EditStaffModal = ({ staff, isOpen, onClose, onSave }: EditStaffModalProps)
                 <input
                   type="email"
                   value={formData.email}
-                  onChange={(e) => handleChange('email', e.target.value)}
+                  onChange={(e) => handleChange("email", e.target.value)}
                   className="w-full px-3 py-2 bg-background border border-input rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                   required
                 />
@@ -110,7 +110,7 @@ const EditStaffModal = ({ staff, isOpen, onClose, onSave }: EditStaffModalProps)
                 <input
                   type="tel"
                   value={formData.phone}
-                  onChange={(e) => handleChange('phone', e.target.value)}
+                  onChange={(e) => handleChange("phone", e.target.value)}
                   className="w-full px-3 py-2 bg-background border border-input rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                   required
                 />
@@ -121,7 +121,7 @@ const EditStaffModal = ({ staff, isOpen, onClose, onSave }: EditStaffModalProps)
                 <input
                   type="date"
                   value={formData.birthday}
-                  onChange={(e) => handleChange('birthday', e.target.value)}
+                  onChange={(e) => handleChange("birthday", e.target.value)}
                   className="w-full px-3 py-2 bg-background border border-input rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                   required
                 />
@@ -132,7 +132,7 @@ const EditStaffModal = ({ staff, isOpen, onClose, onSave }: EditStaffModalProps)
                 <input
                   type="text"
                   value={formData.department}
-                  onChange={(e) => handleChange('department', e.target.value)}
+                  onChange={(e) => handleChange("department", e.target.value)}
                   className="w-full px-3 py-2 bg-background border border-input rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                   required
                 />
@@ -143,7 +143,7 @@ const EditStaffModal = ({ staff, isOpen, onClose, onSave }: EditStaffModalProps)
                 <input
                   type="text"
                   value={formData.position}
-                  onChange={(e) => handleChange('position', e.target.value)}
+                  onChange={(e) => handleChange("position", e.target.value)}
                   className="w-full px-3 py-2 bg-background border border-input rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                   required
                 />
@@ -157,7 +157,7 @@ const EditStaffModal = ({ staff, isOpen, onClose, onSave }: EditStaffModalProps)
               <input
                 type="text"
                 value={formData.celebrationPreferences.cakePreference}
-                onChange={(e) => handlePreferenceChange('cakePreference', e.target.value)}
+                onChange={(e) => handlePreferenceChange("cakePreference", e.target.value)}
                 className="w-full px-3 py-2 bg-background border border-input rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
               />
             </div>
@@ -169,7 +169,7 @@ const EditStaffModal = ({ staff, isOpen, onClose, onSave }: EditStaffModalProps)
               <input
                 type="text"
                 value={formData.celebrationPreferences.giftPreference}
-                onChange={(e) => handlePreferenceChange('giftPreference', e.target.value)}
+                onChange={(e) => handlePreferenceChange("giftPreference", e.target.value)}
                 className="w-full px-3 py-2 bg-background border border-input rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
               />
             </div>
@@ -181,7 +181,7 @@ const EditStaffModal = ({ staff, isOpen, onClose, onSave }: EditStaffModalProps)
               <input
                 type="text"
                 value={formData.celebrationPreferences.partyPreference}
-                onChange={(e) => handlePreferenceChange('partyPreference', e.target.value)}
+                onChange={(e) => handlePreferenceChange("partyPreference", e.target.value)}
                 className="w-full px-3 py-2 bg-background border border-input rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
               />
             </div>
@@ -190,7 +190,7 @@ const EditStaffModal = ({ staff, isOpen, onClose, onSave }: EditStaffModalProps)
               <label className="block text-sm font-medium text-foreground mb-2">Notes</label>
               <textarea
                 value={formData.notes}
-                onChange={(e) => handleChange('notes', e.target.value)}
+                onChange={(e) => handleChange("notes", e.target.value)}
                 rows={4}
                 className="w-full px-3 py-2 bg-background border border-input rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none"
               />
