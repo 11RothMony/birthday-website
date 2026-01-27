@@ -1,20 +1,27 @@
-import type { Metadata } from "next";
+"use client";
+
+import React, { useState } from "react";
 import Header from "@/components/common/Header";
 import Sidebar from "@/components/common/Sidebar";
 import TodaysBirthdaysInteractive from "./components/TodaysBirthdaysInteractive";
-
-export const metadata: Metadata = {
-  title: "Today's Birthdays - BirthdayDesk",
-  description:
-    "Manage current day celebrations with preparation checklists, countdown timers, and real-time coordination tools for office birthday celebrations.",
-};
-
 export default function TodaysBirthdaysPage() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const handleMenuClick = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const handleCloseSidebar = () => {
+    setIsSidebarOpen(false);
+  };
+
   return (
     <>
-      <Header />
-      <Sidebar />
-      <TodaysBirthdaysInteractive />
+      <Header onMenuClick={handleMenuClick} />
+      <Sidebar isOpen={isSidebarOpen} onClose={handleCloseSidebar} />
+        <main className="lg:ml-64 pt-16">
+        <TodaysBirthdaysInteractive />
+      </main>
     </>
   );
 }

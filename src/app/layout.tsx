@@ -6,16 +6,6 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
 };
-
-// export const metadata: Metadata = {
-//   title: 'Next.js with Tailwind CSS',
-//   description: 'A boilerplate project with Next.js and Tailwind CSS',
-//   icons: {
-//     icon: [
-//       { url: '/favicon.ico', type: 'image/x-icon' }
-//     ],
-//   },
-// };
 export const metadata: Metadata = {
   title: "Your App Name",
   description: "Your app description",

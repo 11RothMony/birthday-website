@@ -1,20 +1,25 @@
-import type { Metadata } from "next";
+"use client";
+
+import React, { useState } from "react";
 import Header from "@/components/common/Header";
 import Sidebar from "@/components/common/Sidebar";
 import StaffDirectoryInteractive from "./components/StaffDirectoryInteractive";
-
-export const metadata: Metadata = {
-  title: "Staff Directory - BirthdayDesk",
-  description:
-    "Manage staff birthdays, celebration preferences, and contact information. Search, filter, and organize your team's birthday database with quick-edit capabilities.",
-};
-
 export default function StaffDirectoryPage() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const handleMenuClick = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const handleCloseSidebar = () => {
+    setIsSidebarOpen(false);
+  };
+
   return (
     <>
-      <Header />
-      <Sidebar />
-      <main className="lg:ml-64 pt-16">
+      <Header onMenuClick={handleMenuClick} />
+      <Sidebar isOpen={isSidebarOpen} onClose={handleCloseSidebar} />
+        <main className="lg:ml-64 pt-16">
         <StaffDirectoryInteractive />
       </main>
     </>

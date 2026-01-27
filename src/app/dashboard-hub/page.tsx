@@ -1,19 +1,25 @@
-import type { Metadata } from "next";
+"use client";
+
+import React, { useState } from "react";
 import Header from "@/components/common/Header";
 import Sidebar from "@/components/common/Sidebar";
 import DashboardInteractive from "./components/DashboardInteractive";
 
-export const metadata: Metadata = {
-  title: "Dashboard Hub - BirthdayDesk",
-  description:
-    "Central command center for managing staff birthdays, celebrations, and cake coordination. View today's birthdays, upcoming celebrations, and quick action items in one organized dashboard.",
-};
+export default function DashboardHubClient() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-export default function DashboardHubPage() {
+  const handleMenuClick = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const handleCloseSidebar = () => {
+    setIsSidebarOpen(false);
+  };
+
   return (
     <>
-      <Header />
-      <Sidebar />
+      <Header onMenuClick={handleMenuClick} />
+      <Sidebar isOpen={isSidebarOpen} onClose={handleCloseSidebar} />
       <DashboardInteractive />
     </>
   );

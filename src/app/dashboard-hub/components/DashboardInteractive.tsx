@@ -44,6 +44,8 @@ const DashboardInteractive = () => {
   const [todaysBirthdays, setTodaysBirthdays] = useState<Birthday[]>([]);
   const [upcomingCelebrations, setUpcomingCelebrations] = useState<UpcomingCelebration[]>([]);
   const [timelineEvents, setTimelineEvents] = useState<TimelineEvent[]>([]);
+  const [notificationsEnabled, setNotificationsEnabled] = useState(false);
+  const [notificationPermission, setNotificationPermission] = useState<NotificationPermission>("default");
 
   // Helper function to check if birthday is this month
   const isBirthdayThisMonth = (birthdayString: string): boolean => {
@@ -87,8 +89,113 @@ const DashboardInteractive = () => {
     return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
   };
 
+  // Schedule daily notification at 9 AM
+  const scheduleDailyNotification = () => {
+    const now = new Date();
+    const scheduledTime = new Date();
+    scheduledTime.setHours(9, 0, 0, 0);
+
+    // If 9 AM has already passed today, schedule for tomorrow
+    if (now > scheduledTime) {
+      scheduledTime.setDate(scheduledTime.getDate() + 1);
+    }
+
+    const timeUntilNotification = scheduledTime.getTime() - now.getTime();
+
+    // Clear any existing timeout
+    const existingTimeout = localStorage.getItem("notificationTimeoutId");
+    if (existingTimeout) {
+      clearTimeout(Number(existingTimeout));
+    }
+
+    // Schedule the notification
+    const timeoutId = setTimeout(() => {
+      sendDailyNotification();
+      // Reschedule for the next day
+      scheduleDailyNotification();
+    }, timeUntilNotification);
+
+    localStorage.setItem("notificationTimeoutId", String(timeoutId));
+  };
+
+  // Send the actual notification
+  const sendDailyNotification = () => {
+    if (!notificationsEnabled || notificationPermission !== "granted") return;
+
+    const thisMonthCount = mockData?.staff
+      ? mockData.staff.filter((staff) => {
+          if (!staff?.birthday) return false;
+          return isBirthdayThisMonth(staff.birthday);
+        }).length
+      : 0;
+
+    let message = "";
+    if (thisMonthCount > 0) {
+      message = `🎂 ${thisMonthCount} staff ${thisMonthCount > 1 ? "have birthdays" : "has birthday"} this month!`;
+    } else {
+      message = "No birthdays this month.";
+    }
+
+    new Notification("Birthday Reminder", {
+      body: message,
+      icon: "/favicon.ico",
+      badge: "/favicon.ico",
+      tag: "daily-birthday-reminder",
+    });
+  };
+
+  // Request notification permission and toggle notifications
+  const handleNotificationToggle = async () => {
+    if (!notificationsEnabled) {
+      // User wants to enable notifications
+      if ("Notification" in window) {
+        const permission = await Notification.requestPermission();
+        setNotificationPermission(permission);
+        
+        if (permission === "granted") {
+          setNotificationsEnabled(true);
+          localStorage.setItem("notificationsEnabled", "true");
+          scheduleDailyNotification();
+          
+          // Show a test notification
+          new Notification("Notifications Enabled! 🎉", {
+            body: "You'll receive daily birthday reminders at 9 AM.",
+            icon: "/favicon.ico",
+          });
+        } else {
+          alert("Please allow notifications in your browser settings to enable daily reminders.");
+        }
+      } else {
+        alert("Your browser doesn't support notifications.");
+      }
+    } else {
+      // User wants to disable notifications
+      setNotificationsEnabled(false);
+      localStorage.setItem("notificationsEnabled", "false");
+      
+      // Clear scheduled timeout
+      const existingTimeout = localStorage.getItem("notificationTimeoutId");
+      if (existingTimeout) {
+        clearTimeout(Number(existingTimeout));
+        localStorage.removeItem("notificationTimeoutId");
+      }
+    }
+  };
+
   useEffect(() => {
     setIsHydrated(true);
+
+    // Check notification permission status
+    if ("Notification" in window) {
+      setNotificationPermission(Notification.permission);
+    }
+
+    // Load notification preference from localStorage
+    const savedPreference = localStorage.getItem("notificationsEnabled");
+    if (savedPreference === "true" && Notification.permission === "granted") {
+      setNotificationsEnabled(true);
+      scheduleDailyNotification();
+    }
 
     // Validate mock data
     if (!mockData?.staff || !Array.isArray(mockData.staff)) {
@@ -187,6 +294,14 @@ const DashboardInteractive = () => {
     };
 
     processData();
+
+    // Cleanup on unmount
+    return () => {
+      const existingTimeout = localStorage.getItem("notificationTimeoutId");
+      if (existingTimeout) {
+        clearTimeout(Number(existingTimeout));
+      }
+    };
   }, []);
 
   const handleUpdateStatus = (
@@ -236,7 +351,7 @@ const DashboardInteractive = () => {
     : 0;
 
   return (
-    <div className="min-h-screen bg-background pt-16 lg:pl-64">
+    <div className="min-h-screen bg-background pt-32 lg:pt-16 lg:pl-64">
       <div className="p-4 lg:p-6 space-y-6">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -248,7 +363,7 @@ const DashboardInteractive = () => {
               Welcome back! Here is what is happening today
             </p>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex justify-between items-center gap-4">
             <span className="text-sm text-muted-foreground">
               {new Date().toLocaleDateString("en-US", {
                 weekday: "long",
@@ -257,6 +372,32 @@ const DashboardInteractive = () => {
                 day: "numeric",
               })}
             </span>
+            
+            {/* Notification Toggle */}
+            <div className="flex items-center gap-2 bg-card border border-border rounded-lg px-3 py-2 shadow-sm">
+              <Icon 
+                name="BellIcon" 
+                size={18} 
+                className={notificationsEnabled ? "text-white" : "text-muted-foreground"} 
+              />
+              <span className="text-sm font-medium text-foreground hidden sm:inline">
+                9 AM Reminder
+              </span>
+              <button
+                onClick={handleNotificationToggle}
+                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
+                  notificationsEnabled ? "bg-green-500" : "bg-gray-300"
+                }`}
+                role="switch"
+                aria-checked={notificationsEnabled}
+              >
+                <span
+                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                    notificationsEnabled ? "translate-x-6" : "translate-x-1"
+                  }`}
+                />
+              </button>
+            </div>
           </div>
         </div>
 
@@ -267,6 +408,16 @@ const DashboardInteractive = () => {
             message={`${todaysBirthdays.length} birthday${todaysBirthdays.length > 1 ? "s" : ""} this month! Don't forget to check cake delivery status.`}
             onDismiss={() => setShowNotification(false)}
           />
+        )}
+
+        {/* Notification Status Banner */}
+        {notificationsEnabled && (
+          <div className="bg-celebration/10 border border-celebration/20 rounded-lg p-3 flex items-center gap-3">
+            <Icon name="CheckCircleIcon" size={20} className="text-celebration flex-shrink-0" />
+            <p className="text-sm text-foreground">
+              <span className="font-medium">Daily reminders active!</span> You'll receive notifications at 9:00 AM every day.
+            </p>
+          </div>
         )}
 
         {/* Stats Grid */}
