@@ -235,15 +235,6 @@ const CalendarInteractive = () => {
         onReset={handleResetFilters}
       />
       <QuickActions onPrint={handlePrint} onExport={handleExport} onShare={handleShare} />
-
-      {/* {viewMode === 'day' && (
-        <DayView
-          celebrations={filteredCelebrations}
-          currentDate={currentDate}
-          onCelebrationClick={handleCelebrationClick}
-        />
-      )} */}
-
       {viewMode === "week" && (
         <WeekView
           celebrations={filteredCelebrations}

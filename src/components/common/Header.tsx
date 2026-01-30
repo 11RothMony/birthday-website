@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Icon from "@/components/ui/AppIcon";
+import AppImage from "@/components/ui/AppImage";
 
 interface HeaderProps {
   onMenuClick?: () => void;
@@ -55,32 +56,9 @@ const Header = ({ onMenuClick }: HeaderProps) => {
         </button>
 
         {/* Logo */}
-        <Link href="/dashboard-hub" className="flex items-center gap-3 group">
+        <Link href="/dashboard-hub" className="flex items-center group">
           <div className="relative">
-            <svg
-              width="40"
-              height="40"
-              viewBox="0 0 40 40"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="transition-transform duration-300 group-hover:scale-105"
-            >
-              <circle cx="20" cy="20" r="18" fill="var(--color-primary)" opacity="0.2" />
-              <circle cx="20" cy="20" r="14" fill="var(--color-primary)" />
-              <path
-                d="M20 10 L22 16 L28 16 L23 20 L25 26 L20 22 L15 26 L17 20 L12 16 L18 16 Z"
-                fill="var(--color-accent)"
-              />
-              <circle cx="20" cy="12" r="1.5" fill="var(--color-celebration)" />
-              <circle cx="25" cy="14" r="1" fill="var(--color-celebration)" />
-              <circle cx="15" cy="14" r="1" fill="var(--color-celebration)" />
-            </svg>
-          </div>
-          <div className="hidden sm:block">
-            <h1 className="text-xl font-heading font-semibold text-foreground leading-none">
-              BirthdayBHG
-            </h1>
-            <p className="text-xs text-muted-foreground mt-0.5">Celebrate Every Moment</p>
+            <AppImage src="images/logo2.png" alt="logo" className=" w-16 h-16object-cover" />
           </div>
         </Link>
 

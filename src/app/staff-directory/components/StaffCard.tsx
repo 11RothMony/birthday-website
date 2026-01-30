@@ -5,8 +5,8 @@ import Icon from "@/components/ui/AppIcon";
 interface StaffMember {
   id: string;
   name: string;
-  email: string;
-  phone: string;
+  // email: string;
+  // phone: string;
   department: string;
   position: string;
   birthday: string;
@@ -85,14 +85,14 @@ const StaffCard = ({ staff, onEdit, onView }: StaffCardProps) => {
               })}
             </span>
           </div>
-          <div className="flex items-center gap-2 text-sm">
+          {/* <div className="flex items-center gap-2 text-sm">
             <Icon name="EnvelopeIcon" size={16} className="text-muted-foreground" />
             <span className="text-foreground truncate">{staff.email}</span>
-          </div>
-          <div className="flex items-center gap-2 text-sm">
+          </div> */}
+          {/* <div className="flex items-center gap-2 text-sm">
             <Icon name="PhoneIcon" size={16} className="text-muted-foreground" />
             <span className="text-foreground">{staff.phone}</span>
-          </div>
+          </div> */}
         </div>
         <div className="mt-4 flex gap-2">
           <button

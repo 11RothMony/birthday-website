@@ -7,8 +7,6 @@ import Icon from "@/components/ui/AppIcon";
 interface StaffMember {
   id: string;
   name: string;
-  email: string;
-  phone: string;
   department: string;
   position: string;
   birthday: string;
@@ -67,11 +65,11 @@ const StaffDetailsModal = ({ staff, isOpen, onClose }: StaffDetailsModalProps) =
                 <div className="space-y-2 pl-7">
                   <div className="flex items-center gap-2">
                     <Icon name="EnvelopeIcon" size={16} className="text-muted-foreground" />
-                    <span className="text-sm text-foreground">{staff.email}</span>
+                    {/* <span className="text-sm text-foreground">{staff.email}</span> */}
                   </div>
                   <div className="flex items-center gap-2">
                     <Icon name="PhoneIcon" size={16} className="text-muted-foreground" />
-                    <span className="text-sm text-foreground">{staff.phone}</span>
+                    {/* <span className="text-sm text-foreground">{staff.phone}</span> */}
                   </div>
                   <div className="flex items-center gap-2">
                     <Icon name="CalendarIcon" size={16} className="text-muted-foreground" />

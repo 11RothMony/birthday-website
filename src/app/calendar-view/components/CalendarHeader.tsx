@@ -37,7 +37,7 @@ const CalendarHeader = ({
   };
 
   return (
-    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-16 lg:pt-1 mb-6">
       <div className="flex items-center gap-4">
         <h1 className="text-2xl lg:text-3xl font-heading font-semibold text-foreground">
           {formatTitle()}
@@ -69,7 +69,7 @@ const CalendarHeader = ({
         </div>
 
         <div className="flex items-center gap-1 bg-muted rounded-lg p-1">
-          {(["day", "week", "month", "year"] as const).map((mode) => (
+          {(["week", "month", "year"] as const).map((mode) => (
             <button
               key={mode}
               onClick={() => onViewModeChange(mode)}

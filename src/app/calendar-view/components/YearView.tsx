@@ -32,7 +32,7 @@ const YearView = ({ celebrations, currentDate, onMonthClick }: YearViewProps) =>
     return celebrations.filter((cel) => {
       const celDate = new Date(cel.date);
       return (
-        celDate.getMonth() === monthIndex && celDate.getFullYear() === currentDate.getFullYear()
+        celDate.getMonth() === monthIndex
       );
     });
   };
@@ -115,14 +115,6 @@ const YearView = ({ celebrations, currentDate, onMonthClick }: YearViewProps) =>
                   </div>
 
                   <div className="grid grid-cols-3 gap-2 text-xs">
-                    <div className="flex items-center gap-1">
-                      <div className="w-2 h-2 rounded-full bg-success" />
-                      <span className="text-muted-foreground">{stats.completed}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <div className="w-2 h-2 rounded-full bg-warning" />
-                      <span className="text-muted-foreground">{stats.inProgress}</span>
-                    </div>
                     <div className="flex items-center gap-1">
                       <div className="w-2 h-2 rounded-full bg-primary" />
                       <span className="text-muted-foreground">{stats.planned}</span>

@@ -37,11 +37,17 @@ const MonthView = ({ celebrations, currentDate, onDayClick }: MonthViewProps) =>
   const days = getDaysInMonth();
   const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-  const getCelebrationsForDay = (date: Date | null) => {
-    if (!date) return [];
-    const dateStr = date.toISOString().split("T")[0];
-    return celebrations.filter((cel) => cel.date === dateStr);
-  };
+const getCelebrationsForDay = (date: Date | null) => {
+  if (!date) return [];
+  
+  const day = date.getDate();
+  const month = date.getMonth(); // 0-indexed (0 = January)
+  
+  return celebrations.filter((cel) => {
+    const celDate = new Date(cel.date);
+    return celDate.getDate() === day && celDate.getMonth() === month;
+  });
+};
 
   const isToday = (date: Date | null) => {
     if (!date) return false;

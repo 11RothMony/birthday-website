@@ -10,6 +10,7 @@ interface BirthdayPerson {
   id: number;
   name: string;
   department: string;
+  position: string;
   age: number;
   image: string;
   alt: string;
@@ -80,6 +81,7 @@ const ThisMonthBirthdaysInteractive = () => {
   id: parseInt(staff.id),
   name: staff.name,
   department: staff.department,
+  position: staff.position,
   age: staff.age,
   image: staff.image,
   alt: staff.alt,
@@ -219,7 +221,7 @@ const ThisMonthBirthdaysInteractive = () => {
   const currentSlidePerson = mockBirthdays[currentSlideIndex];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-primary/5 to-celebration/10 pt-32 lg:pt-20 pb-8 px-4 lg:pl-72">
+    <div className="min-h-screen bg-gradient-to-br from-background via-primary/5 to-celebration/10 pt-24 lg:pt-6 pb-8 px-4 lg:pl-7">
       <audio ref={audioRef} onEnded={nextSong} loop />
 
       {/* Slideshow Modal */}

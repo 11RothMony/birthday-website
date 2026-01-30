@@ -86,37 +86,54 @@ const DashboardInteractive = () => {
     if (!birthdayString) return "";
     
     const date = new Date(birthdayString);
-    return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+    return date.toLocaleDateString("en-US", {
+      timeZone: "Asia/Phnom_Penh",
+    });
   };
+  // Schedule daily notification at 9 AM Phnom Penh time
+const scheduleDailyNotification = () => {
+  const now = new Date();
+  
+  // Get current time in Phnom Penh timezone
+  const phnomPenhTime = new Date(now.toLocaleString("en-US", { 
+    timeZone: "Asia/Phnom_Penh" 
+  }));
+  
+  // Set 9 AM in Phnom Penh time
+  const scheduledTime = new Date(phnomPenhTime);
+  scheduledTime.setHours(11, 14, 0, 0);
 
-  // Schedule daily notification at 9 AM
-  const scheduleDailyNotification = () => {
-    const now = new Date();
-    const scheduledTime = new Date();
-    scheduledTime.setHours(9, 0, 0, 0);
+  // If 9 AM has passed, schedule for tomorrow
+  if (phnomPenhTime > scheduledTime) {
+    scheduledTime.setDate(scheduledTime.getDate() + 1);
+  }
 
-    // If 9 AM has already passed today, schedule for tomorrow
-    if (now > scheduledTime) {
-      scheduledTime.setDate(scheduledTime.getDate() + 1);
+  // Convert back to user's local time for setTimeout
+  const timeUntilNotification = scheduledTime.getTime() - phnomPenhTime.getTime();
+
+  // Schedule the notification
+  const timeoutId = setTimeout(() => {
+    sendDailyNotification();
+    scheduleDailyNotification(); // Reschedule for next day
+  }, timeUntilNotification);
+
+  // Store timeout ID (though it won't survive refresh)
+  localStorage.setItem("notificationTimeoutId", String(timeoutId));
+};
+
+// Call this when your app/component initializes
+useEffect(() => {
+  scheduleDailyNotification();
+  
+  return () => {
+    // Cleanup on unmount
+    const timeoutId = localStorage.getItem("notificationTimeoutId");
+    if (timeoutId) {
+      clearTimeout(Number(timeoutId));
     }
-
-    const timeUntilNotification = scheduledTime.getTime() - now.getTime();
-
-    // Clear any existing timeout
-    const existingTimeout = localStorage.getItem("notificationTimeoutId");
-    if (existingTimeout) {
-      clearTimeout(Number(existingTimeout));
-    }
-
-    // Schedule the notification
-    const timeoutId = setTimeout(() => {
-      sendDailyNotification();
-      // Reschedule for the next day
-      scheduleDailyNotification();
-    }, timeUntilNotification);
-
-    localStorage.setItem("notificationTimeoutId", String(timeoutId));
   };
+}, []);
+  
 
   // Send the actual notification
   const sendDailyNotification = () => {

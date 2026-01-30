@@ -7,7 +7,7 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 export const metadata: Metadata = {
-  title: "Your App Name",
+  title: "BHG HBD",
   description: "Your app description",
   manifest: "/manifest.json",
   themeColor: "#000000",

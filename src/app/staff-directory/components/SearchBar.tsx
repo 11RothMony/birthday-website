@@ -19,12 +19,14 @@ const SearchBar = ({ searchTerm, onSearchChange }: SearchBarProps) => {
       <input
         type="text"
         value={searchTerm}
-        onChange={(e) => onSearchChange(e.target.value)}
+        onChange={(e) => {
+          console.log("Input changed:", e.target.value); // Debug log
+          onSearchChange(e.target.value);
+        }}
         placeholder="Search by name, department, or position..."
         className="w-full pl-10 pr-4 py-3 bg-background border border-input rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-all duration-300"
       />
     </div>
   );
 };
-
 export default SearchBar;

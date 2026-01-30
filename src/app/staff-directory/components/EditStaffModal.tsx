@@ -6,8 +6,8 @@ import Icon from "@/components/ui/AppIcon";
 interface StaffMember {
   id: string;
   name: string;
-  email: string;
-  phone: string;
+  // email: string;
+  // phone: string;
   department: string;
   position: string;
   birthday: string;
@@ -86,7 +86,7 @@ const EditStaffModal = ({ staff, isOpen, onClose, onSave }: EditStaffModalProps)
                 />
               </div>
 
-              <div>
+              {/* <div>
                 <label className="block text-sm font-medium text-foreground mb-2">Email</label>
                 <input
                   type="email"
@@ -95,9 +95,9 @@ const EditStaffModal = ({ staff, isOpen, onClose, onSave }: EditStaffModalProps)
                   className="w-full px-3 py-2 bg-background border border-input rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                   required
                 />
-              </div>
+              </div> */}
 
-              <div>
+              {/* <div>
                 <label className="block text-sm font-medium text-foreground mb-2">Phone</label>
                 <input
                   type="tel"
@@ -106,7 +106,7 @@ const EditStaffModal = ({ staff, isOpen, onClose, onSave }: EditStaffModalProps)
                   className="w-full px-3 py-2 bg-background border border-input rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                   required
                 />
-              </div>
+              </div> */}
 
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">Birthday</label>
