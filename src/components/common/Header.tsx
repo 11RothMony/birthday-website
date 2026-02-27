@@ -58,7 +58,7 @@ const Header = ({ onMenuClick }: HeaderProps) => {
         {/* Logo */}
         <Link href="/dashboard-hub" className="flex items-center group">
           <div className="relative">
-            <AppImage src="images/logo2.png" alt="logo" className=" w-16 h-16object-cover" />
+            <AppImage src="images/logo4.png" alt="logo4" className=" w-40 sm:w-48 md:w-52 lg:w-56 object-cover" />
           </div>
         </Link>
 

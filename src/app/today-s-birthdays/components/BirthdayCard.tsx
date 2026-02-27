@@ -55,9 +55,10 @@ const BirthdayCard = ({ person, onUpdateStatus, onAddNote }: BirthdayCardProps) 
           <div className="relative flex-shrink-0">
             <div className="w-20 h-20 rounded-full overflow-hidden ring-4 ring-primary/20">
               <AppImage
+                key={person.id}
                 src={person.image}
                 alt={person.alt}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-top"
               />
             </div>
             <div className="absolute -top-2 -right-2 w-8 h-8 bg-celebration rounded-full flex items-center justify-center shadow-warm">

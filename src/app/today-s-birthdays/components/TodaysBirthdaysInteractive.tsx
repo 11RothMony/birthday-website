@@ -284,7 +284,7 @@ const ThisMonthBirthdaysInteractive = () => {
             {/* Main Content */}
             <div className="flex items-center justify-center min-h-screen text-center">
               <div className="animate-fade-in max-w-full">
-                <h1 className="text-6xl md:text-7xl font-heading font-bold text-white mb-6 drop-shadow-2xl animate-bounce-slow">
+                <h1 className="text-4xl sm:text-6xl md:text-7xl font-heading font-bold text-white mb-6 drop-shadow-2xl animate-bounce-slow">
                   🎂 Happy Birthday! 🎂
                 </h1>
 
@@ -292,7 +292,7 @@ const ThisMonthBirthdaysInteractive = () => {
                   <img
                     src={currentSlidePerson.image}
                     alt={currentSlidePerson.alt}
-                    className="w-48 h-48 md:w-96 md:h-96 rounded-full mx-auto mb-6 object-cover border-8 border-white shadow-2xl"
+                    className="w-48 h-48 md:w-96 md:h-96 rounded-full mx-auto mb-6 object-cover object-top border border-white shadow-2xl"
                   />
 
                   <h2 className="text-4xl md:text-6xl font-heading font-bold text-white mb-3 drop-shadow-lg">
@@ -402,7 +402,7 @@ const ThisMonthBirthdaysInteractive = () => {
                 <img
                   src={person.image}
                   alt={person.alt}
-                  className="w-16 h-16 rounded-full object-cover border-2 border-celebration"
+                  className="w-16 h-16 rounded-full object-cover object-top border-2 border-celebration"
                 />
                 <div className="flex-1">
                   <h3 className="font-heading font-semibold text-foreground">{person.name}</h3>

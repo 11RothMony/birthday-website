@@ -52,7 +52,7 @@ const StaffCard = ({ staff, onEdit, onView }: StaffCardProps) => {
         <div className="flex items-start gap-4">
           <div className="relative flex-shrink-0">
             <div className="w-16 h-16 rounded-full overflow-hidden bg-muted">
-              <AppImage src={staff.image} alt={staff.alt} className="w-full h-full object-cover" />
+              <AppImage src={staff.image} alt={staff.alt} className="w-full h-full object-cover object-top" />
             </div>
             <div
               className={`absolute -bottom-1 -right-1 w-6 h-6 rounded-full ${status.color} flex items-center justify-center`}

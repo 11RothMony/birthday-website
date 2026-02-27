@@ -106,7 +106,7 @@ const TodaysBirthdayCard = ({
             <AppImage
               src={birthday.image}
               alt={birthday.alt}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover object-top"
             />
           </div>
           <div className="absolute -top-1 -right-1 w-6 h-6 bg-celebration rounded-full flex items-center justify-center">
